@@ -90,6 +90,10 @@ class Disease{
     allTMutations.add(ExtremeBioaerosol);
   }
   
+  void inputSMutations(){
+    
+  }
+  
   Disease(){
     infectivity = 0.01;
     severity = 0;
@@ -104,5 +108,32 @@ class Disease{
     allSMutations = new ArrayList<Mutation>();
     allAMutations = new ArrayList<Mutation>();
     inputTMutations();
+  }
+  
+  boolean addTMutation(Mutation m){
+    if (points < m.cost){
+      return false;
+    }
+    accessibleTMutations.remove(m);
+    tMutations.add(m);
+    return true;
+  }
+  
+  boolean addSMutation(Mutation m){
+    if (points < m.cost){
+      return false;
+    }
+    accessibleSMutations.remove(m);
+    sMutations.add(m);
+    return true;
+  }
+  
+  boolean addAMutation(Mutation m){
+    if (points < m.cost){
+      return false;
+    }
+    accessibleAMutations.remove(m);
+    aMutations.add(m);
+    return true;
   }
 }
