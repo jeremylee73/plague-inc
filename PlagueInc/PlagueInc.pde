@@ -1,12 +1,10 @@
 ArrayList<City> cities = new ArrayList<City>();
+Disease disease;
+Cure cure;
+int points;
+ArrayList<String> news;
 
-void setup(){
-  size(1200,785);
-  PImage img;
-  img = loadImage("map.png");
-  img.resize(width, height);
-  background(img);
-  
+void citySetup(){
   ArrayList<String> adjacent = new ArrayList<String>();
   adjacent.add("Opelucid City");
   City League = new City("Pokemon League", 1000, adjacent, true, false, 730, 60);
@@ -94,14 +92,23 @@ void setup(){
   
   City Unity = new City("Unity Tower", 1000, adjacent, true, true, 410, 700);
   cities.add(Unity);
-  
-  drawCities();
 }
 
 void drawCities(){
   for (int i=0; i<cities.size(); i++){
     circle(cities.get(i).x,cities.get(i).y,65);
   }
+}
+
+void setup(){
+  size(1200,785);
+  PImage img;
+  img = loadImage("map.png");
+  img.resize(width, height);
+  background(img);
+  
+  citySetup();
+  drawCities();
 }
 
 void draw(){
