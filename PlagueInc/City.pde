@@ -55,12 +55,13 @@ class City{
   }
   
   void landTransmission(){
-    //println(this.adjacent.size());
     for (int i=0; i<cities.size(); i++){
       for (int j=0; j<adjacent.size(); j++){
         if (cities.get(i).name.equals(adjacent.get(j))){
           if (Math.random() < (diseased / (population * 1.0)) && cities.get(i).diseased == 0){
             cities.get(i).diseased = 1;
+            //fill(255,0,0);
+            //circle(cities.get(i).x,cities.get(i).y,30);
           }
         }
       }

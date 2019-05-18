@@ -8,89 +8,89 @@ void citySetup(){
   ArrayList<String> adjacent = new ArrayList<String>();
   adjacent.add("Opelucid City");
   City League = new City("Pokemon League", 1000000, adjacent, true, false, 730, 60);
-  adjacent.clear();
   cities.add(League);
   
-  adjacent.add("Pokemon League");
-  adjacent.add("Lacunesa Town");
-  adjacent.add("Icirrus City");
-  City Opelucid = new City("Opelucid City", 1000000, adjacent, true, false, 610, 175);
-  adjacent.clear();
+  ArrayList<String> adjacent1 = new ArrayList<String>();
+  adjacent1.add("Pokemon League");
+  adjacent1.add("Lacunesa Town");
+  adjacent1.add("Icirrus City");
+  City Opelucid = new City("Opelucid City", 1000000, adjacent1, true, false, 610, 175);
   cities.add(Opelucid);
   
-  adjacent.add("Opelucid City");
-  adjacent.add("Undella Town");
-  City Lacunesa = new City("Lacunesa Town", 1000000, adjacent, true, false, 865,175);
-  adjacent.clear();
+  ArrayList<String> adjacent2 = new ArrayList<String>();
+  adjacent2.add("Opelucid City");
+  adjacent2.add("Undella Town");
+  City Lacunesa = new City("Lacunesa Town", 1000000, adjacent2, true, false, 865,175);
   cities.add(Lacunesa);
   
-  adjacent.add("Opelucid City");
-  adjacent.add("Mistralton City");
-  City Icirrus = new City("Icirrus City", 1000000, adjacent, true, false,365,175);
-  adjacent.clear();
+  ArrayList<String> adjacent3 = new ArrayList<String>();
+  adjacent3.add("Opelucid City");
+  adjacent3.add("Mistralton City");
+  City Icirrus = new City("Icirrus City", 1000000, adjacent3, true, false,365,175);
   cities.add(Icirrus);
   
-  adjacent.add("Lacunesa Town");
-  adjacent.add("Black City");
-  City Undella = new City("Undella Town", 1000000, adjacent, true, false,1030,300);
-  adjacent.clear();
+  ArrayList<String> adjacent4 = new ArrayList<String>();
+  adjacent4.add("Lacunesa Town");
+  adjacent4.add("Black City");
+  City Undella = new City("Undella Town", 1000000, adjacent4, true, false,1030,300);
   cities.add(Undella);
   
-  adjacent.add("Icirrus City");
-  adjacent.add("Driftveil City");
-  City Mistralton = new City("Mistralton City", 1000000, adjacent, true, false, 170,300);
-  adjacent.clear();
+  ArrayList<String> adjacent5 = new ArrayList<String>();
+  adjacent5.add("Icirrus City");
+  adjacent5.add("Driftveil City");
+  City Mistralton = new City("Mistralton City", 1000000, adjacent5, true, false, 170,300);
   cities.add(Mistralton);
   
-  adjacent.add("Undella Town");
-  adjacent.add("Nimbasa City");
-  City Black = new City("Black City", 1000000, adjacent, true, true, 865,425);
-  adjacent.clear();
+  ArrayList<String> adjacent6 = new ArrayList<String>();
+  adjacent6.add("Undella Town");
+  adjacent6.add("Nimbasa City");
+  City Black = new City("Black City", 1000000, adjacent6, true, true, 865,425);
   cities.add(Black);
   
-  adjacent.add("Nimbasa City");
-  adjacent.add("Mistralton City");
-  City Driftveil = new City("Driftveil City", 1000000, adjacent, true, true, 365,425);
-  adjacent.clear();
+  ArrayList<String> adjacent7 = new ArrayList<String>();
+  adjacent7.add("Nimbasa City");
+  adjacent7.add("Mistralton City");
+  City Driftveil = new City("Driftveil City", 1000000, adjacent7, true, true, 365,425);
   cities.add(Driftveil);
   
-  adjacent.add("Black City");
-  adjacent.add("Driftveil City");
-  adjacent.add("Castelia City");
-  City Nimbasa = new City("Nimbasa City", 1000000, adjacent, true, false, 610, 425);
-  adjacent.clear();
+  ArrayList<String> adjacent8 = new ArrayList<String>();
+  adjacent8.add("Black City");
+  adjacent8.add("Driftveil City");
+  adjacent8.add("Castelia City");
+  City Nimbasa = new City("Nimbasa City", 1000000, adjacent8, true, false, 610, 425);
   cities.add(Nimbasa);
   
-  adjacent.add("Nimbasa City");
-  adjacent.add("Nacrene City");
-  City Castelia = new City("Castelia City", 1000000, adjacent, true, true, 610, 600);
-  adjacent.clear();
+  ArrayList<String> adjacent9 = new ArrayList<String>();
+  adjacent9.add("Nimbasa City");
+  adjacent9.add("Nacrene City");
+  City Castelia = new City("Castelia City", 1000000, adjacent9, true, true, 610, 600);
   cities.add(Castelia);
   
-  adjacent.add("Castelia City");
-  adjacent.add("Straiton City");
-  City Nacrene = new City("Nacrene City", 1000000, adjacent, false, true, 920, 500);
-  adjacent.clear();
+  ArrayList<String> adjacent10 = new ArrayList<String>();
+  adjacent10.add("Castelia City");
+  adjacent10.add("Straiton City");
+  City Nacrene = new City("Nacrene City", 1000000, adjacent10, false, true, 920, 500);
   cities.add(Nacrene);
   
-  adjacent.add("Nacrene City");
-  adjacent.add("Accumula Town");
-  City Straiton = new City("Straiton City", 1000000, adjacent, false, false, 1040, 480);
-  adjacent.clear();
+  ArrayList<String> adjacent11 = new ArrayList<String>();
+  adjacent11.add("Nacrene City");
+  adjacent11.add("Accumula Town");
+  City Straiton = new City("Straiton City", 1000000, adjacent11, false, false, 1040, 480);
   cities.add(Straiton);
   
-  adjacent.add("Straiton City");
-  adjacent.add("Nuvema Town");
-  City Accumula = new City("Accumula Town", 1000000, adjacent, false, false, 1070, 570);
-  adjacent.clear();
+  ArrayList<String> adjacent12 = new ArrayList<String>();
+  adjacent12.add("Straiton City");
+  adjacent12.add("Nuvema Town");
+  City Accumula = new City("Accumula Town", 1000000, adjacent12, false, false, 1070, 570);
   cities.add(Accumula);
   
-  adjacent.add("Accumula Town");
-  City Nuvema = new City("Nuvema Town", 1000000, adjacent, false, true, 1100, 660);
-  adjacent.clear();
+  ArrayList<String> adjacent13 = new ArrayList<String>();
+  adjacent13.add("Accumula Town");
+  City Nuvema = new City("Nuvema Town", 1000000, adjacent13, false, true, 1100, 660);
   cities.add(Nuvema);
   
-  City Unity = new City("Unity Tower", 1000000, adjacent, true, true, 410, 700);
+  ArrayList<String> adjacent14 = new ArrayList<String>();
+  City Unity = new City("Unity Tower", 1000000, adjacent14, true, true, 410, 700);
   cities.add(Unity);
 }
 
@@ -109,8 +109,9 @@ void setup(){
   size(1200,785);
   PImage img;
   img = loadImage("map.png");
-  img.resize(width, height);
-  background(img);
+  //img.resize(width, height);
+  //background(img);
+  image(img, 0,0);
   
   citySetup();
   drawCities();
@@ -128,5 +129,6 @@ void draw(){
       cities.get(i).diseased = 1000000;
     }
     cities.get(i).landTransmission();
+    
   }
 }
