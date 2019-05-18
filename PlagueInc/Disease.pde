@@ -14,4 +14,13 @@ class Disease{
     severity = 0;
     lethality = 0;
   }
+  
+  void diseaseSetup(){
+    tMutations = new ArrayList();
+    sMutations = new ArrayList();
+    aMutations = new ArrayList();
+    accessibleTMutations = new ArrayList();
+    accessibleSMutations = new ArrayList();
+    accessibleAMutations = new ArrayList();
+  }
 }
