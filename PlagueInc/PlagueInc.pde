@@ -100,6 +100,11 @@ void drawCities(){
   }
 }
 
+void spreadDisease(double infectivity, int population, int diseased){
+  double rate = infectivity * ((population-diseased) / (population * 1.0)) * diseased;
+  diseased += rate;
+}
+
 void setup(){
   size(1200,785);
   PImage img;
@@ -112,5 +117,9 @@ void setup(){
 }
 
 void draw(){
-
+  cities.get(0).diseased = 1;
+  for (int i=0; i<cities.size(); i++){
+    spreadDisease(disease.infectivity, cities.get(i).population, cities.get(i).diseased);
+  }
+  System.out.println(cities.get(0).diseased);
 }
