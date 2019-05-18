@@ -38,4 +38,32 @@ class City{
     fill(255, (int) GB, (int) GB, 1);
     circle(x,y,65);
   }
+  
+  void updateDiseasedCount(){
+    fill(255,255,255);
+    noStroke();
+    int digits = 0;
+    int temp = diseased;
+    while (temp > 9){
+      digits++;
+      temp = temp / 10;
+    }
+    rect(x-32, y+32, 100 + (10*digits), 20);
+    textSize(16);
+    fill(0,0,0);
+    text(diseased + " / " + population, x - 32, y + 50);
+  }
+  
+  void landTransmission(){
+    //println(this.adjacent.size());
+    for (int i=0; i<cities.size(); i++){
+      for (int j=0; j<adjacent.size(); j++){
+        if (cities.get(i).name.equals(adjacent.get(j))){
+          if (Math.random() < (diseased / (population * 1.0)) && cities.get(i).diseased == 0){
+            cities.get(i).diseased = 1;
+          }
+        }
+      }
+    }
+  }
 }
