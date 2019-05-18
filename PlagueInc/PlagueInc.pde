@@ -1,3 +1,5 @@
+ArrayList<City> cities = new ArrayList<City>();
+
 void setup(){
   size(1200,785);
   PImage img;
@@ -7,121 +9,101 @@ void setup(){
   
   ArrayList<String> adjacent = new ArrayList<String>();
   adjacent.add("Opelucid City");
-  City League = new City("Pokemon League", 1000, adjacent, true, true);
+  City League = new City("Pokemon League", 1000, adjacent, true, false, 730, 60);
   adjacent.clear();
+  cities.add(League);
   
+  adjacent.add("Pokemon League");
   adjacent.add("Lacunesa Town");
   adjacent.add("Icirrus City");
-  City Opelucid = new City("Opelucid City", 1000, adjacent, true, true);
+  City Opelucid = new City("Opelucid City", 1000, adjacent, true, false, 610, 175);
   adjacent.clear();
+  cities.add(Opelucid);
   
   adjacent.add("Opelucid City");
   adjacent.add("Undella Town");
-  City Lacunesa = new City("Lacunesa Town", 1000, adjacent, true, true);
+  City Lacunesa = new City("Lacunesa Town", 1000, adjacent, true, false, 865,175);
   adjacent.clear();
+  cities.add(Lacunesa);
   
   adjacent.add("Opelucid City");
   adjacent.add("Mistralton City");
-  City Icirrus = new City("Icirrus City", 1000, adjacent, true, true);
+  City Icirrus = new City("Icirrus City", 1000, adjacent, true, false,365,175);
   adjacent.clear();
+  cities.add(Icirrus);
   
   adjacent.add("Lacunesa Town");
   adjacent.add("Black City");
-  City Undella = new City("Undella Town", 1000, adjacent, true, true);
+  City Undella = new City("Undella Town", 1000, adjacent, true, false,1030,300);
   adjacent.clear();
+  cities.add(Undella);
   
   adjacent.add("Icirrus City");
   adjacent.add("Driftveil City");
-  City Mistralton = new City("Mistralton City", 1000, adjacent, true, true);
+  City Mistralton = new City("Mistralton City", 1000, adjacent, true, false, 170,300);
   adjacent.clear();
+  cities.add(Mistralton);
   
   adjacent.add("Undella Town");
   adjacent.add("Nimbasa City");
-  City Black = new City("Black City", 1000, adjacent, true, true);
+  City Black = new City("Black City", 1000, adjacent, true, true, 865,425);
   adjacent.clear();
+  cities.add(Black);
   
   adjacent.add("Nimbasa City");
   adjacent.add("Mistralton City");
-  City Driftveil = new City("Driftveil City", 1000, adjacent, true, true);
+  City Driftveil = new City("Driftveil City", 1000, adjacent, true, true, 365,425);
   adjacent.clear();
+  cities.add(Driftveil);
   
   adjacent.add("Black City");
   adjacent.add("Driftveil City");
   adjacent.add("Castelia City");
-  City Nimbasa = new City("Nimbasa City", 1000, adjacent, true, true);
+  City Nimbasa = new City("Nimbasa City", 1000, adjacent, true, false, 610, 425);
   adjacent.clear();
+  cities.add(Nimbasa);
   
   adjacent.add("Nimbasa City");
   adjacent.add("Nacrene City");
-  City Castelia = new City("Castelia City", 1000, adjacent, true, true);
+  City Castelia = new City("Castelia City", 1000, adjacent, true, true, 610, 600);
   adjacent.clear();
+  cities.add(Castelia);
   
   adjacent.add("Castelia City");
   adjacent.add("Straiton City");
-  City Nacrene = new City("Nacrene City", 1000, adjacent, true, true);
+  City Nacrene = new City("Nacrene City", 1000, adjacent, false, true, 920, 500);
   adjacent.clear();
+  cities.add(Nacrene);
   
   adjacent.add("Nacrene City");
   adjacent.add("Accumula Town");
-  City Straiton = new City("Straiton City", 1000, adjacent, true, true);
+  City Straiton = new City("Straiton City", 1000, adjacent, false, false, 1040, 480);
   adjacent.clear();
+  cities.add(Straiton);
   
   adjacent.add("Straiton City");
   adjacent.add("Nuvema Town");
-  City Accumula = new City("Accumula Town", 1000, adjacent, true, true);
+  City Accumula = new City("Accumula Town", 1000, adjacent, false, false, 1070, 570);
   adjacent.clear();
+  cities.add(Accumula);
   
   adjacent.add("Accumula Town");
-  City Nuvema = new City("Nuvema Town", 1000, adjacent, true, true);
+  City Nuvema = new City("Nuvema Town", 1000, adjacent, false, true, 1100, 660);
   adjacent.clear();
+  cities.add(Nuvema);
   
-  City Unity = new City("Unity Tower", 1000, adjacent, true, true);
+  City Unity = new City("Unity Tower", 1000, adjacent, true, true, 410, 700);
+  cities.add(Unity);
+  
+  drawCities();
+}
+
+void drawCities(){
+  for (int i=0; i<cities.size(); i++){
+    circle(cities.get(i).x,cities.get(i).y,65);
+  }
 }
 
 void draw(){
-  line(610, 425, 865, 425);
-  line(610, 425, 365, 425);
-  line(865, 425, 1030, 300);
-  line(365, 425, 170, 300);
-  line(170, 300, 365, 175);
-  line(610, 600, 610, 425);
-  line(365,175,610,175);
-  line(610,175,865,175);
-  line(865,175,1030,300);
-  line(730,60,610,175);
-  line(610,600,920,500);
-  line(920,500,1040,480);
-  line(1040,480,1070,570);
-  line(1070,570,1100,660);
-  strokeWeight(4);
-  // Pokemon League
-  circle(730, 60, 65);
-  // Nimbasa City
-  circle(610, 425, 65);
-  // Black City
-  circle(865, 425, 65);
-  // Driftveil City
-  circle(365, 425, 65);
-  // Undella Town
-  circle(1030, 300, 65);
-  // Mistralton City
-  circle(170, 300, 65);
-  // Iccirus City
-  circle(365, 175, 65);
-  // Lacunesa Town
-  circle(865, 175, 65);
-  // Opelucid City
-  circle(610, 175, 65);
-  // Castelia City
-  circle(610, 600, 65);
-  // Nacrene City
-  circle(920, 500, 65);
-  // Striaton City
-  circle(1040, 480, 65);
-  // Accumula Town
-  circle(1070, 570, 65);
-  // Nuvema Town
-  circle(1100, 660, 65);
-  // Unity Tower
-  circle(410, 700, 65);
+
 }
