@@ -5,7 +5,13 @@ class Disease{
   ArrayList<Mutation> accessibleTMutations;
   ArrayList<Mutation> accessibleSMutations;
   ArrayList<Mutation> accessibleAMutations;
-  int infectivity;
-  int severity;
-  int lethality;
+  double infectivity;
+  double severity;
+  double lethality;
+  
+  Disease(){
+    infectivity = 0.05;
+    severity = 0;
+    lethality = 0;
+  }
 }
