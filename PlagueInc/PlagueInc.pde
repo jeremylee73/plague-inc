@@ -1,3 +1,7 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 ArrayList<City> cities = new ArrayList<City>();
 Disease disease;
 Cure cure;
@@ -106,17 +110,22 @@ void spreadDisease(City c){
 }
 
 void setup(){
-  size(1200,785);
+  size(1440,785);
   PImage img;
   img = loadImage("map.png");
-  //img.resize(width, height);
-  //background(img);
   image(img, 0,0);
   
   citySetup();
   drawCities();
-  
   disease = new Disease();
+  
+  textSize(16);
+  fill(0,0,0);
+  text("Infectivity: " + (int) (disease.infectivity * 10000) + " / 100", 1220, 20);
+  text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
+  text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
+  
+  
   cities.get(0).diseased = 1;
 }
 
