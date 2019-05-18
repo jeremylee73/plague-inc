@@ -10,7 +10,7 @@ class Disease{
   double lethality;
   
   Disease(){
-    infectivity = 0.0005;
+    infectivity = 0.1;
     severity = 0;
     lethality = 0;
   }

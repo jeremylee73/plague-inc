@@ -122,8 +122,9 @@ void setup(){
 void draw(){
   for (int i=0; i<cities.size(); i++){
     spreadDisease(cities.get(i));
-  }
-  if (cities.get(0).diseased != 1000000){  
-    System.out.println(cities.get(0).diseased);
+    cities.get(i).updateColor();
+    if (cities.get(i).diseased > 1000000){
+      cities.get(i).diseased = 1000000;
+    }
   }
 }

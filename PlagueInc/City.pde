@@ -18,6 +18,8 @@ class City{
     this.adjacent = adjacent;
     this.hasAirport = hasAirport;
     this.hasDock = hasDock;
+    diseased = 0;
+    dead = 0;
     this.x = x;
     this.y = y;
 
@@ -29,5 +31,11 @@ class City{
       }
     }
     strokeWeight(4);
+  }
+  
+  void updateColor(){
+    double GB = (population - diseased) / (population * 1.0) * 255;
+    fill(255, (int) GB, (int) GB, 1);
+    circle(x,y,65);
   }
 }
