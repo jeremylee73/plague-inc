@@ -110,7 +110,6 @@ class Disease{
     inputTMutations();
   }
   
-<<<<<<< HEAD
   void diseaseSetup(){
     tMutations = new ArrayList();
     sMutations = new ArrayList();
@@ -118,7 +117,8 @@ class Disease{
     accessibleTMutations = new ArrayList();
     accessibleSMutations = new ArrayList();
     accessibleAMutations = new ArrayList();
-=======
+  }
+  
   boolean addTMutation(Mutation m){
     if (points < m.cost){
       return false;
@@ -144,6 +144,5 @@ class Disease{
     accessibleAMutations.remove(m);
     aMutations.add(m);
     return true;
->>>>>>> 5b516dd16827adc13b18610e39b6515f71f60ee9
   }
 }
