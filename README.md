@@ -7,3 +7,8 @@ Jeremy - I wrote the logistic function simulator in the Experiments folder so th
 Friday, May 17
 -----------------------------------------------------------------------------------------------------------------------------
 Jeremy - I imported the map.png image from the data folder onto the background of the sketch window. I also created the City class with its variables and constructor. I created instance variables for each city on the map, and for each, I assigned a particular circle. I also stored the names of adjacent cities in an ArrayList variable in each City and drew lines between each City and its adjacent Cities.
+
+Saturday, May 18
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - I created the DNA pop-up bubbles and coded in a feature where they fade away to indicate how much time is left to pop the bubble,
+and also made it so that when the mouse presses the bubble, the points variable is increased by 2.
