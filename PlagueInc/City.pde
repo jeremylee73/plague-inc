@@ -13,6 +13,7 @@ class City{
   boolean dockOpen;
   boolean hasBubble;
   int green, blue;
+  boolean bubblePopped;
   
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y){
     this.name = name;
@@ -25,7 +26,10 @@ class City{
     this.x = x;
     this.y = y;
     green = 0; blue = 0;
-
+    drawRoutes();
+  }
+  
+  void drawRoutes(){
     for (int i=0; i<cities.size(); i++){
       for (int j=0; j<adjacent.size(); j++){
         if (cities.get(i).name.equals(adjacent.get(j))){
@@ -40,13 +44,17 @@ class City{
     double GB = (population - diseased) / (population * 1.0) * 255;
     fill(255, (int) GB, (int) GB, 1);
     circle(x,y,65);
-    if (diseased > 0 && green < 256 && blue < 256){
+    if (diseased > 0 && green < 256 && blue < 256 && !bubblePopped){
       hasBubble = true;
       fill(255, green, blue);
       circle(x,y,30);
       green++; blue++;
     } else {
       hasBubble = false;
+    }
+    if (bubblePopped){
+      fill(255,255,255);
+      circle(x,y,30);
     }
   }
   
