@@ -136,6 +136,16 @@ boolean in(Mutation mut, ArrayList<Mutation> arr){
   return false;
 }
 
+// arr1 has to be smaller than arr2
+boolean arrIn(ArrayList<Mutation> arr1, ArrayList<Mutation> arr2){
+  for (int i=0; i<arr1.size(); i++){
+    if (!(in(arr1.get(i), arr2))){
+      return false;
+    }
+  }
+  return true;
+}
+
 void Confirm(){
   println(disease.allTMutations.size());
   println(d1.getValue());
