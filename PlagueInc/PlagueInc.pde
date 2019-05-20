@@ -173,8 +173,13 @@ void mousePressed() {
       ellipse(c.x, c.y, 35, 35);
       //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
       points+= 2;
+      //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
+      //etc, don't have to be as rigid as following actual game 100%
     }
   }
+  //processing background color
+  fill(205);
+  rect(1220,90,100,20);
   fill(0,0,0);
   text("Points: " + points, 1220, 110);
 }
