@@ -127,6 +127,28 @@ void customize(DropdownList ddl) {
   ddl.setColorActive(color(255, 128));
 }
 
+boolean in(Mutation mut, ArrayList<Mutation> arr){
+  for (int i=0; i<arr.size(); i++){
+    if (mut.name.equals(arr.get(i).name)){
+      return true; 
+    }
+  }
+  return false;
+}
+
+void Confirm(){
+  println(disease.allTMutations.size());
+  println(d1.getValue());
+  if (d1.getValue() != 0){
+    disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
+    disease.accessibleTMutations.remove(disease.accessibleTMutations.get((int) d1.getValue() - 1);
+    for (int i=0; i<disease.allTMutations.size(); i++){
+      Mutation mut = disease.allTMutations.get(i);
+      
+    }    
+  }
+}
+
 void setup() {
   size(1440, 785);
   img = loadImage("map.png");
