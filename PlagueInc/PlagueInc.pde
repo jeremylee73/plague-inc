@@ -1,13 +1,19 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import controlP5.*;
 
+ControlP5 cp5;
+DropdownList d1, d2;
 ArrayList<City> cities = new ArrayList<City>();
 Disease disease;
 Cure cure;
 int points;
 ArrayList<String> news;
 PImage img;
+String[] TMStrings;
+JComboBox TMList;
+JLabel TMText;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -110,6 +116,16 @@ void spreadDisease(City c) {
   c.diseased += Math.ceil(rate);
 }
 
+void customize(DropdownList ddl) {
+  // a convenience function to customize a DropdownList
+  ddl.setBackgroundColor(color(190)); 
+  ddl.setItemHeight(20);
+  ddl.setBarHeight(30);
+  ddl.getCaptionLabel().set("<Transmission>");
+  ddl.setColorBackground(color(60)); 
+  ddl.setColorActive(color(255,128)); 
+}
+
 void setup() {
   size(1440, 785);
   img = loadImage("map.png");
@@ -125,7 +141,13 @@ void setup() {
   text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
   text("Points: " + 0, 1220, 110);
-
+  cp5 = new ControlP5(this);
+  d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
+  for (int i=0; i<disease.allTMutations.size(); i++){
+    d1.addItem(disease.allTMutations.get(i).name, i);
+  }
+  customize(d1);
+  
   cities.get(0).diseased = 1;
 }
 
