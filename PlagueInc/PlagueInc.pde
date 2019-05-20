@@ -169,6 +169,8 @@ void mousePressed() {
     //this if statement calculates if mouse coords is within the bubble's hitbox
     if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 30) && c.hasBubble) {
       c.bubblePopped = true;
+      fill(255, 255, 255);
+      ellipse(c.x, c.y, 35, 35);
       //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
       points+= 2;
     }
