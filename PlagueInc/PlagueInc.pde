@@ -14,6 +14,7 @@ PImage img;
 String[] TMStrings;
 JComboBox TMList;
 JLabel TMText;
+int totalDead;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -108,7 +109,7 @@ void citySetup() {
 void drawCities() {
   for (int i=0; i<cities.size(); i++) {
     circle(cities.get(i).x, cities.get(i).y, 65);
-  }  
+  }
 }
 
 void spreadDisease(City c) {
@@ -123,7 +124,7 @@ void customize(DropdownList ddl) {
   ddl.setBarHeight(30);
   ddl.getCaptionLabel().set("<Transmission>");
   ddl.setColorBackground(color(60)); 
-  ddl.setColorActive(color(255,128)); 
+  ddl.setColorActive(color(255, 128));
 }
 
 void setup() {
@@ -134,6 +135,7 @@ void setup() {
   citySetup();
   drawCities();
   disease = new Disease();
+  cure = new Cure();
 
   textSize(16);
   fill(0, 0, 0);
@@ -141,19 +143,22 @@ void setup() {
   text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
   text("Points: " + 0, 1220, 110);
+  text("Cure: " + 0 + "%", 1220, 140);
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
-  for (int i=0; i<disease.allTMutations.size(); i++){
+  for (int i=0; i<disease.allTMutations.size(); i++) {
     d1.addItem(disease.allTMutations.get(i).name, i);
   }
   customize(d1);
-  
+
   cities.get(0).diseased = 1;
 }
 
 void draw() {
+  totalDead = 0;
   for (City c : cities) {
     spreadDisease(c);
+    totalDead += c.dead;
     c.updateDiseasedCount();
     c.updateColor();
     if (c.diseased > 1000000) {
@@ -161,13 +166,26 @@ void draw() {
     }
     c.landTransmission();
   }
+  //rudimentary cure rate, very subject to change
+  if (totalDead >= 10000 ) {
+    if (cure.developed() <= 100){
+      cure.setDeveloped(cure.developed() + totalDead * pow(1,-100));
+    }
+    if (cure.developed() > 100){
+      cure.setDeveloped(100);
+    }
+    fill(205);
+    rect(1220,120,100,22);
+    fill(0,0,0);
+    text("Cure: " + (int)cure.developed() + "%", 1220, 140);
+  }
 }
 
 void mousePressed() {
   for (City c : cities) {
     //pops bubble if bubble is above the city and adds 2 points
     //this if statement calculates if mouse coords is within the bubble's hitbox
-    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 30) && c.hasBubble) {
+    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && c.hasBubble) {
       c.bubblePopped = true;
       fill(255, 255, 255);
       ellipse(c.x, c.y, 35, 35);
@@ -179,7 +197,7 @@ void mousePressed() {
   }
   //processing background color
   fill(205);
-  rect(1220,90,100,20);
-  fill(0,0,0);
+  rect(1220, 90, 100, 22);
+  fill(0, 0, 0);
   text("Points: " + points, 1220, 110);
 }

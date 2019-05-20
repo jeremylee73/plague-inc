@@ -8,7 +8,7 @@ class Disease{
   ArrayList<Mutation> accessibleTMutations;
   ArrayList<Mutation> accessibleSMutations;
   ArrayList<Mutation> accessibleAMutations;
-  double infectivity;
+  double infectivity; //should start at 0.0005 and hit till 0.01 w/o any extra mutations
   double severity;
   double lethality;
   

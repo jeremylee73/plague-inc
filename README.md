@@ -19,4 +19,5 @@ Monday, May 20
 
 
 Victor - fixed bug where popping bubbles would make the bubbles permanently stay white, interfering with the filling in of the cities' circles.
-Also fixed bug where the digits for points would overlap each other
+Also fixed bug where the digits for points would overlap each other + fixed hitbox for popping bubbles.
+I also added a very rudimentary cure rate system.
