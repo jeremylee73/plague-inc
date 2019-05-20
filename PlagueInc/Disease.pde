@@ -115,6 +115,11 @@ class Disease{
     sMutations = new ArrayList();
     aMutations = new ArrayList();
     accessibleTMutations = new ArrayList();
+    for (int i=0; i<allTMutations.size(); i++){
+      if (allTMutations.get(i).prereqs.size() == 0){
+        accessibleTMutations.add(allTMutations.get(i));
+      }
+    }
     accessibleSMutations = new ArrayList();
     accessibleAMutations = new ArrayList();
   }
