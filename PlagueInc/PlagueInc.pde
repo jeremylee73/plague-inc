@@ -146,10 +146,12 @@ void setup() {
   text("Cure: " + 0 + "%", 1220, 140);
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
-  for (int i=0; i<disease.allTMutations.size(); i++) {
-    d1.addItem(disease.allTMutations.get(i).name, i);
+  d1.addItem("<Transmission>", 0);
+  for (int i=1; i<=disease.allTMutations.size(); i++) {
+    d1.addItem(disease.allTMutations.get(i-1).name, i);
   }
   customize(d1);
+  cp5.addButton("Confirm").setValue(0).setPosition(1220, 500).setSize(100, 40);
 
   cities.get(0).diseased = 1;
 }
