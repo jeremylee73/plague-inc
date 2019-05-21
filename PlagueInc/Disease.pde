@@ -108,6 +108,7 @@ class Disease{
     allSMutations = new ArrayList<Mutation>();
     allAMutations = new ArrayList<Mutation>();
     inputTMutations();
+    diseaseSetup();
   }
   
   void diseaseSetup(){
@@ -124,12 +125,40 @@ class Disease{
     accessibleAMutations = new ArrayList();
   }
   
+  boolean in(Mutation mut, ArrayList<Mutation> arr){
+    for (int i=0; i<arr.size(); i++){
+      if (mut.name.equals(arr.get(i).name)){
+        return true; 
+      }
+    }
+    return false;
+  }
+
+  // arr1 has to be smaller than arr2
+  boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2){
+    if (arr1.size()>arr2.size()){
+      return false; 
+    }
+    for (int i=0; i<arr1.size(); i++){
+      if (!(arr1.get(i).equals(arr2.get(i).name))){
+        return false; 
+      }
+    }
+    return true;
+  }
+  
   boolean addTMutation(Mutation m){
     if (points < m.cost){
       return false;
     }
     accessibleTMutations.remove(m);
     tMutations.add(m);
+    for (int i=0; i<disease.allTMutations.size(); i++){
+      Mutation mut = allTMutations.get(i);
+      if (arrIn(mut.prereqs, tMutations) && !(in(mut, accessibleTMutations)) && !(in(mut, tMutations))){
+        accessibleTMutations.add(mut);
+      }
+    }
     return true;
   }
   

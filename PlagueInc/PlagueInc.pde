@@ -127,45 +127,20 @@ void customize(DropdownList ddl) {
   ddl.setColorActive(color(255, 128));
 }
 
-boolean in(Mutation mut, ArrayList<Mutation> arr){
-  for (int i=0; i<arr.size(); i++){
-    if (mut.name.equals(arr.get(i).name)){
-      return true; 
-    }
-  }
-  return false;
-}
 
-// arr1 has to be smaller than arr2
-boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2){
-  if (arr1.size()>arr2.size()){
-    return false; 
-  }
-  for (int i=0; i<arr1.size(); i++){
-    if (!(arr1.get(i).equals(arr2.get(i).name))){
-      return false; 
-    }
-  }
-  return true;
-}
 
 void Confirm(){
   if (d1.getValue() != 0){
     disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
-    for (int i=0; i<disease.allTMutations.size(); i++){
-      Mutation mut = disease.allTMutations.get(i);
-      if (arrIn(mut.prereqs, disease.tMutations) && !(in(mut, disease.accessibleTMutations)) && !(in(mut, disease.tMutations))){
-        disease.accessibleTMutations.add(mut);
-      }
-    }
     d1.clear();
     d1.addItem("<Transmission>", 0);
     for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
       d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
     }
   }
-  for (int i=0; i<disease.tMutations.size(); i++){
-    System.out.println(disease.tMutations.get(i).name);
+  System.out.println("-----------------------------");
+  for (int i=0; i<disease.accessibleTMutations.size(); i++){
+    System.out.println(disease.accessibleTMutations.get(i).name);
   }
 }
 
@@ -229,7 +204,6 @@ void draw() {
     fill(0,0,0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
-  
 }
 
 void mousePressed() {
