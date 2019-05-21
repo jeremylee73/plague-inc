@@ -132,16 +132,6 @@ void customize(DropdownList ddl) {
 void Confirm(){
   if (d1.getValue() != 0){
     disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
-<<<<<<< HEAD
-    for (int i=0; i<disease.allTMutations.size(); i++){
-      Mutation mut = disease.allTMutations.get(i);
-      if (arrIn(mut.prereqs, disease.tMutations) && !(in(mut, disease.accessibleTMutations)) && !(in(mut, disease.tMutations))){
-        disease.accessibleTMutations.add(mut);
-      }
-    }
-    print(disease.accessibleTMutations.get(disease.accessibleTMutations.size()-1));
-=======
->>>>>>> c8633b87ead0de546bca32b7133f53c6232bfbca
     d1.clear();
     d1.addItem("<Transmission>", 0);
     for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
