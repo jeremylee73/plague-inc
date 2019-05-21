@@ -139,21 +139,32 @@ class Disease{
     if (arr1.size()>arr2.size()){
       return false; 
     }
+    int found = 0;
     for (int i=0; i<arr1.size(); i++){
-      if (!(arr1.get(i).equals(arr2.get(i).name))){
-        return false; 
+      for (int j=0; j<arr2.size(); j++){
+        if (arr1.get(i).equals(arr2.get(j).name)){
+          found++;
+        }
       }
+
     }
-    return true;
+    if (found == arr1.size()){
+      return true;
+    }
+    return false;
   }
   
   boolean addTMutation(Mutation m){
     if (points < m.cost){
       return false;
     }
+    points -= m.cost;
     accessibleTMutations.remove(m);
     tMutations.add(m);
-    for (int i=0; i<disease.allTMutations.size(); i++){
+    infectivity += m.infIncrement;
+    severity += m.sevIncrement;
+    lethality += m.letIncrement;
+    for (int i=0; i<allTMutations.size(); i++){
       Mutation mut = allTMutations.get(i);
       if (arrIn(mut.prereqs, tMutations) && !(in(mut, accessibleTMutations)) && !(in(mut, tMutations))){
         accessibleTMutations.add(mut);
