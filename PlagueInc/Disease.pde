@@ -95,7 +95,7 @@ class Disease{
   }
   
   Disease(){
-    infectivity = 0.01;
+    infectivity = 0.0005;
     severity = 0;
     lethality = 0;
     tMutations = new ArrayList<Mutation>();
@@ -161,9 +161,9 @@ class Disease{
     points -= m.cost;
     accessibleTMutations.remove(m);
     tMutations.add(m);
-    infectivity += m.infIncrement;
-    severity += m.sevIncrement;
-    lethality += m.letIncrement;
+    infectivity += m.infIncrement / 10000.0;
+    severity += m.sevIncrement / 10000.0;
+    lethality += m.letIncrement / 10000.0;
     for (int i=0; i<allTMutations.size(); i++){
       Mutation mut = allTMutations.get(i);
       if (arrIn(mut.prereqs, tMutations) && !(in(mut, accessibleTMutations)) && !(in(mut, tMutations))){
