@@ -16,7 +16,7 @@ Victor - I created the DNA pop-up bubbles and coded in a feature where they fade
 
 Monday, May 20
 -----------------------------------------------------------------------------------------------------------------------------
-
+Jeremy - I created the drop down menu for transmission diseases and a button to submit them. It also changes what's displayed on the menu as more mutations are chosen, based on the prerequisites for each mutation (defined earlier). It is still buggy now, so it needs some fixing.
 
 Victor - fixed bug where popping bubbles would make the bubbles permanently stay white, interfering with the filling in of the cities' circles.
 Also fixed bug where the digits for points would overlap each other + fixed hitbox for popping bubbles.
