@@ -137,25 +137,30 @@ boolean in(Mutation mut, ArrayList<Mutation> arr){
 }
 
 // arr1 has to be smaller than arr2
-boolean arrIn(ArrayList<Mutation> arr1, ArrayList<Mutation> arr2){
+boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2){
+  if (arr1.size()>arr2.size()){
+    return false; 
+  }
   for (int i=0; i<arr1.size(); i++){
-    if (!(in(arr1.get(i), arr2))){
-      return false;
+    if (!(arr1.get(i).equals(arr2.get(i).name))){
+      return false; 
     }
   }
   return true;
 }
 
 void Confirm(){
-  println(disease.allTMutations.size());
-  println(d1.getValue());
   if (d1.getValue() != 0){
     disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
-    disease.accessibleTMutations.remove(disease.accessibleTMutations.get((int) d1.getValue() - 1);
     for (int i=0; i<disease.allTMutations.size(); i++){
       Mutation mut = disease.allTMutations.get(i);
-      
+      if (arrIn(mut.prereqs, disease.tMutations) && !(in(mut, disease.accessibleTMutations)) && !(in(mut, disease.tMutations))){
+        disease.accessibleTMutations.add(mut);
+      }
     }    
+  }
+  if (disease.tMutations.size() != 0){
+    System.out.println(disease.tMutations.get(0).name);
   }
 }
 
@@ -168,6 +173,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
+  points = 100;
 
   textSize(16);
   fill(0, 0, 0);
