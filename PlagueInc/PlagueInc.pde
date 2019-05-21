@@ -9,6 +9,7 @@ ArrayList<City> cities = new ArrayList<City>();
 Disease disease;
 Cure cure;
 int points;
+int pointRate;
 ArrayList<String> news;
 PImage img;
 String[] TMStrings;
@@ -127,8 +128,6 @@ void customize(DropdownList ddl) {
   ddl.setColorActive(color(255, 128));
 }
 
-
-
 void Confirm(){
   if (d1.getValue() != 0){
     disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
@@ -153,6 +152,10 @@ void updateDiseaseLabels(){
   rect(1220, 60, 200, 22);
   fill(0, 0, 0);
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
+  fill(205);
+  rect(1220, 90, 100, 22);
+  fill(0, 0, 0);
+  text("Points: " + points, 1220, 110);
 }
 
 void setup() {
@@ -164,7 +167,8 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 100;
+  points = 0;
+  pointRate = 1;
 
   textSize(16);
   fill(0, 0, 0);
@@ -216,6 +220,10 @@ void draw() {
     fill(0,0,0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
+  
+  if (Math.random() < (1/180.0)){
+    points += pointRate;
+  }
 }
 
 void mousePressed() {
@@ -233,8 +241,4 @@ void mousePressed() {
     }
   }
   //processing background color
-  fill(205);
-  rect(1220, 90, 100, 22);
-  fill(0, 0, 0);
-  text("Points: " + points, 1220, 110);
 }
