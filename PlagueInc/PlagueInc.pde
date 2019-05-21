@@ -1,13 +1,20 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import controlP5.*;
 
+ControlP5 cp5;
+DropdownList d1, d2;
 ArrayList<City> cities = new ArrayList<City>();
 Disease disease;
 Cure cure;
 int points;
 ArrayList<String> news;
 PImage img;
+String[] TMStrings;
+JComboBox TMList;
+JLabel TMText;
+int totalDead;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -110,6 +117,59 @@ void spreadDisease(City c) {
   c.diseased += Math.ceil(rate);
 }
 
+void customize(DropdownList ddl) {
+  // a convenience function to customize a DropdownList
+  ddl.setBackgroundColor(color(190)); 
+  ddl.setItemHeight(20);
+  ddl.setBarHeight(30);
+  ddl.getCaptionLabel().set("<Transmission>");
+  ddl.setColorBackground(color(60)); 
+  ddl.setColorActive(color(255, 128));
+}
+
+boolean in(Mutation mut, ArrayList<Mutation> arr){
+  for (int i=0; i<arr.size(); i++){
+    if (mut.name.equals(arr.get(i).name)){
+      return true; 
+    }
+  }
+  return false;
+}
+
+// arr1 has to be smaller than arr2
+boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2){
+  if (arr1.size()>arr2.size()){
+    return false; 
+  }
+  for (int i=0; i<arr1.size(); i++){
+    if (!(arr1.get(i).equals(arr2.get(i).name))){
+      return false; 
+    }
+  }
+  return true;
+}
+
+void Confirm(){
+  if (d1.getValue() != 0){
+    disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
+    for (int i=0; i<disease.allTMutations.size(); i++){
+      Mutation mut = disease.allTMutations.get(i);
+      if (arrIn(mut.prereqs, disease.tMutations) && !(in(mut, disease.accessibleTMutations)) && !(in(mut, disease.tMutations))){
+        disease.accessibleTMutations.add(mut);
+      }
+    }
+    print(disease.accessibleTMutations.get(disease.accessibleTMutations.size()-1));
+    d1.clear();
+    d1.addItem("<Transmission>", 0);
+    for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
+      d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+    }
+  }
+  for (int i=0; i<disease.tMutations.size(); i++){
+    System.out.println(disease.tMutations.get(i).name);
+  }
+}
+
 void setup() {
   size(1440, 785);
   img = loadImage("map.png");
@@ -118,6 +178,8 @@ void setup() {
   citySetup();
   drawCities();
   disease = new Disease();
+  cure = new Cure();
+  points = 100;
 
   textSize(16);
   fill(0, 0, 0);
@@ -125,13 +187,29 @@ void setup() {
   text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
   text("Points: " + 0, 1220, 110);
+  text("Cure: " + 0 + "%", 1220, 140);
+  cp5 = new ControlP5(this);
+  d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
+  d1.addItem("<Transmission>", 0);
+  for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
+    d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+  }
+  customize(d1);
+  cp5.addButton("Confirm").setValue(0).setPosition(1220, 500).setSize(100, 40);
+  d1.clear();
+  d1.addItem("<Transmission>", 0);
+  for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
+    d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+  }
 
   cities.get(0).diseased = 1;
 }
 
 void draw() {
+  totalDead = 0;
   for (City c : cities) {
     spreadDisease(c);
+    totalDead += c.dead;
     c.updateDiseasedCount();
     c.updateColor();
     if (c.diseased > 1000000) {
@@ -139,18 +217,39 @@ void draw() {
     }
     c.landTransmission();
   }
+  //rudimentary cure rate, very subject to change
+  if (totalDead >= 10000 ) {
+    if (cure.developed() <= 100){
+      cure.setDeveloped(pow(totalDead * 0.000001,2));
+    }
+    if (cure.developed() > 100){
+      cure.setDeveloped(100);
+    }
+    fill(205);
+    rect(1220,120,100,22);
+    fill(0,0,0);
+    text("Cure: " + (int)cure.developed() + "%", 1220, 140);
+  }
+  
 }
 
 void mousePressed() {
   for (City c : cities) {
     //pops bubble if bubble is above the city and adds 2 points
     //this if statement calculates if mouse coords is within the bubble's hitbox
-    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 30) && c.hasBubble) {
+    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && c.hasBubble) {
       c.bubblePopped = true;
+      fill(255, 255, 255);
+      ellipse(c.x, c.y, 35, 35);
       //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
       points+= 2;
+      //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
+      //etc, don't have to be as rigid as following actual game 100%
     }
   }
-  fill(0,0,0);
+  //processing background color
+  fill(205);
+  rect(1220, 90, 100, 22);
+  fill(0, 0, 0);
   text("Points: " + points, 1220, 110);
 }

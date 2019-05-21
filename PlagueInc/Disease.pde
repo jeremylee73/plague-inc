@@ -8,7 +8,7 @@ class Disease{
   ArrayList<Mutation> accessibleTMutations;
   ArrayList<Mutation> accessibleSMutations;
   ArrayList<Mutation> accessibleAMutations;
-  double infectivity;
+  double infectivity; //should start at 0.0005 and hit till 0.01 w/o any extra mutations
   double severity;
   double lethality;
   
@@ -115,6 +115,11 @@ class Disease{
     sMutations = new ArrayList();
     aMutations = new ArrayList();
     accessibleTMutations = new ArrayList();
+    for (int i=0; i<allTMutations.size(); i++){
+      if (allTMutations.get(i).prereqs.size() == 0){
+        accessibleTMutations.add(allTMutations.get(i));
+      }
+    }
     accessibleSMutations = new ArrayList();
     accessibleAMutations = new ArrayList();
   }
