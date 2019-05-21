@@ -138,10 +138,6 @@ void Confirm(){
       d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
     }
   }
-  System.out.println("-----------------------------");
-  for (int i=0; i<disease.accessibleTMutations.size(); i++){
-    System.out.println(disease.accessibleTMutations.get(i).name);
-  }
 }
 
 void updateDiseaseLabels(){
