@@ -169,6 +169,7 @@ void setup() {
   cure = new Cure();
   points = 0;
   pointRate = 1;
+  news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
 
   textSize(16);
   fill(0, 0, 0);

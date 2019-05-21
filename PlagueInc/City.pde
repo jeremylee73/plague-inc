@@ -12,7 +12,7 @@ class City {
   boolean airportOpen;
   boolean dockOpen;
   boolean hasBubble;
-  int green, blue;
+  int green, blue, red;
   boolean bubblePopped;
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
@@ -27,6 +27,7 @@ class City {
     this.y = y;
     green = 0; 
     blue = 0;
+    red = 255;
     drawRoutes();
   }
 
@@ -45,7 +46,8 @@ class City {
     double GB = (population - diseased) / (population * 1.0) * 255;
     fill(255, (int) GB, (int) GB, 1);
     ellipse(x, y, 65, 65);
-    if (diseased > 0 && green < 256 && blue < 256 && !bubblePopped) {
+    if (diseased > 0 && green < 255 && blue < 255 && !bubblePopped) {
+      //this case is true longer than it should be? might be causing bug with bubbles visuals
       hasBubble = true;
       fill(255, green, blue);
       ellipse(x, y, 30, 30);
@@ -83,6 +85,12 @@ class City {
           if (Math.random() < (diseased / (population * 1.0)) && cities.get(i).diseased == 0) {
             cities.get(i).diseased = 1;
             hasBubble = true;
+            //adds infection message to news and shows it on screen
+            news.add(name+" has become infected.");
+            fill(205);
+            rect(1220,280,150,120);
+            fill(0,0,0);
+            text(news.get(news.size() - 1),1220,300,150,100);
           }
         }
       }
