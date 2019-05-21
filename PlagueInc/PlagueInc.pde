@@ -157,10 +157,15 @@ void Confirm(){
       if (arrIn(mut.prereqs, disease.tMutations) && !(in(mut, disease.accessibleTMutations)) && !(in(mut, disease.tMutations))){
         disease.accessibleTMutations.add(mut);
       }
-    }    
+    }
+    d1.clear();
+    d1.addItem("<Transmission>", 0);
+    for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
+      d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+    }
   }
-  if (disease.tMutations.size() != 0){
-    System.out.println(disease.tMutations.get(0).name);
+  for (int i=0; i<disease.tMutations.size(); i++){
+    System.out.println(disease.tMutations.get(i).name);
   }
 }
 
@@ -185,11 +190,16 @@ void setup() {
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
   d1.addItem("<Transmission>", 0);
-  for (int i=1; i<=disease.allTMutations.size(); i++) {
-    d1.addItem(disease.allTMutations.get(i-1).name, i);
+  for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
+    d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
   }
   customize(d1);
   cp5.addButton("Confirm").setValue(0).setPosition(1220, 500).setSize(100, 40);
+  d1.clear();
+  d1.addItem("<Transmission>", 0);
+  for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
+    d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+  }
 
   cities.get(0).diseased = 1;
 }
@@ -219,6 +229,7 @@ void draw() {
     fill(0,0,0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
+  
 }
 
 void mousePressed() {
