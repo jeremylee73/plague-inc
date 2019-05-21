@@ -144,6 +144,21 @@ void Confirm(){
   }
 }
 
+void updateDiseaseLabels(){
+  fill(205);
+  rect(1220, 0, 200, 22);
+  fill(0, 0, 0);
+  text("Infectivity: " + (int) (disease.infectivity * 10000) + " / 100", 1220, 20);
+  fill(205);
+  rect(1220, 30, 200, 22);
+  fill(0, 0, 0);
+  text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
+  fill(205);
+  rect(1220, 60, 200, 22);
+  fill(0, 0, 0);
+  text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
+}
+
 void setup() {
   size(1440, 785);
   img = loadImage("map.png");
@@ -186,6 +201,7 @@ void draw() {
     totalDead += c.dead;
     c.updateDiseasedCount();
     c.updateColor();
+    updateDiseaseLabels();
     if (c.diseased > 1000000) {
       c.diseased = 1000000;
     }
