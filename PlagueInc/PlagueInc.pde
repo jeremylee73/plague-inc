@@ -101,7 +101,7 @@ void citySetup() {
 
 void drawCities() {
   for (int i=0; i<cities.size(); i++) {
-    circle(cities.get(i).x, cities.get(i).y, 65);
+    ellipse(cities.get(i).x, cities.get(i).y, 65, 65);
   }  
 }
 
