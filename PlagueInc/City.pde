@@ -48,7 +48,7 @@ class City {
     for (int i=0; i<cities.size(); i++){
       if (cities.get(i).hasAirport){
         fill(255,0,0);
-        rect(cities.get(i).x - 25, cities.get(i).y - 60, 20, 20);
+        rect(cities.get(i).x + 40, cities.get(i).y - 25, 20, 20);
         fill(255,255,255);
       }
     }
@@ -58,7 +58,7 @@ class City {
     for (int i=0; i<cities.size(); i++){
       if (cities.get(i).hasDock){
         fill(255,0,0);
-        triangle(cities.get(i).x+5, cities.get(i).y - 40, cities.get(i).x+15, cities.get(i).y - 60, cities.get(i).x + 25, cities.get(i).y - 40);
+        triangle(cities.get(i).x+40, cities.get(i).y+20, cities.get(i).x+50, cities.get(i).y+5, cities.get(i).x + 60, cities.get(i).y + 20);
         fill(255,255,255);
       }
     }
@@ -103,7 +103,7 @@ class City {
     for (int i=0; i<cities.size(); i++) {
       for (int j=0; j<adjacent.size(); j++) {
         if (cities.get(i).name.equals(adjacent.get(j))) {
-          if (Math.random() < (diseased / (population * 1.0)) && cities.get(i).diseased == 0) {
+          if (Math.random() < (diseased / (population * 2.0)) && cities.get(i).diseased == 0) {
             cities.get(i).diseased = 1;
             hasBubble = true;
             //adds infection message to news and shows it on screen
