@@ -123,7 +123,6 @@ void customize(DropdownList ddl) {
   ddl.setBackgroundColor(color(190)); 
   ddl.setItemHeight(20);
   ddl.setBarHeight(30);
-  ddl.getCaptionLabel().set("<Transmission>");
   ddl.setColorBackground(color(60)); 
   ddl.setColorActive(color(255, 128));
 }
@@ -136,6 +135,9 @@ void Confirm(){
     for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
       d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
     }
+  }
+  if (d2.getValue() != 0){
+    
   }
 }
 
@@ -178,6 +180,7 @@ void setup() {
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
   text("Points: " + 0, 1220, 110);
   text("Cure: " + 0 + "%", 1220, 140);
+  
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
   d1.addItem("<Transmission>", 0);
@@ -185,12 +188,17 @@ void setup() {
     d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
   }
   customize(d1);
-  cp5.addButton("Confirm").setValue(0).setPosition(1220, 500).setSize(100, 40);
-  d1.clear();
-  d1.addItem("<Transmission>", 0);
-  for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
-    d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+  d1.getCaptionLabel().set("<Transmission>");
+  
+  d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 300);
+  d2.addItem("<Symptom>", 0);
+  for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
+    d2.addItem(disease.accessibleSMutations.get(i-1).name, i);
   }
+  customize(d2);
+  d2.getCaptionLabel().set("<Symptom>");
+
+  cp5.addButton("Confirm").setValue(0).setPosition(1220, 800).setSize(100, 40);
 
   cities.get(0).diseased = 1;
 }
