@@ -137,7 +137,12 @@ void Confirm(){
     }
   }
   if (d2.getValue() != 0){
-    
+    disease.addSMutation(disease.accessibleSMutations.get((int) d2.getValue() - 1));
+    d2.clear();
+    d2.addItem("<Symptom>", 0);
+    for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
+      d2.addItem(disease.accessibleSMutations.get(i-1).name, i);
+    }
   }
 }
 
@@ -198,7 +203,7 @@ void setup() {
   customize(d2);
   d2.getCaptionLabel().set("<Symptom>");
 
-  cp5.addButton("Confirm").setValue(0).setPosition(1220, 800).setSize(100, 40);
+  cp5.addButton("Confirm").setValue(0).setPosition(1220, 700).setSize(100, 40);
 
   cities.get(0).diseased = 1;
 }
