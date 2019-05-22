@@ -247,7 +247,43 @@ class Disease{
     Mutation InternalHemorrhaging = new Mutation("Internal Hemorrhaging (Tier 3)", 12, 0, 9, 7, sprereqs20);
     allSMutations.add(InternalHemorrhaging);
     
+    ArrayList<String> sprereqs21 = new ArrayList<String>();
+    sprereqs21.add("Diarrhea (Tier 3)");
+    sprereqs21.add("Insanity (Tier 4)");
+    Mutation Dysentery = new Mutation("Dysentery (Tier 4)", 19, 8, 15, 8, sprereqs21);
+    allSMutations.add(Dysentery);
     
+    ArrayList<String> sprereqs22 = new ArrayList<String>();
+    sprereqs22.add("Pulmonary Fibrosis (Tier 3)");
+    sprereqs22.add("Immune Suppression (Tier 3)");
+    sprereqs22.add("Coma (Tier 4)");
+    Mutation TotalOrganFailure = new Mutation("Total Organ Failure (Tier 4)", 28, 0, 20, 25, sprereqs22);
+    allSMutations.add(TotalOrganFailure);
+    
+    ArrayList<String> sprereqs23 = new ArrayList<String>();
+    sprereqs23.add("Skin Lesions (Tier 3)");
+    sprereqs23.add("Hemorrhagic Shock (Tier 4)");
+    Mutation Necrosis = new Mutation("Necrosis (Tier 4)", 27, 10, 20, 13, sprereqs23);
+    allSMutations.add(Necrosis);
+    
+    ArrayList<String> sprereqs24 = new ArrayList<String>();
+    sprereqs24.add("Seizures (Tier 3)");
+    sprereqs24.add("Dysentery (Tier 4)");
+    Mutation Insanity = new Mutation("Insanity (Tier 4)", 18, 6, 15, 0, sprereqs24);
+    allSMutations.add(Insanity);
+    
+    ArrayList<String> sprereqs25 = new ArrayList<String>();
+    sprereqs25.add("Paralysis (Tier 3)");
+    sprereqs25.add("Systemic Infection (Tier 3)");
+    sprereqs25.add("Total Organ Failure (Tier 4)");
+    Mutation Coma = new Mutation("Coma (Tier 4)", 21, 0, 15, 2, sprereqs25);
+    allSMutations.add(Coma);
+    
+    ArrayList<String> sprereqs26 = new ArrayList<String>();
+    sprereqs26.add("Internal Hemorrhaging (Tier 3)");
+    sprereqs26.add("Necrosis (Tier 4)");
+    Mutation HemorrhagicShock = new Mutation("Hemorrhagic Shock (Tier 4)", 23, 0, 15, 15, sprereqs26);
+    allSMutations.add(HemorrhagicShock);
   }
   
   Disease(){
@@ -264,6 +300,7 @@ class Disease{
     allSMutations = new ArrayList<Mutation>();
     allAMutations = new ArrayList<Mutation>();
     inputTMutations();
+    inputSMutations();
     diseaseSetup();
   }
   
