@@ -315,6 +315,11 @@ class Disease{
       }
     }
     accessibleSMutations = new ArrayList();
+    for (int i=0; i<allSMutations.size(); i++){
+      if (allSMutations.get(i).prereqs.size() == 0){
+        accessibleSMutations.add(allSMutations.get(i));
+      }
+    }
     accessibleAMutations = new ArrayList();
   }
   
