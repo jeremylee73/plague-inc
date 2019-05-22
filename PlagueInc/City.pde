@@ -29,6 +29,7 @@ class City {
     blue = 0;
     red = 255;
     drawRoutes();
+    drawAirports();
   }
 
   void drawRoutes() {
@@ -41,6 +42,18 @@ class City {
     }
     strokeWeight(4);
   }
+  
+  void drawAirports(){
+    for (int i=0; i<cities.size(); i++){
+      if (cities.get(i).hasAirport){
+        fill(255,0,0);
+        rect(cities.get(i).x - 30, cities.get(i).y - 60, 20, 20);
+        fill(255,255,255);
+      }
+    }
+  }
+  
+  
 
   void updateColor() {
     double GB = (population - diseased) / (population * 1.0) * 255;
@@ -93,6 +106,14 @@ class City {
             text(news.get(news.size() - 1),1220,200,150,100);
           }
         }
+      }
+    }
+  }
+  
+  void planeTransmission(){
+    for (int i=0; i<cities.size(); i++){
+      if (cities.get(i).hasAirport && cities.get(i).airportOpen){
+          
       }
     }
   }
