@@ -47,9 +47,7 @@ class City {
   void drawAirports(){
     for (int i=0; i<cities.size(); i++){
       if (cities.get(i).hasAirport){
-        fill(255,0,0);
         rect(cities.get(i).x + 40, cities.get(i).y - 25, 20, 20);
-        fill(255,255,255);
       }
     }
   }
@@ -57,9 +55,7 @@ class City {
   void drawDocks(){
     for (int i=0; i<cities.size(); i++){
       if (cities.get(i).hasDock){
-        fill(255,0,0);
         triangle(cities.get(i).x+40, cities.get(i).y+20, cities.get(i).x+50, cities.get(i).y+5, cities.get(i).x + 60, cities.get(i).y + 20);
-        fill(255,255,255);
       }
     }
   }
