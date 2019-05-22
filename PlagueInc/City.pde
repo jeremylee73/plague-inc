@@ -30,6 +30,7 @@ class City {
     red = 255;
     drawRoutes();
     drawAirports();
+    drawDocks();
   }
 
   void drawRoutes() {
@@ -47,13 +48,21 @@ class City {
     for (int i=0; i<cities.size(); i++){
       if (cities.get(i).hasAirport){
         fill(255,0,0);
-        rect(cities.get(i).x - 30, cities.get(i).y - 60, 20, 20);
+        rect(cities.get(i).x - 25, cities.get(i).y - 60, 20, 20);
         fill(255,255,255);
       }
     }
   }
   
-  
+  void drawDocks(){
+    for (int i=0; i<cities.size(); i++){
+      if (cities.get(i).hasDock){
+        fill(255,0,0);
+        triangle(cities.get(i).x+5, cities.get(i).y - 40, cities.get(i).x+15, cities.get(i).y - 60, cities.get(i).x + 25, cities.get(i).y - 40);
+        fill(255,255,255);
+      }
+    }
+  }
 
   void updateColor() {
     double GB = (population - diseased) / (population * 1.0) * 255;
