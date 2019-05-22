@@ -9,7 +9,7 @@ void setup() {
   img = loadImage("PlagueIncDNABubble.png");
   ellipse(wD2, hD2, img.width+3, img.height+3);
   //shape = loadShape("PlagueIncDNABubble.png");
-  shape = createShape(ELLIPSE,20,20,20,20);
+  shape = createShape(ELLIPSE,65,65,50,50);
 }
 
 void draw() {
@@ -18,7 +18,7 @@ void draw() {
     fadeAmt -= 1;
   fill(255,255,255,fadeAmt);
   rect(width/2,height/2, 50, 50);
-  shape(shape, 100, 100);
+  shape(shape, 100, 300);
   if (fadeAmt <= 100) shape.setVisible(false);
   image(img, wD2-img.width/2, hD2-img.height/2);
 }
