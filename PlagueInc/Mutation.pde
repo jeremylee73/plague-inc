@@ -14,4 +14,24 @@ class Mutation{
     this.letIncrement = letIncrement;
     this.prereqs = prereqs;
   }
+  
+  String name(){
+    return name;
+  }
+  
+  int cost(){
+    return cost;
+  }
+  
+  int infIncrement(){
+    return infIncrement;
+  }
+  
+  int sevIncrement(){
+    return sevIncrement;
+  }
+  
+  int letIncrement(){
+    return letIncrement;
+  }
 }
