@@ -88,9 +88,9 @@ class City {
             //adds infection message to news and shows it on screen
             news.add(name+" has become infected.");
             fill(205);
-            rect(1220,280,150,120);
+            rect(1220,180,160,100);
             fill(0,0,0);
-            text(news.get(news.size() - 1),1220,300,150,100);
+            text(news.get(news.size() - 1),1220,200,150,100);
           }
         }
       }

@@ -182,7 +182,7 @@ void setup() {
   text("Cure: " + 0 + "%", 1220, 140);
   
   cp5 = new ControlP5(this);
-  d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 150);
+  d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
   d1.addItem("<Transmission>", 0);
   for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
     d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
@@ -190,7 +190,7 @@ void setup() {
   customize(d1);
   d1.getCaptionLabel().set("<Transmission>");
   
-  d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 300);
+  d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
   d2.addItem("<Symptom>", 0);
   for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
     d2.addItem(disease.accessibleSMutations.get(i-1).name, i);
