@@ -21,3 +21,7 @@ Jeremy - I created the drop down menu for transmission diseases and a button to 
 Victor - fixed bug where popping bubbles would make the bubbles permanently stay white, interfering with the filling in of the cities' circles.
 Also fixed bug where the digits for points would overlap each other + fixed hitbox for popping bubbles.
 I also added a very rudimentary cure rate system.
+
+Tuesday, May 21
+-----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I fixed the bug in addTMutation, so that should be working now. I also added the pointRate, in which points are generated at a certain pace throughout the game without having to pop bubbles. I also instantiated all of the Symptom mutations in the Disease class.
