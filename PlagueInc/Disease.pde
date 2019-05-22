@@ -91,6 +91,34 @@ class Disease{
   }
   
   void inputSMutations(){
+    ArrayList<String> sprereqs = new ArrayList<String>();
+    Mutation Nausea = new Mutation("Nausea (Tier 1)", 2, 1, 1, 0, sprereqs);
+    allSMutations.add(Nausea);
+    Mutation Coughing = new Mutation("Coughing (Tier 1)", 4, 3, 1, 0, sprereqs);
+    allSMutations.add(Coughing);
+    Mutation Rash = new Mutation("Rash (Tier 1)", 3, 2, 1, 0, sprereqs);
+    allSMutations.add(Rash);
+    Mutation Insomnia = new Mutation("Insomnia (Tier 1)", 2, 0, 3, 0, sprereqs);
+    allSMutations.add(Insomnia);
+    Mutation Cysts = new Mutation("Cysts (Tier 1)", 2, 2, 2, 0, sprereqs);
+    allSMutations.add(Cysts);
+    Mutation Anemia = new Mutation("Anemia (Tier 1)", 2, 1, 1, 0, sprereqs);
+    allSMutations.add(Anemia);
+    
+    ArrayList<String> sprereqs1 = new ArrayList<String>();
+    sprereqs1.add("Nausea (Tier 1)");
+    sprereqs1.add("Pulmonary Edema (Tier 3)");
+    sprereqs1.add("Diarrhea (Tier 3)");
+    Mutation Vomiting = new Mutation("Vomiting (Tier 2)", 3, 3, 1, 0, sprereqs1);
+    allSMutations.add(Vomiting);
+    
+    ArrayList<String> sprereqs2 = new ArrayList<String>();
+    sprereqs2.add("Coughing (Tier 1)");
+    sprereqs2.add("Pulmonary Edema (Tier 3)");
+    sprereqs2.add("Pulmonary Fibrosis (Tier 3)");
+    Mutation Pneumonia = new Mutation("Pneumonia (Tier 2)", 3, 3, 2, 0, sprereqs2);
+    allSMutations.add(Pneumonia);
+    
     
   }
   
