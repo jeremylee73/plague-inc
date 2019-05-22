@@ -86,7 +86,7 @@ class City {
             cities.get(i).diseased = 1;
             hasBubble = true;
             //adds infection message to news and shows it on screen
-            news.add(name+" has become infected.");
+            news.add(cities.get(i).name+" has become infected.");
             fill(205);
             rect(1220,180,160,100);
             fill(0,0,0);
