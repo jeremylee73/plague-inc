@@ -119,6 +119,134 @@ class Disease{
     Mutation Pneumonia = new Mutation("Pneumonia (Tier 2)", 3, 3, 2, 0, sprereqs2);
     allSMutations.add(Pneumonia);
     
+    ArrayList<String> sprereqs3 = new ArrayList<String>();
+    sprereqs3.add("Coughing (Tier 1)");
+    sprereqs3.add("Fever (Tier 3)");
+    sprereqs3.add("Immune Suppression (Tier 3)");
+    Mutation Sneezing = new Mutation("Sneezing (Tier 2)", 5, 5, 1, 0, sprereqs3);
+    allSMutations.add(Sneezing);
+    
+    ArrayList<String> sprereqs4 = new ArrayList<String>();
+    sprereqs4.add("Fever (Tier 3)");
+    sprereqs4.add("Rash (Tier 1)");
+    sprereqs4.add("Skin Lesions (Tier 3)");
+    Mutation Sweating = new Mutation("Sweating (Tier 2)", 3, 2, 1, 0, sprereqs4);
+    allSMutations.add(Sweating);
+    
+    ArrayList<String> sprereqs5 = new ArrayList<String>();
+    sprereqs5.add("Insomnia (Tier 1)");
+    sprereqs5.add("Inflammation (Tier 3)");
+    sprereqs5.add("Seizures (Tier 3)");
+    Mutation Paranoia = new Mutation("Paranoia (Tier 2)", 4, 0, 4, 0, sprereqs5);
+    allSMutations.add(Paranoia);
+    
+    ArrayList<String> sprereqs6 = new ArrayList<String>();
+    sprereqs6.add("Inflammation (Tier 3)");
+    sprereqs6.add("Cysts (Tier 1)");
+    sprereqs6.add("Paralysis (Tier 3)");
+    Mutation Hypersensitivity = new Mutation("Hypersensitivity (Tier 2)", 2, 1, 2, 0, sprereqs6);
+    allSMutations.add(Hypersensitivity);
+    
+    ArrayList<String> sprereqs7 = new ArrayList<String>();
+    sprereqs7.add("Cysts (Tier 1)");
+    sprereqs7.add("Tumors (Tier 3)");
+    sprereqs7.add("Systemic Infection (Tier 3)");
+    Mutation Abscesses = new Mutation("Abscesses (Tier 2)", 2, 4, 4, 0, sprereqs7);
+    allSMutations.add(Abscesses);
+    
+    ArrayList<String> sprereqs8 = new ArrayList<String>();
+    sprereqs8.add("Tumors (Tier 3)");
+    sprereqs8.add("Anemia (Tier 1)");
+    sprereqs8.add("Internal Hemorrhaging (Tier 3)");
+    Mutation Hemophilia = new Mutation("Hemophilia (Tier 2)", 3, 4, 3, 0, sprereqs8);
+    allSMutations.add(Hemophilia);
+    
+    ArrayList<String> sprereqs9 = new ArrayList<String>();
+    sprereqs9.add("Vomiting (Tier 2)");
+    sprereqs9.add("Pneumonia (Tier 2)");
+    sprereqs9.add("Diarrhea (Tier 3)");
+    sprereqs9.add("Pulmonary Fibrosis (Tier 3)");
+    Mutation PulmonaryEdema = new Mutation("Pulmonary Edema (Tier 3)", 7, 5, 4, 2, sprereqs9);
+    allSMutations.add(PulmonaryEdema);
+    
+    ArrayList<String> sprereqs10 = new ArrayList<String>();
+    sprereqs10.add("Sneezing (Tier 2)");
+    sprereqs10.add("Sweating (Tier 2)");
+    sprereqs10.add("Immune Suppression (Tier 3)");
+    sprereqs10.add("Skin Lesions (Tier 3)");
+    Mutation Fever = new Mutation("Fever (Tier 3)", 9, 4, 3, 3, sprereqs10);
+    allSMutations.add(Fever);
+    
+    ArrayList<String> sprereqs11 = new ArrayList<String>();
+    sprereqs10.add("Paranoia (Tier 2)");
+    sprereqs10.add("Hypersensitivity (Tier 2)");
+    sprereqs10.add("Seizures (Tier 3)");
+    sprereqs10.add("Paralysis (Tier 3)");
+    Mutation Inflammation = new Mutation("Inflammation (Tier 3)", 5, 2, 2, 2, sprereqs10);
+    allSMutations.add(Inflammation);
+    
+    ArrayList<String> sprereqs12 = new ArrayList<String>();
+    sprereqs12.add("Systemic Infection (Tier 3)");
+    sprereqs12.add("Internal Hemorrhaging (Tier 3)");
+    Mutation Tumors = new Mutation("Tumors (Tier 3)", 11, 2, 0, 4, sprereqs12);
+    allSMutations.add(Tumors);
+    
+    ArrayList<String> sprereqs13 = new ArrayList<String>();
+    sprereqs13.add("Vomiting (Tier 2)");
+    sprereqs13.add("Pulmonary Edema (Tier 3)");
+    sprereqs13.add("Dysentery (Tier 4)");
+    Mutation Diarrhea = new Mutation("Diarrhea (Tier 3)", 6, 6, 4, 0, sprereqs13);
+    allSMutations.add(Diarrhea);
+    
+    ArrayList<String> sprereqs14 = new ArrayList<String>();
+    sprereqs14.add("Pneumonia (Tier 2)");
+    sprereqs14.add("Pulmonary Edema (Tier 3)");
+    sprereqs14.add("Total Organ Failure (Tier 4)");
+    Mutation PulmonaryFibrosis = new Mutation("Pulmonary Fibrosis (Tier 3)", 6, 3, 3, 2, sprereqs14);
+    allSMutations.add(PulmonaryFibrosis);
+    
+    ArrayList<String> sprereqs15 = new ArrayList<String>();
+    sprereqs15.add("Sneezing (Tier 2)");
+    sprereqs15.add("Fever (Tier 3)");
+    sprereqs15.add("Total Organ Failure (Tier 4)");
+    Mutation ImmuneSuppression = new Mutation("Immune Suppression (Tier 3)", 12, 2, 6, 4, sprereqs15);
+    allSMutations.add(ImmuneSuppression);
+    
+    ArrayList<String> sprereqs16 = new ArrayList<String>();
+    sprereqs16.add("Sweating (Tier 2)");
+    sprereqs16.add("Fever (Tier 3)");
+    sprereqs16.add("Necrosis (Tier 4)");
+    Mutation SkinLesions = new Mutation("Skin Lesions (Tier 3)", 8, 11, 4, 0, sprereqs16);
+    allSMutations.add(SkinLesions);
+    
+    ArrayList<String> sprereqs17 = new ArrayList<String>();
+    sprereqs17.add("Paranoia (Tier 2)");
+    sprereqs17.add("Inflammation (Tier 3)");
+    sprereqs17.add("Insanity (Tier 4)");
+    Mutation Seizures = new Mutation("Seizures (Tier 3)", 4, 1, 7, 3, sprereqs17);
+    allSMutations.add(Seizures);
+    
+    ArrayList<String> sprereqs18 = new ArrayList<String>();
+    sprereqs18.add("Inflammation (Tier 3)");
+    sprereqs18.add("Hypersensitivity (Tier 2)");
+    sprereqs18.add("Coma (Tier 4)");
+    Mutation Paralysis = new Mutation("Paralysis (Tier 3)", 10, 1, 5, 1, sprereqs18);
+    allSMutations.add(Paralysis);
+    
+    ArrayList<String> sprereqs19 = new ArrayList<String>();
+    sprereqs19.add("Coma (Tier 4)");
+    sprereqs19.add("Tumors (Tier 3)");
+    sprereqs19.add("Abscesses (Tier 2)");
+    Mutation SystemicInfection = new Mutation("Systemic Infection (Tier 3)", 17, 6, 7, 6, sprereqs19);
+    allSMutations.add(SystemicInfection);
+    
+    ArrayList<String> sprereqs20 = new ArrayList<String>();
+    sprereqs20.add("Tumors (Tier 3)");
+    sprereqs20.add("Hemophilia (Tier 2)");
+    sprereqs20.add("Hemorrhagic Shock (Tier 4)");
+    Mutation InternalHemorrhaging = new Mutation("Internal Hemorrhaging (Tier 3)", 12, 0, 9, 7, sprereqs20);
+    allSMutations.add(InternalHemorrhaging);
+    
     
   }
   
