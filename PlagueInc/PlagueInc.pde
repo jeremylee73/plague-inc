@@ -241,7 +241,26 @@ void draw() {
   }
 }
 
+void controlEvent(ControlEvent theEvent) {
+  // DropdownList is of type ControlGroup.
+  // A controlEvent will be triggered from inside the ControlGroup class.
+  // therefore you need to check the originator of the Event with
+  // if (theEvent.isGroup())
+  // to avoid an error message thrown by controlP5.
+  //this skeleton code and comments are credited to one of the examples on documentation
+
+  if (theEvent.isGroup()) {
+    // check if the Event was triggered from a ControlGroup
+    //from what I've seen, this method is never activated in our code
+    //println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+  } 
+  else if (theEvent.isController()) {
+    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+  }
+}
+
 void mousePressed() {
+  cp5.addListener();
   for (City c : cities) {
     //pops bubble if bubble is above the city and adds 2 points
     //this if statement calculates if mouse coords is within the bubble's hitbox
