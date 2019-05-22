@@ -123,6 +123,7 @@ void customize(DropdownList ddl) {
   ddl.setBackgroundColor(color(190)); 
   ddl.setItemHeight(20);
   ddl.setBarHeight(30);
+  ddl.setSize(200,100);
   ddl.setColorBackground(color(60)); 
   ddl.setColorActive(color(255, 128));
 }
