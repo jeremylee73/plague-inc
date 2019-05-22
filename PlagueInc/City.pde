@@ -46,7 +46,7 @@ class City {
     double GB = (population - diseased) / (population * 1.0) * 255;
     fill(255, (int) GB, (int) GB, 1);
     ellipse(x, y, 65, 65);
-    if (diseased > 0 && green < 255 && blue < 255 && !bubblePopped) {
+    if (GB > 254 && diseased > 0 && !bubblePopped) {
       //this case is true longer than it should be? might be causing bug with bubbles visuals
       hasBubble = true;
       fill(255, green, blue);
@@ -54,10 +54,9 @@ class City {
       green++; 
       blue++;
     } else {
-      fill(255, (int) GB, (int) GB, 1);
       hasBubble = false;
     }
-    if (bubblePopped){
+    if (bubblePopped && GB > 254){
       fill(255,255,255);
       ellipse(x,y,30,30);
     }
