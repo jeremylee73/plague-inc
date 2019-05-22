@@ -347,6 +347,20 @@ class Disease{
     return false;
   }
   
+  boolean arrSIn(ArrayList<String> arr1, ArrayList<Mutation> arr2){
+    if (arr2.size() == 0){
+      return false; 
+    }
+    for (int i=0; i<arr1.size(); i++){
+      for (int j=0; j<arr2.size(); j++){
+        if (arr1.get(i).equals(arr2.get(j).name)){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
   boolean addTMutation(Mutation m){
     if (points < m.cost){
       return false;
@@ -372,6 +386,16 @@ class Disease{
     }
     accessibleSMutations.remove(m);
     sMutations.add(m);
+    points -= m.cost;
+    infectivity += m.infIncrement / 10000.0;
+    severity += m.sevIncrement / 10000.0;
+    lethality += m.letIncrement / 10000.0;
+    for (int i=0; i<allSMutations.size(); i++){
+      Mutation mut = allSMutations.get(i);
+      if (arrSIn(mut.prereqs, sMutations) && !(in(mut, accessibleSMutations)) && !(in(mut, sMutations))){
+        accessibleSMutations.add(mut);
+      }
+    }
     return true;
   }
   
