@@ -110,7 +110,7 @@ void citySetup() {
 void drawCities() {
   for (int i=0; i<cities.size(); i++) {
     ellipse(cities.get(i).x, cities.get(i).y, 65, 65);
-  }  
+  }
 }
 
 void spreadDisease(City c) {
@@ -123,13 +123,13 @@ void customize(DropdownList ddl) {
   ddl.setBackgroundColor(color(190)); 
   ddl.setItemHeight(20);
   ddl.setBarHeight(30);
-  ddl.setSize(200,100);
+  ddl.setSize(200, 100);
   ddl.setColorBackground(color(60)); 
   ddl.setColorActive(color(255, 128));
 }
 
-void Confirm(){
-  if (d1.getValue() != 0){
+void Confirm() {
+  if (d1.getValue() != 0) {
     disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
     d1.clear();
     d1.addItem("<Transmission>", 0);
@@ -137,7 +137,7 @@ void Confirm(){
       d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
     }
   }
-  if (d2.getValue() != 0){
+  if (d2.getValue() != 0) {
     disease.addSMutation(disease.accessibleSMutations.get((int) d2.getValue() - 1));
     d2.clear();
     d2.addItem("<Symptom>", 0);
@@ -147,7 +147,7 @@ void Confirm(){
   }
 }
 
-void updateDiseaseLabels(){
+void updateDiseaseLabels() {
   fill(205);
   rect(1220, 0, 200, 22);
   fill(0, 0, 0);
@@ -186,7 +186,7 @@ void setup() {
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
   text("Points: " + 0, 1220, 110);
   text("Cure: " + 0 + "%", 1220, 140);
-  
+
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
   d1.addItem("<Transmission>", 0);
@@ -195,7 +195,7 @@ void setup() {
   }
   customize(d1);
   d1.getCaptionLabel().set("<Transmission>");
-  
+
   d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
   d2.addItem("<Symptom>", 0);
   for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
@@ -224,19 +224,19 @@ void draw() {
   }
   //rudimentary cure rate, very subject to change
   if (totalDead >= 10000 ) {
-    if (cure.developed() <= 100){
-      cure.setDeveloped(pow(totalDead * 0.000001,2));
+    if (cure.developed() <= 100) {
+      cure.setDeveloped(pow(totalDead * 0.000001, 2));
     }
-    if (cure.developed() > 100){
+    if (cure.developed() > 100) {
       cure.setDeveloped(100);
     }
     fill(205);
-    rect(1220,120,100,22);
-    fill(0,0,0);
+    rect(1220, 120, 100, 22);
+    fill(0, 0, 0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
-  
-  if (Math.random() < (1/180.0)){
+
+  if (Math.random() < (1/180.0)) {
     points += pointRate;
   }
 }
@@ -256,4 +256,39 @@ void mousePressed() {
     }
   }
   //processing background color
+}
+
+void controlEvent(ControlEvent theEvent) {
+  //this skeleton code is credited to one of the examples on documentation
+  //documentation stated this first if statement is necessary to not throw an error
+  if (theEvent.isGroup()) {
+    //from what I've seen, this method is never activated in our code
+  } else if (theEvent.isController()) {
+    if (theEvent.getController() == d1) {
+      fill(205);
+      rect(1220, 500, 170, 320);
+      if (theEvent.getController().getValue() != 0) {
+        Mutation mut = disease.accessibleTMutations.get((int)theEvent.getController().getValue()-1);
+        fill(0, 0, 0);
+        text(mut.name(), 1220,500,150,100);
+        text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
+        text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100);
+        text("Lethality: +"+mut.letIncrement(), 1220, 590, 150, 100);
+        text("Cost: "+mut.cost()+" Points", 1220, 620, 150, 100);
+      }
+    }
+    if (theEvent.getController() == d2) {
+      fill(205);
+      rect(1220, 500, 170, 320);
+      if (theEvent.getController().getValue() != 0) {
+        Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
+        fill(0, 0, 0);
+        text(mut.name(), 1220,500,150,100);
+        text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
+        text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100);
+        text("Lethality: +"+mut.letIncrement(), 1220, 590, 150, 100);
+        text("Cost: "+mut.cost()+" Points", 1220, 620, 150, 100);
+      }
+    }
+  }
 }
