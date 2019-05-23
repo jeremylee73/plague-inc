@@ -137,7 +137,8 @@ void Confirm() {
     for (int i=1; i<=accTMuts.size(); i++) {
       d1.addItem(accTMuts.get(i-1).name, i);
     }
-    dSell1.addItem(accTMuts.get((int) d1.getValue() - 1).name, disease.tMutations.size());
+    ArrayList<Mutation> tMuts = disease.tMutations;
+    dSell1.addItem(tMuts.get(tMuts.size()-1).name, tMuts.size());
   }
   if (d2.getValue() != 0) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
@@ -147,6 +148,7 @@ void Confirm() {
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
+    dSell1.addItem(accSMuts.get((int) d2.getValue() - 2).name, disease.sMutations.size());
   }
 }
 
