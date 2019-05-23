@@ -148,7 +148,8 @@ void Confirm() {
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
-    dSell1.addItem(accSMuts.get((int) d2.getValue() - 2).name, disease.sMutations.size());
+    ArrayList<Mutation> sMuts = disease.sMutations;
+    dSell1.addItem(sMuts.get(sMuts.size()-1).name, sMuts.size());
   }
 }
 
@@ -280,11 +281,17 @@ void controlEvent(ControlEvent theEvent) {
       if (theEvent.getController().getValue() != 0) {
         Mutation mut = disease.accessibleTMutations.get((int)theEvent.getController().getValue()-1);
         fill(0, 0, 0);
-        text(mut.name(), 1220,500,150,100);
-        text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
-        text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100);
+        textSize(10);
+        String stats = mut.name()+"  ";
+        stats+="Infectivity: +"+mut.infIncrement()+"  ";
+        stats+="Severity: +"+mut.sevIncrement()+"  ";
+        stats+="Lethality: +"+mut.letIncrement()+"  ";
+        stats+="Cost: "+mut.cost()+" Points";
+        text(stats, 1220,500,150,75);
+        /*text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
+        text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100); //<>//
         text("Lethality: +"+mut.letIncrement(), 1220, 590, 150, 100);
-        text("Cost: "+mut.cost()+" Points", 1220, 620, 150, 100);
+        text("Cost: "+mut.cost()+" Points", 1220, 620, 150, 100);*/
       }
     }
     if (theEvent.getController() == d2) {
@@ -293,6 +300,7 @@ void controlEvent(ControlEvent theEvent) {
       if (theEvent.getController().getValue() != 0) {
         Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
         fill(0, 0, 0);
+        textSize(10);
         text(mut.name(), 1220,500,150,100);
         text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
         text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100);
