@@ -25,3 +25,11 @@ I also added a very rudimentary cure rate system.
 Tuesday, May 21
 -----------------------------------------------------------------------------------------------------------------------------
 Jeremy - I fixed the bug in addTMutation, so that should be working now. I also added the pointRate, in which points are generated at a certain pace throughout the game without having to pop bubbles. I also instantiated all of the Symptom mutations in the Disease class.
+
+Victor - coded in growth curve for cure development and news display
+
+Wednesday, May 22
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+Victor - I added the display for stats of mutations when selecting them on the DropdownList.
