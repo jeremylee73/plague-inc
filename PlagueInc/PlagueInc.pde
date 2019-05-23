@@ -4,7 +4,7 @@ import javax.swing.*;
 import controlP5.*;
 
 ControlP5 cp5;
-DropdownList d1, d2;
+DropdownList d1, d2, dSell1;
 ArrayList<City> cities = new ArrayList<City>();
 Disease disease;
 Cure cure;
@@ -131,11 +131,13 @@ void customize(DropdownList ddl) {
 void Confirm() {
   if (d1.getValue() != 0) {
     disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
+    println(disease.tMutations);
     d1.clear();
     d1.addItem("<Transmission>", 0);
     for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
       d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
     }
+    dSell1.addItem(disease.accessibleTMutations.get((int) d1.getValue() - 1).name, 0);
   }
   if (d2.getValue() != 0) {
     disease.addSMutation(disease.accessibleSMutations.get((int) d2.getValue() - 1));
@@ -198,11 +200,16 @@ void setup() {
 
   d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
   d2.addItem("<Symptom>", 0);
-  for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
+  for (int i=1; i<=disease.accessibleSMutations.size(); i+s+) {
     d2.addItem(disease.accessibleSMutations.get(i-1).name, i);
   }
   customize(d2);
   d2.getCaptionLabel().set("<Symptom>");
+  
+  dSell1 = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 550);
+  dSell1.addItem("<Current Transmissions>", 0);
+  customize(dSell1);
+  dSell1.getCaptionLabel().set("<Current Transmissions>");
 
   cp5.addButton("Confirm").setValue(0).setPosition(1220, 700).setSize(100, 40);
 
