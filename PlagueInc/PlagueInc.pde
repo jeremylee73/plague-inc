@@ -277,5 +277,17 @@ void controlEvent(ControlEvent theEvent) {
         text("Cost: "+mut.cost()+" Points", 1220, 590, 150, 100);
       }
     }
+    if (theEvent.getController() == d2) {
+      fill(205);
+      rect(1220, 500, 170, 320);
+      if (theEvent.getController().getValue() != 0) {
+        Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
+        fill(0, 0, 0);
+        text("Infectivity: +"+mut.infIncrement(), 1220, 500, 150, 100);
+        text("Severity: +"+mut.sevIncrement(), 1220, 530, 150, 100);
+        text("Lethality: +"+mut.letIncrement(), 1220, 560, 150, 100);
+        text("Cost: "+mut.cost()+" Points", 1220, 590, 150, 100);
+      }
+    }
   }
 }
