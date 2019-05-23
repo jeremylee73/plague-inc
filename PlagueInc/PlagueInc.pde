@@ -130,21 +130,22 @@ void customize(DropdownList ddl) {
 
 void Confirm() {
   if (d1.getValue() != 0) {
-    disease.addTMutation(disease.accessibleTMutations.get((int) d1.getValue() - 1));
-    println(disease.tMutations);
+    ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
+    disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
     d1.clear();
     d1.addItem("<Transmission>", 0);
-    for (int i=1; i<=disease.accessibleTMutations.size(); i++) {
-      d1.addItem(disease.accessibleTMutations.get(i-1).name, i);
+    for (int i=1; i<=accTMuts.size(); i++) {
+      d1.addItem(accTMuts.get(i-1).name, i);
     }
-    dSell1.addItem(disease.accessibleTMutations.get((int) d1.getValue() - 1).name, 0);
+    dSell1.addItem(accTMuts.get((int) d1.getValue() - 1).name, disease.tMutations.size());
   }
   if (d2.getValue() != 0) {
-    disease.addSMutation(disease.accessibleSMutations.get((int) d2.getValue() - 1));
+    ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
+    disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
     d2.clear();
     d2.addItem("<Symptom>", 0);
-    for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
-      d2.addItem(disease.accessibleSMutations.get(i-1).name, i);
+    for (int i=1; i<=accSMuts.size(); i++) {
+      d2.addItem(accSMuts.get(i-1).name, i);
     }
   }
 }
@@ -200,7 +201,7 @@ void setup() {
 
   d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
   d2.addItem("<Symptom>", 0);
-  for (int i=1; i<=disease.accessibleSMutations.size(); i+s+) {
+  for (int i=1; i<=disease.accessibleSMutations.size(); i++) {
     d2.addItem(disease.accessibleSMutations.get(i-1).name, i);
   }
   customize(d2);
