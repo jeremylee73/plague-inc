@@ -30,20 +30,24 @@ Victor - coded in growth curve for cure development and news display
 
 Wednesday, May 22
 -----------------------------------------------------------------------------------------------------------------------------
-
-
 Victor - I added the display for stats of mutations when selecting them on the DropdownList.
 
 Thursday, May 23
 -----------------------------------------------------------------------------------------------------------------------------
-
-
 Victor - Worked on selling mutations. So far, have added method to print out names of Mutations in a Mutation ArrayList, made it so that bought mutations are added to the DropdownList that displays acquired mutations (var: dSell), resized textbox for stats, added button for selling, and resized Confirm button. So far, selling is very buggy (DropdownList won't refresh after selling + decrements incorrectly).
 
+Friday, May 24
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - debugged Current Mutations dropdownlist and added immediate refreshing feature to Transmissions and Symptons dropdownlist.
 
+
+
+Keep in mind:
+the error message in processing terminal is fine, that does not break the code, but is necessary to refresh the selling dropdownlist properly
 
 BUGS:
-selling
 
 TO-DO:
 feature where you notify user if they don't have enough points to buy a mutation
+re-add mutation to other dropdownlists once u sell them. implement feature where u get less and less refund for selling, and eventually u need to pay
+if they try to confirm an item on current transmission dropdownlist, display warning message (do same for selling an item on the accessible mutations dropdownlists)
