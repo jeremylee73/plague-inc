@@ -161,6 +161,19 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   }
 }
 
+void Sell(){
+  if (dSell.getValue() != 0){
+    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
+    Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
+    disease.sell(mut);
+    dSell.clear();
+    dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i <= acqMuts.size(); i++){
+      dSell.addItem(acqMuts.get(i-1).name, i);
+    }
+  }
+}
+
 void updateDiseaseLabels() {
   fill(205);
   rect(1220, 0, 200, 22);
@@ -179,6 +192,66 @@ void updateDiseaseLabels() {
   fill(0, 0, 0);
   text("Points: " + points, 1220, 110);
 }
+
+void putStatsText(Mutation mut) {
+  fill(0, 0, 0);
+  textSize(10);
+  text(mut.name(), 1220, 510);
+  String stats = "";
+  stats+="Infectivity: +"+mut.infIncrement()+"  ";
+  stats+="Severity: +"+mut.sevIncrement()+"  ";
+  //spacing for visual purposes
+  stats+="Lethality: +"+mut.letIncrement()+"   ";
+  if (mut.letIncrement() < 10) {
+    stats+= " ";
+  }
+  stats+="Cost: "+mut.cost()+" Points";
+  text(stats, 1220, 515, 150, 75);
+}
+
+void controlEvent(ControlEvent theEvent) {
+  //this skeleton code is credited to one of the examples on documentation
+  //documentation stated this first if statement is necessary to not throw an error
+  if (theEvent.isGroup()) {
+    //from what I've seen, this method is never activated in our code
+  } else if (theEvent.isController()) {
+    if (theEvent.getController() == d1) {
+      fill(205);
+      rect(1220, 500, 170, 320);
+      if (theEvent.getController().getValue() != 0) {
+        Mutation mut = disease.accessibleTMutations.get((int)theEvent.getController().getValue()-1);
+        putStatsText(mut);
+      }
+    }
+    if (theEvent.getController() == d2) {
+      fill(205);
+      rect(1220, 500, 170, 320);
+      if (theEvent.getController().getValue() != 0) {
+        Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
+        putStatsText(mut);
+      }
+    }
+  }
+}
+
+void mousePressed() {
+  for (City c : cities) {
+    //pops bubble if bubble is above the city and adds 2 points
+    //this if statement calculates if mouse coords is within the bubble's hitbox
+    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && c.hasBubble) {
+      c.bubblePopped = true;
+      fill(255, 255, 255);
+      ellipse(c.x, c.y, 35, 35);
+      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
+      points+= 2;
+      //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
+      //etc, don't have to be as rigid as following actual game 100%
+    }
+  }
+  //processing background color
+}
+
+
 
 void setup() {
   size(1440, 785);
@@ -223,8 +296,8 @@ void setup() {
   customize(dSell);
   dSell.getCaptionLabel().set("<Current Mutations>");
 
-  cp5.addButton("Confirm").setValue(0).setPosition(1220, 680).setSize(60, 40);
-  cp5.addButton("Sell").setValue(0).setPosition(1300,680).setSize(60,40);
+  cp5.addButton("Confirm").setValue(0).setPosition(1215, 680).setSize(70, 40);
+  cp5.addButton("Sell").setValue(0).setPosition(1300,680).setSize(70,40);
 
   cities.get(0).diseased = 1;
 }
@@ -259,62 +332,4 @@ void draw() {
   if (Math.random() < (1/180.0)) {
     points += pointRate;
   }
-}
-
-void mousePressed() {
-  for (City c : cities) {
-    //pops bubble if bubble is above the city and adds 2 points
-    //this if statement calculates if mouse coords is within the bubble's hitbox
-    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && c.hasBubble) {
-      c.bubblePopped = true;
-      fill(255, 255, 255);
-      ellipse(c.x, c.y, 35, 35);
-      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
-      points+= 2;
-      //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
-      //etc, don't have to be as rigid as following actual game 100%
-    }
-  }
-  //processing background color
-}
-
-void controlEvent(ControlEvent theEvent) {
-  //this skeleton code is credited to one of the examples on documentation
-  //documentation stated this first if statement is necessary to not throw an error
-  if (theEvent.isGroup()) {
-    //from what I've seen, this method is never activated in our code
-  } else if (theEvent.isController()) {
-    if (theEvent.getController() == d1) {
-      fill(205);
-      rect(1220, 500, 170, 320);
-      if (theEvent.getController().getValue() != 0) {
-        Mutation mut = disease.accessibleTMutations.get((int)theEvent.getController().getValue()-1);
-        putStatsText(mut);
-      }
-    }
-    if (theEvent.getController() == d2) {
-      fill(205);
-      rect(1220, 500, 170, 320);
-      if (theEvent.getController().getValue() != 0) {
-        Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
-        putStatsText(mut);
-      }
-    }
-  }
-}
-
-void putStatsText(Mutation mut) {
-  fill(0, 0, 0);
-  textSize(10);
-  text(mut.name(), 1220, 510);
-  String stats = "";
-  stats+="Infectivity: +"+mut.infIncrement()+"  ";
-  stats+="Severity: +"+mut.sevIncrement()+"  ";
-  //spacing for visual purposes
-  stats+="Lethality: +"+mut.letIncrement()+"   ";
-  if (mut.letIncrement() < 10) {
-    stats+= " ";
-  }
-  stats+="Cost: "+mut.cost()+" Points";
-  text(stats, 1220, 515, 150, 75);
 }

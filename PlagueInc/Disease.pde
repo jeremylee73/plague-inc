@@ -416,4 +416,17 @@ class Disease{
     aMutations.add(m);
     return true;
   }
+  
+  void sell(Mutation mut){
+    if (acquiredMutations.size() != 0){
+      infectivity -= mut.infIncrement();
+      severity -= mut.sevIncrement();
+      lethality -= mut.letIncrement();
+    }
+    acquiredMutations.remove(mut);
+    for (int i = 0; i < acquiredMutations.size(); i++){
+      println();
+    }
+    points+= mut.cost();
+  }
 }
