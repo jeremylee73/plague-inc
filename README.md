@@ -33,3 +33,17 @@ Wednesday, May 22
 
 
 Victor - I added the display for stats of mutations when selecting them on the DropdownList.
+
+Thursday, May 23
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+Victor - Worked on selling mutations. So far, have added method to print out names of Mutations in a Mutation ArrayList, made it so that bought mutations are added to the DropdownList that displays acquired mutations (var: dSell), resized textbox for stats, added button for selling, and resized Confirm button. So far, selling is very buggy (DropdownList won't refresh after selling + decrements incorrectly).
+
+
+
+BUGS:
+selling
+
+TO-DO:
+feature where you notify user if they don't have enough points to buy a mutation
