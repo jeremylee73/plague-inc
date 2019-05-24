@@ -131,7 +131,10 @@ void customize(DropdownList ddl) {
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
+    if (!disease.addTMutation(accTMuts.get((int) d1.getValue() - 1))){
+      fill(255,0,0);
+      text("You do not have enough points",1220,660,100,60);
+    }
     d1.clear();
     d1.addItem("<Transmission>", 0);
     for (int i=1; i<=accTMuts.size(); i++) {
