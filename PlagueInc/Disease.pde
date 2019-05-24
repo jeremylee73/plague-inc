@@ -418,9 +418,9 @@ class Disease {
 
   void sell(Mutation mut) {
     if (acquiredMutations.size() != 0) {
-      infectivity -= mut.infIncrement();
-      severity -= mut.sevIncrement();
-      lethality -= mut.letIncrement();
+      infectivity -= mut.infIncrement() / 10000.0;
+      severity -= mut.sevIncrement() / 10000.0;
+      lethality -= mut.letIncrement() / 10000.0;
     }
     acquiredMutations.remove(mut);
     printMutationArray(acquiredMutations);
