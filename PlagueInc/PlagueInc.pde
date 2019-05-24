@@ -132,8 +132,12 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
-    d1.clear();
+    //d1.clear();
+    //d1.addItem("<Transmission>", 0);
+    d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
     d1.addItem("<Transmission>", 0);
+    customize(d1);
+    d1.getCaptionLabel().set("<Transmission>");
     for (int i=1; i<=accTMuts.size(); i++) {
       d1.addItem(accTMuts.get(i-1).name, i);
     }
@@ -147,8 +151,12 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d2.getValue() != 0) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
-    d2.clear();
+    //d2.clear();
+    //d2.addItem("<Symptom>", 0);
+    d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
     d2.addItem("<Symptom>", 0);
+    customize(d2);
+    d2.getCaptionLabel().set("<Symptom>");
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
@@ -167,7 +175,7 @@ void Sell() {
     Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
     disease.sell(mut);
     fill(205);
-    rect(1220,560,1000,1000);
+    rect(1220, 560, 1000, 1000);
     dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
     dSell.addItem("<Current Transmissions>", 0);
     customize(dSell);
@@ -281,7 +289,7 @@ void setup() {
   disease = new Disease();
   cure = new Cure();
   points = 0;
-  pointRate = 1;
+  pointRate = 1; //<>//
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
 
   textSize(16);
@@ -289,7 +297,7 @@ void setup() {
   text("Infectivity: " + (int) (disease.infectivity * 10000) + " / 100", 1220, 20);
   text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
-  text("Points: " + 0, 1220, 110); //<>//
+  text("Points: " + 0, 1220, 110);
   text("Cure: " + 0 + "%", 1220, 140);
 
   cp5 = new ControlP5(this);
