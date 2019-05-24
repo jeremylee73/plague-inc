@@ -8,6 +8,7 @@ class Disease{
   ArrayList<Mutation> accessibleTMutations;
   ArrayList<Mutation> accessibleSMutations;
   ArrayList<Mutation> accessibleAMutations;
+  ArrayList<Mutation> acquiredMutations;
   double infectivity; //should start at 0.0005 and hit till 0.01 w/o any extra mutations
   double severity;
   double lethality;
@@ -299,6 +300,7 @@ class Disease{
     allTMutations = new ArrayList<Mutation>();
     allSMutations = new ArrayList<Mutation>();
     allAMutations = new ArrayList<Mutation>();
+    acquiredMutations = new ArrayList<Mutation>();
     inputTMutations();
     inputSMutations();
     diseaseSetup();
@@ -373,6 +375,7 @@ class Disease{
     points -= m.cost;
     accessibleTMutations.remove(m);
     tMutations.add(m);
+    acquiredMutations.add(0,m);
     infectivity += m.infIncrement / 10000.0;
     severity += m.sevIncrement / 10000.0;
     lethality += m.letIncrement / 10000.0;
@@ -391,6 +394,7 @@ class Disease{
     }
     accessibleSMutations.remove(m);
     sMutations.add(m);
+    acquiredMutations.add(0,m);
     points -= m.cost;
     infectivity += m.infIncrement / 10000.0;
     severity += m.sevIncrement / 10000.0;

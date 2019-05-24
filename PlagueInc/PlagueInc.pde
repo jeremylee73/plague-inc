@@ -4,7 +4,7 @@ import javax.swing.*;
 import controlP5.*;
 
 ControlP5 cp5;
-DropdownList d1, d2, dSell1;
+DropdownList d1, d2, dSell;
 ArrayList<City> cities = new ArrayList<City>();
 Disease disease;
 Cure cure;
@@ -128,7 +128,7 @@ void customize(DropdownList ddl) {
   ddl.setColorActive(color(255, 128));
 }
 
-void Confirm() {
+void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
@@ -137,8 +137,12 @@ void Confirm() {
     for (int i=1; i<=accTMuts.size(); i++) {
       d1.addItem(accTMuts.get(i-1).name, i);
     }
-    ArrayList<Mutation> tMuts = disease.tMutations;
-    dSell1.addItem(tMuts.get(tMuts.size()-1).name, tMuts.size());
+    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
+    dSell.clear();
+    dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i<=acqMuts.size(); i++) {
+      dSell.addItem(acqMuts.get(i-1).name, i);
+    }
   }
   if (d2.getValue() != 0) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
@@ -148,8 +152,12 @@ void Confirm() {
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
-    ArrayList<Mutation> sMuts = disease.sMutations;
-    dSell1.addItem(sMuts.get(sMuts.size()-1).name, sMuts.size());
+    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
+    dSell.clear();
+    dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i<=acqMuts.size(); i++) {
+      dSell.addItem(acqMuts.get(i-1).name, i);
+    }
   }
 }
 
@@ -210,12 +218,13 @@ void setup() {
   customize(d2);
   d2.getCaptionLabel().set("<Symptom>");
 
-  dSell1 = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 550);
-  dSell1.addItem("<Current Transmissions>", 0);
-  customize(dSell1);
-  dSell1.getCaptionLabel().set("<Current Transmissions>");
+  dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
+  dSell.addItem("<Current Transmissions>", 0);
+  customize(dSell);
+  dSell.getCaptionLabel().set("<Current Mutations>");
 
-  cp5.addButton("Confirm").setValue(0).setPosition(1220, 700).setSize(100, 40);
+  cp5.addButton("Confirm").setValue(0).setPosition(1220, 680).setSize(60, 40);
+  cp5.addButton("Sell").setValue(0).setPosition(1300,680).setSize(60,40);
 
   cities.get(0).diseased = 1;
 }
