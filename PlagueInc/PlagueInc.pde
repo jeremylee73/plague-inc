@@ -161,14 +161,20 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   }
 }
 
-void Sell(){
-  if (dSell.getValue() != 0){
+void Sell() {
+  if (dSell.getValue() != 0) {
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
     disease.sell(mut);
-    dSell.clear();
-    dSell.addItem("<Current Mutations>", 0);
-    for (int i=1; i <= acqMuts.size(); i++){
+    fill(205);
+    rect(1220,560,1000,1000);
+    dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
+    dSell.addItem("<Current Transmissions>", 0);
+    customize(dSell);
+    dSell.getCaptionLabel().set("<Current Mutations>");
+    //dSell.clear();
+    //dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i <= acqMuts.size(); i++) {
       dSell.addItem(acqMuts.get(i-1).name, i);
     }
   }
@@ -209,10 +215,10 @@ void putStatsText(Mutation mut) {
   text(stats, 1220, 515, 150, 75);
 }
 
-void printMutationArray(ArrayList<Mutation> ary){
+void printMutationArray(ArrayList<Mutation> ary) {
   String str = "[";
-  for (int i = 0; i < ary.size(); i++){
-    if (i != 0){
+  for (int i = 0; i < ary.size(); i++) {
+    if (i != 0) {
       str+= ", ";
     }
     str+= ary.get(i).name;
@@ -283,7 +289,7 @@ void setup() {
   text("Infectivity: " + (int) (disease.infectivity * 10000) + " / 100", 1220, 20);
   text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
-  text("Points: " + 0, 1220, 110);
+  text("Points: " + 0, 1220, 110); //<>//
   text("Cure: " + 0 + "%", 1220, 140);
 
   cp5 = new ControlP5(this);
@@ -309,7 +315,7 @@ void setup() {
   dSell.getCaptionLabel().set("<Current Mutations>");
 
   cp5.addButton("Confirm").setValue(0).setPosition(1215, 680).setSize(70, 40);
-  cp5.addButton("Sell").setValue(0).setPosition(1300,680).setSize(70,40);
+  cp5.addButton("Sell").setValue(0).setPosition(1300, 680).setSize(70, 40);
 
   cities.get(0).diseased = 1;
 }

@@ -423,7 +423,6 @@ class Disease {
       lethality -= mut.letIncrement() / 10000.0;
     }
     acquiredMutations.remove(mut);
-    printMutationArray(acquiredMutations);
     points+= mut.cost();
   }
 }
