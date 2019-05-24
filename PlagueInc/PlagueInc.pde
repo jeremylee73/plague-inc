@@ -209,6 +209,18 @@ void putStatsText(Mutation mut) {
   text(stats, 1220, 515, 150, 75);
 }
 
+void printMutationArray(ArrayList<Mutation> ary){
+  String str = "[";
+  for (int i = 0; i < ary.size(); i++){
+    if (i != 0){
+      str+= ", ";
+    }
+    str+= ary.get(i).name;
+  }
+  str+="]";
+  println(str);
+}
+
 void controlEvent(ControlEvent theEvent) {
   //this skeleton code is credited to one of the examples on documentation
   //documentation stated this first if statement is necessary to not throw an error
