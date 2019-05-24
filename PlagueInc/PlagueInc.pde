@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.*; //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -209,7 +209,7 @@ void setup() {
   }
   customize(d2);
   d2.getCaptionLabel().set("<Symptom>");
-  
+
   dSell1 = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 550);
   dSell1.addItem("<Current Transmissions>", 0);
   customize(dSell1);
@@ -280,18 +280,7 @@ void controlEvent(ControlEvent theEvent) {
       rect(1220, 500, 170, 320);
       if (theEvent.getController().getValue() != 0) {
         Mutation mut = disease.accessibleTMutations.get((int)theEvent.getController().getValue()-1);
-        fill(0, 0, 0);
-        textSize(10);
-        String stats = mut.name()+"  ";
-        stats+="Infectivity: +"+mut.infIncrement()+"  ";
-        stats+="Severity: +"+mut.sevIncrement()+"  ";
-        stats+="Lethality: +"+mut.letIncrement()+"  ";
-        stats+="Cost: "+mut.cost()+" Points";
-        text(stats, 1220,500,150,75);
-        /*text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
-        text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100); //<>//
-        text("Lethality: +"+mut.letIncrement(), 1220, 590, 150, 100);
-        text("Cost: "+mut.cost()+" Points", 1220, 620, 150, 100);*/
+        putStatsText(mut);
       }
     }
     if (theEvent.getController() == d2) {
@@ -299,14 +288,24 @@ void controlEvent(ControlEvent theEvent) {
       rect(1220, 500, 170, 320);
       if (theEvent.getController().getValue() != 0) {
         Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
-        fill(0, 0, 0);
-        textSize(10);
-        text(mut.name(), 1220,500,150,100);
-        text("Infectivity: +"+mut.infIncrement(), 1220, 530, 150, 100);
-        text("Severity: +"+mut.sevIncrement(), 1220, 560, 150, 100);
-        text("Lethality: +"+mut.letIncrement(), 1220, 590, 150, 100);
-        text("Cost: "+mut.cost()+" Points", 1220, 620, 150, 100);
+        putStatsText(mut);
       }
     }
   }
+}
+
+void putStatsText(Mutation mut) {
+  fill(0, 0, 0);
+  textSize(10);
+  text(mut.name(), 1220, 510);
+  String stats = "";
+  stats+="Infectivity: +"+mut.infIncrement()+"  ";
+  stats+="Severity: +"+mut.sevIncrement()+"  ";
+  //spacing for visual purposes
+  stats+="Lethality: +"+mut.letIncrement()+"   ";
+  if (mut.letIncrement() < 10) {
+    stats+= " ";
+  }
+  stats+="Cost: "+mut.cost()+" Points";
+  text(stats, 1220, 515, 150, 75);
 }
