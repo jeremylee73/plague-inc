@@ -1,4 +1,4 @@
-import java.awt.*; //<>//
+import java.awt.*; //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -131,15 +131,17 @@ void customize(DropdownList ddl) {
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    if (!disease.addTMutation(accTMuts.get((int) d1.getValue() - 1))){
-      fill(255,0,0);
-      text("You do not have enough points",1220,660,100,60);
-    }
-    d1.clear();
+    disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
+    //d1.clear();
+    //d1.addItem("<Transmission>", 0);
+    d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
     d1.addItem("<Transmission>", 0);
+    customize(d1);
+    d1.getCaptionLabel().set("<Transmission>");
     for (int i=1; i<=accTMuts.size(); i++) {
       d1.addItem(accTMuts.get(i-1).name, i);
     }
+    //adding mutation to Current Transmission DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     dSell.clear();
     dSell.addItem("<Current Mutations>", 0);
@@ -150,11 +152,16 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d2.getValue() != 0) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
-    d2.clear();
+    //d2.clear();
+    //d2.addItem("<Symptom>", 0);
+    d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
     d2.addItem("<Symptom>", 0);
+    customize(d2);
+    d2.getCaptionLabel().set("<Symptom>");
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
+    //adding mutation to Current Transmissions DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     dSell.clear();
     dSell.addItem("<Current Mutations>", 0);
@@ -164,14 +171,20 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   }
 }
 
-void Sell(){
-  if (dSell.getValue() != 0){
+void Sell() {
+  if (dSell.getValue() != 0) {
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
     disease.sell(mut);
-    dSell.clear();
-    dSell.addItem("<Current Mutations>", 0);
-    for (int i=1; i <= acqMuts.size(); i++){
+    fill(205);
+    rect(1220, 560, 1000, 1000);
+    dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
+    dSell.addItem("<Current Transmissions>", 0);
+    customize(dSell);
+    dSell.getCaptionLabel().set("<Current Mutations>");
+    //dSell.clear();
+    //dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i <= acqMuts.size(); i++) {
       dSell.addItem(acqMuts.get(i-1).name, i);
     }
   }
@@ -212,10 +225,10 @@ void putStatsText(Mutation mut) {
   text(stats, 1220, 515, 150, 75);
 }
 
-void printMutationArray(ArrayList<Mutation> ary){
+void printMutationArray(ArrayList<Mutation> ary) {
   String str = "[";
-  for (int i = 0; i < ary.size(); i++){
-    if (i != 0){
+  for (int i = 0; i < ary.size(); i++) {
+    if (i != 0) {
       str+= ", ";
     }
     str+= ary.get(i).name;
@@ -278,7 +291,7 @@ void setup() {
   disease = new Disease();
   cure = new Cure();
   points = 0;
-  pointRate = 1;
+  pointRate = 1; //<>//
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
 
   textSize(16);
@@ -312,7 +325,7 @@ void setup() {
   dSell.getCaptionLabel().set("<Current Mutations>");
 
   cp5.addButton("Confirm").setValue(0).setPosition(1215, 680).setSize(70, 40);
-  cp5.addButton("Sell").setValue(0).setPosition(1300,680).setSize(70,40);
+  cp5.addButton("Sell").setValue(0).setPosition(1300, 680).setSize(70, 40);
 
   cities.get(0).diseased = 1;
 }
