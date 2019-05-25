@@ -43,11 +43,18 @@ Victor - debugged Current Mutations dropdownlist and added immediate refreshing 
 
 
 Keep in mind:
-the error message in processing terminal is fine, that does not break the code, but is necessary to refresh the selling dropdownlist properly
+- the error message in processing terminal is fine, that does not break the code, but is necessary to refresh the selling dropdownlist properly
+- in symptoms, when u buy a tier 4 symptom and a tier 3 sympton shows up as post-requisite, that should probably be a game design choice to keep it like that for sake of clarity of what buying a certain mutation does instead of resorting the list to make the post-req tier 3 go above pre-req tier 4 in the item order in the Symptoms DropdownList
 
 BUGS:
+- selling Extreme Zoonosis and its "Extreme" tMutation counterparts
 
-TO-DO:
-feature where you notify user if they don't have enough points to buy a mutation
-re-add mutation to other dropdownlists once u sell them. implement feature where u get less and less refund for selling, and eventually u need to pay
-if they try to confirm an item on current transmission dropdownlist, display warning message (do same for selling an item on the accessible mutations dropdownlists)
+TO-DO features:
+- feature where you notify user if they don't have enough points to buy a mutation
+- implement feature where u get less and less refund for selling, and eventually u need to pay
+- if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
+- make pointRate grow in an appropriate logistic curve
+- refer to Prototype for more things
+
+The Required Significant Algorithm that is part of the project: 
+- selling and adding items to dropdownlists, and updating lists appropiately?
