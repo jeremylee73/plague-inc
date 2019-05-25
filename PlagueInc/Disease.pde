@@ -424,14 +424,17 @@ class Disease {
     }
     acquiredMutations.remove(mut);
     points+= mut.cost();
-    //re-adds mutation into accessible mutation DropdownLists
+    //re-adds mutation into the proper place (next to it's tier level) in the accessible mutation ArrayLists
     if (mut.type.equals("tMutation")){
       String accMutName;
       for (int i = 0; i < accessibleTMutations.size(); i++){
         accMutName = accessibleTMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-1).equals(mut.name.substring(mut.name.length()-1))){
           accessibleTMutations.add(i,mut);
+          refreshDropDownList("<Transmission>");
           break;
+          //bird1 failed, sMutations work, but won't unsettle new accessible stuff
+          //to-do, check if there's a point growth rate
         }
       }
     } else if (mut.type.equals("sMutation")){
@@ -440,6 +443,7 @@ class Disease {
         accMutName = accessibleSMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-8).equals(mut.name.substring(mut.name.length()-8))){
           accessibleSMutations.add(i,mut);
+          refreshDropDownList("<Symptoms>");
           break;
         }
       }

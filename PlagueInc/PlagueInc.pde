@@ -155,7 +155,7 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   }
 }
 
-void refreshDropDownList(String name){
+boolean refreshDropDownList(String name){
   if (name.equals("<Transmission>")){
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     //d1.clear();
@@ -167,6 +167,7 @@ void refreshDropDownList(String name){
     for (int i=1; i<=accTMuts.size(); i++) {
       d1.addItem(accTMuts.get(i-1).name, i);
     }
+    return true;
   } else if (name.equals("<Symptoms>")){
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     //d2.clear();
@@ -178,7 +179,9 @@ void refreshDropDownList(String name){
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
+    return true;
   }
+  return false;
 }
 
 void Sell() {
