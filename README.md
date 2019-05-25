@@ -40,18 +40,22 @@ Friday, May 24
 -----------------------------------------------------------------------------------------------------------------------------
 Victor - debugged Current Mutations dropdownlist and added immediate refreshing feature to Transmissions and Symptons dropdownlist.
 
+Saturday, May 25
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - reorganized a small block of code in main PlagueInc file, updating README bugs/to-do list, re-adding mutations to accessible mutation DropDownLists after selling them
 
-
-Keep in mind:
-- the error message in processing terminal is fine, that does not break the code, but is necessary to refresh the selling dropdownlist properly
-- in symptoms, when u buy a tier 4 symptom and a tier 3 sympton shows up as post-requisite, that should probably be a game design choice to keep it like that for sake of clarity of what buying a certain mutation does instead of resorting the list to make the post-req tier 3 go above pre-req tier 4 in the item order in the Symptoms DropdownList
+-----------------------------------------------------------------------------------------------------------------------------
+Design Choices:
+- When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
+- When buying mutations, the branching out (post-requirement) mutations are put at the bottom of the DropdownList to show clarity in what mutations lead to what kind of new mutations become available (it is easier to see what new mutations become available if they can always expect a consistent place to find their new mutations - the bottom).
+- However, when selling mutations, the mutations are inserted in the DropdownList so that it is ordered correctly according to tier level. We don't need to always put the sold mutations at the bottom of the DropdownList because the player can rely on the program to re-add the mutation to the Transmission/Symptom DropdownLists, and does not need the same type of clarity that is utilized in the philosophy for buying mutations.
 
 BUGS:
-- selling Extreme Zoonosis and its "Extreme" tMutation counterparts
+- Victor: fix where when selling mutations, it unstages the mutations that had become available from the bought mutation (and then bug test this!).
 
 TO-DO features:
-- feature where you notify user if they don't have enough points to buy a mutation
 - implement feature where u get less and less refund for selling, and eventually u need to pay
+- feature where you warn user if they don't have enough points to buy a mutation
 - if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
 - make pointRate grow in an appropriate logistic curve
 - refer to Prototype for more things
