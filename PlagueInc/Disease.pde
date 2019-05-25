@@ -380,6 +380,7 @@ class Disease {
     lethality += m.letIncrement / 10000.0;
     for (int i=0; i<allTMutations.size(); i++) {
       Mutation mut = allTMutations.get(i);
+      //if prereqs are met and mutation is not already in the dropdownlist
       if (arrIn(mut.prereqs, tMutations) && !(in(mut, accessibleTMutations)) && !(in(mut, tMutations))) {
         accessibleTMutations.add(mut);
       }
@@ -400,6 +401,7 @@ class Disease {
     lethality += m.letIncrement / 10000.0;
     for (int i=0; i<allSMutations.size(); i++) {
       Mutation mut = allSMutations.get(i);
+      //if prereqs are met and mutation is not already in the dropdownlist
       if (arrSIn(mut.prereqs, sMutations) && !(in(mut, accessibleSMutations)) && !(in(mut, sMutations))) {
         accessibleSMutations.add(mut);
       }
@@ -440,6 +442,8 @@ class Disease {
       //accessible mutation ArrayLists, and thus cannot be compared with any of them.
       //the solution is to add mut to the end
       accessibleTMutations.add(mut);
+      refreshDropDownList("<Transmission>");
+      return true;
     } else if (mut.type.equals("sMutation")){
       String accMutName;
       for (int i = 0; i < accessibleSMutations.size(); i++){
@@ -451,6 +455,8 @@ class Disease {
         }
       }
       accessibleSMutations.add(mut);
+      refreshDropDownList("<Symptoms>");
+      return true;
     } else if (mut.type.equals("aMutation")){
       //implement later
     }
