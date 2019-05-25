@@ -416,7 +416,7 @@ class Disease {
     return true;
   }
 
-  void sell(Mutation mut) {
+  boolean sell(Mutation mut) {
     if (acquiredMutations.size() != 0) {
       infectivity -= mut.infIncrement() / 10000.0;
       severity -= mut.sevIncrement() / 10000.0;
@@ -424,31 +424,36 @@ class Disease {
     }
     acquiredMutations.remove(mut);
     points+= mut.cost();
-    //re-adds mutation into the proper place (next to it's tier level) in the accessible mutation ArrayLists
+    //re-adds mutation into the proper place (below previous tier levels) in the 
+    //accessible mutation ArrayLists
     if (mut.type.equals("tMutation")){
       String accMutName;
       for (int i = 0; i < accessibleTMutations.size(); i++){
         accMutName = accessibleTMutations.get(i).name;
-        if (accMutName.substring(accMutName.length()-1).equals(mut.name.substring(mut.name.length()-1))){
+        if (accMutName.substring(accMutName.length()-1).compareTo(mut.name.substring(mut.name.length()-1)) >= 0){
           accessibleTMutations.add(i,mut);
           refreshDropDownList("<Transmission>");
-          break;
-          //bird1 failed, sMutations work, but won't unsettle new accessible stuff
-          //to-do, check if there's a point growth rate
+          return true;
         }
       }
+      //if didn't work, that means mut is a higher tier than any other mutation in the
+      //accessible mutation ArrayLists, and thus cannot be compared with any of them.
+      //the solution is to add mut to the end
+      accessibleTMutations.add(mut);
     } else if (mut.type.equals("sMutation")){
       String accMutName;
       for (int i = 0; i < accessibleSMutations.size(); i++){
         accMutName = accessibleSMutations.get(i).name;
-        if (accMutName.substring(accMutName.length()-8).equals(mut.name.substring(mut.name.length()-8))){
+        if (accMutName.substring(accMutName.length()-8).compareTo(mut.name.substring(mut.name.length()-8)) >= 0){
           accessibleSMutations.add(i,mut);
           refreshDropDownList("<Symptoms>");
-          break;
+          return true;
         }
       }
+      accessibleSMutations.add(mut);
     } else if (mut.type.equals("aMutation")){
       //implement later
     }
+    return false;
   }
 }
