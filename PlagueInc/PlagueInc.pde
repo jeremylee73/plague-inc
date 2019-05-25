@@ -132,15 +132,7 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
-    //d1.clear();
-    //d1.addItem("<Transmission>", 0);
-    d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
-    d1.addItem("<Transmission>", 0);
-    customize(d1);
-    d1.getCaptionLabel().set("<Transmission>");
-    for (int i=1; i<=accTMuts.size(); i++) {
-      d1.addItem(accTMuts.get(i-1).name, i);
-    }
+    refreshDropDownList("<Transmission>");
     //adding mutation to Current Transmission DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     dSell.clear();
@@ -152,6 +144,31 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d2.getValue() != 0) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
+    refreshDropDownList("<Symptoms>");
+    //adding mutation to Current Transmissions DropdownList
+    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
+    dSell.clear();
+    dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i<=acqMuts.size(); i++) {
+      dSell.addItem(acqMuts.get(i-1).name, i);
+    }
+  }
+}
+
+void refreshDropDownList(String name){
+  if (name.equals("<Transmission>")){
+    ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
+    //d1.clear();
+    //d1.addItem("<Transmission>", 0);
+    d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
+    d1.addItem("<Transmission>", 0);
+    customize(d1);
+    d1.getCaptionLabel().set("<Transmission>");
+    for (int i=1; i<=accTMuts.size(); i++) {
+      d1.addItem(accTMuts.get(i-1).name, i);
+    }
+  } else if (name.equals("<Symptoms>")){
+    ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     //d2.clear();
     //d2.addItem("<Symptom>", 0);
     d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
@@ -160,13 +177,6 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
     d2.getCaptionLabel().set("<Symptom>");
     for (int i=1; i<=accSMuts.size(); i++) {
       d2.addItem(accSMuts.get(i-1).name, i);
-    }
-    //adding mutation to Current Transmissions DropdownList
-    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
-    dSell.clear();
-    dSell.addItem("<Current Mutations>", 0);
-    for (int i=1; i<=acqMuts.size(); i++) {
-      dSell.addItem(acqMuts.get(i-1).name, i);
     }
   }
 }
