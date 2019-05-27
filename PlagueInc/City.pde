@@ -80,6 +80,21 @@ class City {
     }
   }
 
+  void updateDeadCount(){
+    fill(0, 0, 0);
+    noStroke();
+    int digits = 0;
+    int temp = diseased;
+    while (temp > 9) {
+      digits++;
+      temp = temp / 10;
+    }
+    rect(x-32, y+52, 100 + (10*digits), 20);
+    textSize(16);
+    fill(255, 255, 255);
+    text(dead + " / " + population, x - 32, y + 70);
+  }
+
   void updateDiseasedCount() {
     fill(255, 255, 255);
     noStroke();

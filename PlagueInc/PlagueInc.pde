@@ -370,6 +370,7 @@ void draw() {
     totalDead += c.dead;
     println(totalDead);
     c.updateDiseasedCount();
+    c.updateDeadCount();
     c.updateColor();
     updateDiseaseLabels();
     if (c.diseased > 1000000) {
