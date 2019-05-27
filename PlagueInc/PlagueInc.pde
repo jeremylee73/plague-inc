@@ -122,7 +122,7 @@ void spreadDisease(City c) {
 }
 
 void killDisease(City c){
-  if (disease.lethality > 0 && c.diseased > 0 && Math.random() < 0.0001){
+  if (disease.lethality > 0 && c.diseased > 0 && Math.random() < (c.diseased/c.population)){
     c.dead++;
     c.diseased--;
   }
