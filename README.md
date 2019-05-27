@@ -30,6 +30,8 @@ Victor - coded in growth curve for cure development and news display
 
 Wednesday, May 22
 -----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I added all the Symptom mutations to a DropdownList and made them selectable. I also created the image for airports and docks and added them to cities.
+
 Victor - I added the display for stats of mutations when selecting them on the DropdownList.
 
 Thursday, May 23
