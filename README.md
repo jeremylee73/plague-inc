@@ -54,8 +54,8 @@ Jeremy - I added the mechanism for the disease killing people and made it a line
 
 Tuesday, May 28
 -----------------------------------------------------------------------------------------------------------------------------
+Victor - I successfully coded in the unstaging mutations for symptom mutations, but was unable to debug it for transmission mutations. Added labels for total % infected and total % dead. Played around with curbing pointRate growth and speeding up cureRate
 
-Victor - I successfully allowed unstaging mutations for SMutations but not TMutations
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
@@ -63,17 +63,26 @@ Design Choices:
 - However, when selling mutations, the mutations are inserted in the DropdownList so that it is ordered correctly according to tier level. We don't need to always put the sold mutations at the bottom of the DropdownList because the player can rely on the program to re-add the mutation to the Transmission/Symptom DropdownLists, and does not need the same type of clarity that is utilized in the philosophy for buying mutations.
 
 BUGS:
-- fix where when selling mutations, it unstages the mutations that had become available from the bought mutation (and then bug test this!).
+- fix where when selling mutations, it unstages the tMutations that had become available from the bought mutation (and then bug test this!).
 - cannot sell mutations while its post-reqs are still in "Current Mutations" list
-- mistaking connected mutations as "hanging" mutations - not super important rn cuz super complicated and selling is only useful when mutations mutate randomly
-- news on the right with which city is infected flickers a lot and sometimes dead rate increases even though city is not infected (perhaps due to split-second infected being > 0?)
-- pointRate and cureRate grow too slow
+- test out pointRate and cureRate
+- fix infected and dead labels
 
 TO-DO features:
-- implement feature where u get less and less refund for selling, and eventually u need to pay
-- feature where you warn user if they don't have enough points to buy a mutation
+- cure dissemination and also stopping game when dead == diseased
+- fill in circle darker gray as death count goes up
 - if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
+- automatic mutations
+- implement feature where u get less and less refund for selling, and eventually u need to pay (which means showing stats for selling too)
+- when ports/airports close, display that as news
+- we might not even be able to get to the point of customizing transmission mutations lmao (hopefully we can add aMutations though)
+- putting names of city next to them (and display % infected and % dead for each city if have time)
 - refer to Prototype for more things
+
+Extra Features:
+- feature where you warn user if they don't have enough points to buy a mutation
+- mistaking connected mutations as "hanging" mutations - not super important rn cuz super complicated and selling is only useful when mutations mutate randomly
+- outskirt towns? (not mandatory, only if have extra time)
 
 The Required Significant Algorithm that is part of the project: 
 - selling and adding items to dropdownlists, and updating lists appropiately?
