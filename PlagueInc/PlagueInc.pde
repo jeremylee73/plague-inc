@@ -16,6 +16,7 @@ String[] TMStrings;
 JComboBox TMList;
 JLabel TMText;
 int totalDead;
+int totalDiseased;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -129,7 +130,7 @@ void killDisease(City c){
     c.dead += Math.ceil(rate);
     c.diseased -= Math.ceil(rate);
     if (c.diseased < 0){
-      c.diseased = 0;  
+      c.diseased = 0;
     }
     if (c.dead > c.population){
       c.dead = c.population;  
@@ -239,6 +240,24 @@ void updateDiseaseLabels() {
   rect(1220, 90, 100, 22);
   fill(0, 0, 0);
   text("Points: " + points, 1220, 110);
+}
+
+void updatePointRate(){
+  if (disease.severity > 0.0005){
+    pointRate = 2;  
+  }
+  if (disease.severity > 0.0015){
+    pointRate = 3;  
+  }
+  if (disease.severity > 0.0025){
+    pointRate = 4;  
+  }
+  if (disease.severity > 0.0040){
+    pointRate = 5;  
+  }
+  if (disease.severity > 0.0050){
+    pointRate = 6;  
+  }
 }
 
 void putStatsText(Mutation mut) {
@@ -364,13 +383,16 @@ void setup() {
 
 void draw() {
   totalDead = 0;
+  totalDiseased = 0;
   for (City c : cities) {
     killDisease(c);
     spreadDisease(c);
     totalDead += c.dead;
+    totalDiseased += c.diseased;
     c.updateDiseasedCount();
     c.updateDeadCount();
     c.updateColor();
+    updatePointRate();
     updateDiseaseLabels();
     if (c.diseased > 1000000) {
       c.diseased = 1000000;
