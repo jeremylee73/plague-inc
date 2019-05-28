@@ -114,10 +114,12 @@ void drawCities() {
 }
 
 void spreadDisease(City c) {
-  double rate = (disease.infectivity) * ((c.population-c.diseased-c.dead) / (c.population * 1.0)) * c.diseased;
-  c.diseased += Math.ceil(rate);
-  if (c.diseased > c.population - c.dead){
-    c.diseased = c.population - c.dead;
+  if (c.diseased > 0){
+    double rate = (disease.infectivity) * ((c.population-c.diseased-c.dead) / (c.population * 1.0)) * c.diseased;
+    c.diseased += Math.ceil(rate);
+    if (c.diseased > c.population - c.dead){
+      c.diseased = c.population - c.dead;
+    }
   }
 }
 
