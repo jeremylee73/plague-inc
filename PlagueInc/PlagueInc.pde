@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>//
+import java.awt.*; //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -115,25 +115,25 @@ void drawCities() {
 }
 
 void spreadDisease(City c) {
-  if (c.diseased > 0){
+  if (c.diseased > 0) {
     double rate = (disease.infectivity) * ((c.population-c.diseased-c.dead) / (c.population * 1.0)) * c.diseased;
     c.diseased += Math.ceil(rate);
-    if (c.diseased > c.population - c.dead){
+    if (c.diseased > c.population - c.dead) {
       c.diseased = c.population - c.dead;
     }
   }
 }
 
-void killDisease(City c){
-  if (disease.lethality > 0 && c.diseased > 0){
+void killDisease(City c) {
+  if (disease.lethality > 0 && c.diseased > 0) {
     double rate = (disease.lethality) * 10000;
     c.dead += Math.ceil(rate);
     c.diseased -= Math.ceil(rate);
-    if (c.diseased < 0){
+    if (c.diseased < 0) {
       c.diseased = 0;
     }
-    if (c.dead > c.population){
-      c.dead = c.population;  
+    if (c.dead > c.population) {
+      c.dead = c.population;
     }
   }
 }
@@ -175,8 +175,8 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   }
 }
 
-boolean refreshDropDownList(String name){
-  if (name.equals("<Transmission>")){
+boolean refreshDropDownList(String name) {
+  if (name.equals("<Transmission>")) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     //d1.clear();
     //d1.addItem("<Transmission>", 0);
@@ -188,7 +188,7 @@ boolean refreshDropDownList(String name){
       d1.addItem(accTMuts.get(i-1).name, i);
     }
     return true;
-  } else if (name.equals("<Symptoms>")){
+  } else if (name.equals("<Symptoms>")) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     //d2.clear();
     //d2.addItem("<Symptom>", 0);
@@ -242,35 +242,35 @@ void updateDiseaseLabels() {
   text("Points: " + points, 1220, 110);
 }
 
-void updatePointRate(){
-  if (disease.severity > 0.0005){
-    pointRate = 2;  
+void updatePointRate() {
+  if (disease.severity > 0.0005) {
+    pointRate = 2;
   }
-  if (disease.severity > 0.0015){
-    pointRate = 3;  
+  if (disease.severity > 0.0015) {
+    pointRate = 3;
   }
-  if (disease.severity > 0.0025){
-    pointRate = 4;  
+  if (disease.severity > 0.0025) {
+    pointRate = 4;
   }
-  if (disease.severity > 0.0040){
-    pointRate = 5;  
+  if (disease.severity > 0.0040) {
+    pointRate = 5;
   }
-  if (disease.severity > 0.0050){
-    pointRate = 6;  
+  if (disease.severity > 0.0050) {
+    pointRate = 6;
   }
-  if (points > 70){
+  if (points > 70) {
     pointRate--;
   }
-  if (points > 90){
+  if (points > 80) {
     pointRate--;
   }
-  if (points > 110){
+  if (points > 90) {
     pointRate--;
   }
-  if (points > 130){
+  if (points > 100) {
     pointRate--;
   }
-  if (points > 150){
+  if (points > 110) {
     pointRate--;
   }
 }
@@ -357,7 +357,7 @@ void setup() {
   disease = new Disease();
   cure = new Cure();
   points = 0;
-  pointRate = 1; //<>//
+  pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
 
   textSize(16);
@@ -367,6 +367,8 @@ void setup() {
   text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
   text("Points: " + 0, 1220, 110);
   text("Cure: " + 0 + "%", 1220, 140);
+  text("Infected: 0%", 1220, 170);
+  text("Dead: 0%", 1220, 200);
 
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
@@ -428,6 +430,14 @@ void draw() {
     fill(0, 0, 0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
+  fill(205);
+  rect(1220, 150, 100, 22);
+  fill(0, 0, 0);
+  text("Infected: " + (totalDiseased / (cities.size()*cities.get(0).population)) + "%", 1220, 170);
+  fill(205);
+  rect(1220, 180, 100, 22);
+  fill(0, 0, 0);
+  text("Dead: " + (totalDead / (cities.size()*cities.get(0).population) ) + "%", 1220, 200);
 
   if (Math.random() < (1/180.0)) {
     points += pointRate;

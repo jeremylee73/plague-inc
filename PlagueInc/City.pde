@@ -64,7 +64,7 @@ class City {
     double GB = (population - diseased) / (population * 1.0) * 255;
     fill(255, (int) GB, (int) GB, 1);
     ellipse(x, y, 65, 65);
-    if (GB > 254 && diseased > 0 && !bubblePopped) {
+    if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped) {
       //this case is true longer than it should be? might be causing bug with bubbles visuals
       hasBubble = true;
       fill(255, green, blue);
@@ -121,9 +121,9 @@ class City {
               //adds infection message to news and shows it on screen
               news.add(cities.get(i).name+" has become infected.");
               fill(205);
-              rect(1220, 180, 160, 100);
+              rect(1220, 215, 160, 100);
               fill(0, 0, 0);
-              text(news.get(news.size() - 1), 1220, 200, 150, 100);
+              text(news.get(news.size() - 1), 1220, 235, 150, 100);
             }
           }
         }
