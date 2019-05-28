@@ -129,10 +129,45 @@ class City {
     }
   }
   
+  void sendPlane(PImage img, City c){
+    float dx = Math.abs(c.x - x);
+    float dy = Math.abs(c.y - y);
+    float theta = atan(dy / dx);
+    float angle = 0;
+    if (c.x > x && c.y > y){
+      angle = PI - theta;
+    } else if (c.x > x && c.y < y){
+      angle = (PI/2) - theta;  
+    } else if (c.x < x && c.y > y){
+      angle = PI + theta;  
+    } else if (c.x < x && c.y < y){
+      angle = (3*PI / 2) + theta;  
+    }
+    pushMatrix();
+    rotate(angle);
+    translate(dx / 100, dy / 100);
+    image(img, x, y);
+    popMatrix();
+  }
+  
   void planeTransmission(){
-    for (int i=0; i<cities.size(); i++){
-      if (cities.get(i).hasAirport && cities.get(i).airportOpen){
-          
+    if (hasAirport && airportOpen){
+      if (Math.random() > (diseased / (population * 1.0))){
+        PImage planeImg = loadImage("healthyplane.png");
+        image(planeImg, x, y);
+        for (int i=0; i<cities.size(); i++){
+          if (cities.get(i).hasAirport && cities.get(i).airportOpen){
+              sendPlane(planeImg, cities.get(i));
+          }
+        }
+      } else {
+        PImage planeImg = loadImage("infectedplane.png");
+        image(planeImg, x, y);
+        for (int i=0; i<cities.size(); i++){
+          if (cities.get(i).hasAirport && cities.get(i).airportOpen){
+              sendPlane(planeImg, cities.get(i));
+          }
+        }
       }
     }
   }

@@ -398,6 +398,7 @@ void draw() {
       c.diseased = 1000000;
     }
     c.landTransmission();
+    c.planeTransmission();
   }
   //rudimentary cure rate, very subject to change
   if (totalDead >= 10000 ) {
