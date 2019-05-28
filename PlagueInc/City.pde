@@ -84,7 +84,7 @@ class City {
     fill(0, 0, 0);
     noStroke();
     int digits = 0;
-    int temp = diseased;
+    int temp = dead;
     while (temp > 9) {
       digits++;
       temp = temp / 10;
