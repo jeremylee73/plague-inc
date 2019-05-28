@@ -46,6 +46,12 @@ Saturday, May 25
 -----------------------------------------------------------------------------------------------------------------------------
 Victor - reorganized a small block of code in main PlagueInc file, updating README bugs/to-do list, re-adding mutations to accessible mutation DropDownLists after selling them
 
+Sunday, May 26
+-----------------------------------------------------------------------------------------------------------------------------
+
+Monday, May 27
+-----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I added the mechanism for the disease killing people and made it a linear function, so that there is a risk of the disease killing people faster than it spreads. This forces the player to time the implementation of certain mutations. I also added the textbox below the city indicating how many people are dead. It is still buggy with the news on the right because it flickers a lot.
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
