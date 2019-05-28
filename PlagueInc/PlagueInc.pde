@@ -258,6 +258,21 @@ void updatePointRate(){
   if (disease.severity > 0.0050){
     pointRate = 6;  
   }
+  if (points > 70){
+    pointRate--;
+  }
+  if (points > 90){
+    pointRate--;
+  }
+  if (points > 110){
+    pointRate--;
+  }
+  if (points > 130){
+    pointRate--;
+  }
+  if (points > 150){
+    pointRate--;
+  }
 }
 
 void putStatsText(Mutation mut) {
@@ -403,7 +418,7 @@ void draw() {
   //rudimentary cure rate, very subject to change
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
-      cure.setDeveloped(pow(totalDead * 0.000001, 2));
+      cure.setDeveloped(pow(totalDead * 0.00001, 2));
     }
     if (cure.developed() > 100) {
       cure.setDeveloped(100);
