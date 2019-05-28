@@ -114,26 +114,24 @@ void drawCities() {
 }
 
 void spreadDisease(City c) {
-  double rate = (disease.infectivity) * ((c.population-c.diseased) / (c.population * 1.0)) * c.diseased;
+  double rate = (disease.infectivity) * ((c.population-c.diseased-c.dead) / (c.population * 1.0)) * c.diseased;
   c.diseased += Math.ceil(rate);
   if (c.diseased > c.population - c.dead){
-    c.diseased = c.population - c.dead;  
+    c.diseased = c.population - c.dead;
   }
 }
 
 void killDisease(City c){
-  if (disease.lethality > 0 && c.diseased > 0 && Math.random() < (c.diseased/c.population)){
-    c.dead++;
-    c.diseased--;
-  }
-  double rate = (disease.lethality) * ((c.diseased - c.dead) / (c.diseased * 1.0)) * c.dead;
-  c.dead += Math.ceil(rate);
-  c.diseased -= Math.ceil(rate);
-  if (c.diseased < 0){
-    c.diseased = 0;  
-  }
-  if (c.dead > c.population){
-    c.dead = c.population;  
+  if (disease.lethality > 0 && c.diseased > 0){
+    double rate = (disease.lethality) * 10000;
+    c.dead += Math.ceil(rate);
+    c.diseased -= Math.ceil(rate);
+    if (c.diseased < 0){
+      c.diseased = 0;  
+    }
+    if (c.dead > c.population){
+      c.dead = c.population;  
+    }
   }
 }
 
@@ -365,10 +363,9 @@ void setup() {
 void draw() {
   totalDead = 0;
   for (City c : cities) {
-    spreadDisease(c);
     killDisease(c);
+    spreadDisease(c);
     totalDead += c.dead;
-    println(totalDead);
     c.updateDiseasedCount();
     c.updateDeadCount();
     c.updateColor();

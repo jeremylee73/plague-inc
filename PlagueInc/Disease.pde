@@ -290,7 +290,7 @@ class Disease {
   Disease() {
     infectivity = 0.0005;
     severity = 0;
-    lethality = 0.0002;
+    lethality = 0.0;
     tMutations = new ArrayList<Mutation>();
     sMutations = new ArrayList<Mutation>();
     aMutations = new ArrayList<Mutation>();
