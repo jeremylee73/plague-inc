@@ -59,13 +59,14 @@ Design Choices:
 - However, when selling mutations, the mutations are inserted in the DropdownList so that it is ordered correctly according to tier level. We don't need to always put the sold mutations at the bottom of the DropdownList because the player can rely on the program to re-add the mutation to the Transmission/Symptom DropdownLists, and does not need the same type of clarity that is utilized in the philosophy for buying mutations.
 
 BUGS:
-- Victor: fix where when selling mutations, it unstages the mutations that had become available from the bought mutation (and then bug test this!).
+- fix where when selling mutations, it unstages the mutations that had become available from the bought mutation (and then bug test this!).
+- news on the right with which city is infected flickers a lot and sometimes dead rate increases even though city is not infected (perhaps due to split-second infected being > 0?)
+- pointRate and cureRate grow too slow
 
 TO-DO features:
 - implement feature where u get less and less refund for selling, and eventually u need to pay
 - feature where you warn user if they don't have enough points to buy a mutation
 - if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
-- make pointRate grow in an appropriate logistic curve
 - refer to Prototype for more things
 
 The Required Significant Algorithm that is part of the project: 
