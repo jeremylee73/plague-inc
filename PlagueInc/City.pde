@@ -43,18 +43,18 @@ class City {
     }
     strokeWeight(4);
   }
-  
-  void drawAirports(){
-    for (int i=0; i<cities.size(); i++){
-      if (cities.get(i).hasAirport){
+
+  void drawAirports() {
+    for (int i=0; i<cities.size(); i++) {
+      if (cities.get(i).hasAirport) {
         rect(cities.get(i).x + 40, cities.get(i).y - 25, 20, 20);
       }
     }
   }
-  
-  void drawDocks(){
-    for (int i=0; i<cities.size(); i++){
-      if (cities.get(i).hasDock){
+
+  void drawDocks() {
+    for (int i=0; i<cities.size(); i++) {
+      if (cities.get(i).hasDock) {
         triangle(cities.get(i).x+40, cities.get(i).y+20, cities.get(i).x+50, cities.get(i).y+5, cities.get(i).x + 60, cities.get(i).y + 20);
       }
     }
@@ -74,13 +74,13 @@ class City {
     } else {
       hasBubble = false;
     }
-    if (bubblePopped && GB > 254){
-      fill(255,255,255);
-      ellipse(x,y,30,30);
+    if (bubblePopped && GB > 254) {
+      fill(255, 255, 255);
+      ellipse(x, y, 30, 30);
     }
   }
 
-  void updateDeadCount(){
+  void updateDeadCount() {
     fill(0, 0, 0);
     noStroke();
     int digits = 0;
@@ -117,22 +117,23 @@ class City {
           if (Math.random() < (diseased / (population * 2.0)) && cities.get(i).diseased == 0) {
             cities.get(i).diseased = 1;
             hasBubble = true;
-            //adds infection message to news and shows it on screen
-            news.add(cities.get(i).name+" has become infected.");
-            fill(205);
-            rect(1220,180,160,100);
-            fill(0,0,0);
-            text(news.get(news.size() - 1),1220,200,150,100);
+            if (dead == 0) {
+              //adds infection message to news and shows it on screen
+              news.add(cities.get(i).name+" has become infected.");
+              fill(205);
+              rect(1220, 180, 160, 100);
+              fill(0, 0, 0);
+              text(news.get(news.size() - 1), 1220, 200, 150, 100);
+            }
           }
         }
       }
     }
   }
-  
-  void planeTransmission(){
-    for (int i=0; i<cities.size(); i++){
-      if (cities.get(i).hasAirport && cities.get(i).airportOpen){
-          
+
+  void planeTransmission() {
+    for (int i=0; i<cities.size(); i++) {
+      if (cities.get(i).hasAirport && cities.get(i).airportOpen) {
       }
     }
   }

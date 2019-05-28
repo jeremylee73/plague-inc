@@ -430,6 +430,19 @@ class Disease {
     //accessible mutation ArrayLists
     if (mut.type.equals("tMutation")){
       String accMutName;
+      Mutation accMut;
+      //removes post-reqs when selling the mutation
+      for (int i = 0; i < accessibleTMutations.size(); i++){
+        accMut = accessibleTMutations.get(i);
+        for (int j = 0; j < accMut.prereqs().size(); j++){
+          if (accMut.prereqs().get(j).equals(mut.name)){
+            accessibleTMutations.remove(accMut);
+            i--;
+          }
+        }
+      }
+      printMutationArray(accessibleTMutations);
+      
       for (int i = 0; i < accessibleTMutations.size(); i++){
         accMutName = accessibleTMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-1).compareTo(mut.name.substring(mut.name.length()-1)) >= 0){
@@ -446,6 +459,17 @@ class Disease {
       return true;
     } else if (mut.type.equals("sMutation")){
       String accMutName;
+      Mutation accMut;
+      //removes post-reqs when selling the mutation
+      for (int i = 0; i < accessibleSMutations.size(); i++){
+        accMut = accessibleSMutations.get(i);
+        for (int j = 0; j < accMut.prereqs().size(); j++){
+          if (accMut.prereqs().get(j).equals(mut.name)){
+            accessibleSMutations.remove(accMut);
+            i--; //so that indexing re-calibrates itself after removing an element from list
+          }
+        }
+      }
       for (int i = 0; i < accessibleSMutations.size(); i++){
         accMutName = accessibleSMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-8).compareTo(mut.name.substring(mut.name.length()-8)) >= 0){

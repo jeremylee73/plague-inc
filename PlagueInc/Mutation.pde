@@ -37,4 +37,8 @@ class Mutation{
   int letIncrement(){
     return letIncrement;
   }
+  
+  ArrayList<String> prereqs(){
+    return prereqs;
+  }
 }
