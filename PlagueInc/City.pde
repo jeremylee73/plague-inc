@@ -130,13 +130,6 @@ class City {
       }
     }
   }
-
-  void planeTransmission() {
-    for (int i=0; i<cities.size(); i++) {
-      if (cities.get(i).hasAirport && cities.get(i).airportOpen) {
-      }
-    }
-  }
   
   void sendPlane(PImage img, City c){
     float dx = Math.abs(c.x - x);
@@ -177,7 +170,6 @@ class City {
               sendPlane(planeImg, cities.get(i));
           }
         }
->>>>>>> 7e2f72d941451bea122746291d04c297ff04c3ef
       }
     }
   }
