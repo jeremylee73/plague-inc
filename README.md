@@ -54,6 +54,8 @@ Jeremy - I added the mechanism for the disease killing people and made it a line
 
 Tuesday, May 28
 -----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I added the plane images and designed the animation for the planes moving from city to city. However, it is not thoroughly tested yet and is still buggy.
+
 Victor - I successfully coded in the unstaging mutations for symptom mutations, but was unable to debug it for transmission mutations. Added labels for total % infected and total % dead. Played around with curbing pointRate growth and speeding up cureRate
 
 -----------------------------------------------------------------------------------------------------------------------------
