@@ -58,6 +58,10 @@ Jeremy - I added the plane images and designed the animation for the planes movi
 
 Victor - I successfully coded in the unstaging mutations for symptom mutations, but was unable to debug it for transmission mutations. Added labels for total % infected and total % dead. Played around with curbing pointRate growth and speeding up cureRate
 
+Wednesday, May 28
+-----------------------------------------------------------------------------------------------------------------------------
+
+
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
@@ -69,6 +73,8 @@ BUGS:
 - cannot sell mutations while its post-reqs are still in "Current Mutations" list
 - test out pointRate and cureRate
 - fix infected and dead labels
+- overlapping city labels at the bottom poses a problem when the bubble shows up
+- points go into negative range when infected is ~10%
 
 TO-DO features:
 - cure dissemination and also stopping game when dead == diseased
