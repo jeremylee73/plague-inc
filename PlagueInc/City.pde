@@ -156,9 +156,8 @@ class City {
   
   void planeTransmission(){
     if (hasAirport && airportOpen){
-      if (Math.random() > (diseased / (population * 1.0))){
+      if (Math.random() > ((diseased * 1000000) / (population * 1.0))){
         PImage planeImg = loadImage("healthyplane.png");
-        image(planeImg, x-25, y-28, 50, 50);
         for (int i=0; i<cities.size(); i++){
           if (cities.get(i).hasAirport && cities.get(i).airportOpen){
             City c = cities.get(i);
@@ -175,9 +174,11 @@ class City {
             } else if (c.x < x && c.y < y){
               angle = (3*PI / 2) + theta;  
             }
+            println(angle);
             pushMatrix();
+            translate(dx/100, dy/100);
             rotate(angle);
-            translate(dx / 100, dy / 100);
+            image(planeImg, 0, 0, 50, 50);
             popMatrix();
           }
         }

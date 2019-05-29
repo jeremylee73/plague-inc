@@ -401,6 +401,7 @@ void setup() {
 void draw() {
   totalDead = 0;
   totalDiseased = 0;
+  
   for (City c : cities) {
     killDisease(c);
     spreadDisease(c);
@@ -415,8 +416,9 @@ void draw() {
       c.diseased = 1000000;
     }
     c.landTransmission();
-    c.planeTransmission();
+    //c.planeTransmission();
   }
+  cities.get(0).planeTransmission();
   //rudimentary cure rate, very subject to change
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
