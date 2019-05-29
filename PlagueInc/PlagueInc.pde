@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -342,7 +342,7 @@ void mousePressed() {
       //etc, don't have to be as rigid as following actual game 100%
     }
   }
-  //processing background color
+  //processing background color //<>//
 }
 
 
@@ -417,10 +417,22 @@ void draw() {
     c.landTransmission();
     c.planeTransmission();
   }
-  //rudimentary cure rate, very subject to change
+  //displays total % infected and total % dead
+  fill(205);
+  rect(1220, 150, 100, 22);
+  fill(0, 0, 0);
+  text("Infected: " + (totalDiseased * 100 / (cities.size()*cities.get(0).population)) + "%", 1220, 170);
+  fill(205);
+  rect(1220, 180, 100, 22);
+  fill(0, 0, 0);
+  float percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
+  text("Dead: " + (int)percentDead + "%", 1220, 200);
+  //println(100.0 * totalDiseased / (cities.size()*cities.get(0).population));
+  
+  //calculates and displays cure %
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
-      cure.setDeveloped(pow(totalDead * 0.00001, 2));
+      cure.setDeveloped((int)(percentDead * 1.5));
     }
     if (cure.developed() > 100) {
       cure.setDeveloped(100);
@@ -430,15 +442,6 @@ void draw() {
     fill(0, 0, 0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
-  fill(205);
-  rect(1220, 150, 100, 22);
-  fill(0, 0, 0);
-  text("Infected: " + (totalDiseased / (cities.size()*cities.get(0).population)) + "%", 1220, 170);
-  fill(205);
-  rect(1220, 180, 100, 22);
-  fill(0, 0, 0);
-  text("Dead: " + (totalDead / (cities.size()*cities.get(0).population) ) + "%", 1220, 200);
-
   if (Math.random() < (1/180.0)) {
     points += pointRate;
   }

@@ -441,7 +441,7 @@ class Disease {
           }
         }
       }
-      printMutationArray(accessibleTMutations);
+      //printMutationArray(accessibleTMutations);
       
       for (int i = 0; i < accessibleTMutations.size(); i++){
         accMutName = accessibleTMutations.get(i).name;
