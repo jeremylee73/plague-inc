@@ -351,7 +351,7 @@ void setup() {
   size(1440, 785);
   img = loadImage("map.png");
   image(img, 0, 0);
-
+  
   citySetup();
   drawCities();
   disease = new Disease();
