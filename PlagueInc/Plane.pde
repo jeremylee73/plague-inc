@@ -7,6 +7,11 @@ class Plane{
   float y;
   
   Plane(float x, float y, City from, City to, boolean isDiseased){
+    this.from = from;
+    this.to = to;
+    this.x = x;
+    this.y = y;
+    this.isDiseased = isDiseased;
     if (!isDiseased){
       PImage planeImg = loadImage("healthyplane.png");
     } else {
