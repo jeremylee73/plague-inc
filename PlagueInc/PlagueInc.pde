@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -17,6 +17,7 @@ JComboBox TMList;
 JLabel TMText;
 int totalDead;
 int totalDiseased;
+float percentDead;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -258,19 +259,19 @@ void updatePointRate() {
   if (disease.severity > 0.0050) {
     pointRate = 6;
   }
-  if (points > 70) {
+  if (percentDead > 25 || points > 70 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 80) {
+  if (percentDead > 35 || points > 80 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 90) {
+  if (percentDead > 45  || points > 90 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 100) {
+  if (percentDead > 55 || points > 100 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 110) {
+  if (percentDead > 65 || points > 110 && pointRate > 1) {
     pointRate--;
   }
 }
@@ -341,7 +342,7 @@ void mousePressed() {
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  }
+  } //<>//
   //processing background color //<>//
 }
 
@@ -369,6 +370,8 @@ void setup() {
   text("Cure: " + 0 + "%", 1220, 140);
   text("Infected: 0%", 1220, 170);
   text("Dead: 0%", 1220, 200);
+  
+  percentDead = 0;
 
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
@@ -418,10 +421,6 @@ void draw() {
     c.landTransmission();
     //c.planeTransmission();
   }
-<<<<<<< HEAD
-  cities.get(0).planeTransmission();
-  //rudimentary cure rate, very subject to change
-=======
   //displays total % infected and total % dead
   fill(205);
   rect(1220, 150, 100, 22);
@@ -430,12 +429,11 @@ void draw() {
   fill(205);
   rect(1220, 180, 100, 22);
   fill(0, 0, 0);
-  float percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
+  percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
   text("Dead: " + (int)percentDead + "%", 1220, 200);
   //println(100.0 * totalDiseased / (cities.size()*cities.get(0).population));
   
   //calculates and displays cure %
->>>>>>> 6de49416e23c617526dedf884d275878556b22f4
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
       cure.setDeveloped((int)(percentDead * 1.5));
