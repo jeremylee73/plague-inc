@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -342,7 +342,7 @@ void mousePressed() {
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  } //<>//
+  } //<>// //<>//
   //processing background color //<>//
 }
 
@@ -419,7 +419,7 @@ void draw() {
       c.diseased = 1000000;
     }
     c.landTransmission();
-    //c.planeTransmission();
+    c.planeTransmission();
   }
   //displays total % infected and total % dead
   fill(205);
@@ -431,8 +431,6 @@ void draw() {
   fill(0, 0, 0);
   percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
   text("Dead: " + (int)percentDead + "%", 1220, 200);
-  //println(100.0 * totalDiseased / (cities.size()*cities.get(0).population));
-  
   //calculates and displays cure %
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {

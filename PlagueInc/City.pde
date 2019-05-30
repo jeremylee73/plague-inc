@@ -156,38 +156,18 @@ class City {
   
   void planeTransmission(){
     if (hasAirport && airportOpen){
-      if (Math.random() > ((diseased * 1000000) / (population * 1.0))){
-        PImage planeImg = loadImage("healthyplane.png");
+      if (Math.random() > ((diseased * 100000) / (population * 1.0))){
         for (int i=0; i<cities.size(); i++){
-          if (cities.get(i).hasAirport && cities.get(i).airportOpen){
+          if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
             City c = cities.get(i);
-            float dx = Math.abs(c.x - x);
-            float dy = Math.abs(c.y - y);
-            float theta = atan(dy / dx);
-            float angle = 0;
-            if (c.x > x && c.y > y){
-              angle = PI - theta;
-            } else if (c.x > x && c.y < y){
-              angle = (PI/2) - theta;  
-            } else if (c.x < x && c.y > y){
-              angle = PI + theta;  
-            } else if (c.x < x && c.y < y){
-              angle = (3*PI / 2) + theta;  
-            }
-            println(angle);
-            pushMatrix();
-            translate(dx/100, dy/100);
-            rotate(angle);
-            image(planeImg, 0, 0, 50, 50);
-            popMatrix();
           }
         }
       } else {
-        PImage planeImg = loadImage("infectedplane.png");
-        image(planeImg, x, y);
-        for (int i=0; i<cities.size(); i++){
-          if (cities.get(i).hasAirport && cities.get(i).airportOpen){
-              sendPlane(planeImg, cities.get(i));
+        if (Math.random() > ((diseased * 100000) / (population * 1.0))){
+          for (int i=0; i<cities.size(); i++){
+            if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
+              City c = cities.get(i);
+            }
           }
         }
       }
