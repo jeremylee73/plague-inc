@@ -342,7 +342,7 @@ void mousePressed() {
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  } //<>// //<>//
+  } //<>// //<>// //<>//
   //processing background color //<>//
 }
 
@@ -410,9 +410,9 @@ void draw() {
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
+    c.updateColor();
     c.updateDiseasedCount();
     c.updateDeadCount();
-    c.updateColor();
     updatePointRate();
     updateDiseaseLabels();
     if (c.diseased > 1000000) {
