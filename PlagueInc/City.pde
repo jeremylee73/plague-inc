@@ -159,14 +159,16 @@ class City {
       if (Math.random() > ((diseased * 100000) / (population * 1.0))){
         for (int i=0; i<cities.size(); i++){
           if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
-            City c = cities.get(i);
+            Plane newPlane = new Plane(x, y, this, cities.get(i), false);
+            newPlane.send();
           }
         }
       } else {
         if (Math.random() > ((diseased * 100000) / (population * 1.0))){
           for (int i=0; i<cities.size(); i++){
             if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
-              City c = cities.get(i);
+              Plane newPlane = new Plane(x, y, this, cities.get(i), true);
+            newPlane.send();
             }
           }
         }

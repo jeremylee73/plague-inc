@@ -5,6 +5,7 @@ class Plane{
   boolean isDiseased;
   float x;
   float y;
+  PImage planeImg;
   
   Plane(float x, float y, City from, City to, boolean isDiseased){
     this.from = from;
@@ -13,10 +14,11 @@ class Plane{
     this.y = y;
     this.isDiseased = isDiseased;
     if (!isDiseased){
-      PImage planeImg = loadImage("healthyplane.png");
+      planeImg = loadImage("healthyplane.png");
     } else {
-      PImage planeImg = loadImage("infectedplane.png");
+      planeImg = loadImage("infectedplane.png");
     }
+    image(planeImg, x, y, 50, 50);
   }
   
   void setAngle(){
@@ -36,6 +38,10 @@ class Plane{
   }
   
   void send(){
-      rotate(angle);
+    rotate(angle);
+    pushMatrix();
+    translate(x + to.x - from.x, y + to.y - from.y);
+    image(planeImg, x, y, 50, 50);
+    popMatrix();
   }
 }
