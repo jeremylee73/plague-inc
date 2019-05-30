@@ -58,9 +58,13 @@ Jeremy - I added the plane images and designed the animation for the planes movi
 
 Victor - I successfully coded in the unstaging mutations for symptom mutations, but was unable to debug it for transmission mutations. Added labels for total % infected and total % dead. Played around with curbing pointRate growth and speeding up cureRate
 
-Wednesday, May 28
+Wednesday, May 29
 -----------------------------------------------------------------------------------------------------------------------------
+Victor - I tested out cureRate and pointRate growth curves and fixed the labels for total % infected and total % dead.
 
+Thursday, May 30
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - I played around with pointRate to further finetune the balance of the game (so that pointRate "caps" at 1 after a certain point but also so that as more people die (indicating progression in the game) pointRate decreases as well to simulate the game getting increasingly harder, encouraging players to spend points wisely), and I also fixed the bug where pointRate could go below 1.
 
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
@@ -72,9 +76,8 @@ BUGS:
 - fix where when selling mutations, it unstages the tMutations that had become available from the bought mutation (and then bug test this!).
 - cannot sell mutations while its post-reqs are still in "Current Mutations" list
 - test out pointRate and cureRate
-- fix infected and dead labels
 - overlapping city labels at the bottom poses a problem when the bubble shows up
-- points go into negative range when infected is ~10%
+- infectivity and severity and lethality can exceed 100/100?
 
 TO-DO features:
 - cure dissemination and also stopping game when dead == diseased
