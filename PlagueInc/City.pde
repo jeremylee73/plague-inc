@@ -14,6 +14,7 @@ class City {
   boolean hasBubble;
   int green, blue, red;
   boolean bubblePopped;
+  ArrayList<Plane> planes;
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
     this.name = name;
@@ -160,7 +161,7 @@ class City {
         for (int i=0; i<cities.size(); i++){
           if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
             Plane newPlane = new Plane(x, y, this, cities.get(i), false);
-            newPlane.send();
+            planes.add(newPlane);
           }
         }
       } else {
@@ -168,7 +169,7 @@ class City {
           for (int i=0; i<cities.size(); i++){
             if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
               Plane newPlane = new Plane(x, y, this, cities.get(i), true);
-            newPlane.send();
+              planes.add(newPlane);
             }
           }
         }

@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -420,7 +420,11 @@ void draw() {
     }
     c.landTransmission();
     c.planeTransmission();
+    for (int i=0; i<c.planes.size(); i++){
+      c.planes.get(i).send();  
+    }
   }
+  
   //displays total % infected and total % dead
   fill(205);
   rect(1220, 150, 100, 22);

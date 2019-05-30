@@ -38,10 +38,10 @@ class Plane{
   }
   
   void send(){
-    rotate(angle);
     pushMatrix();
     translate(x + to.x - from.x, y + to.y - from.y);
     image(planeImg, x, y, 50, 50);
+    rotate(angle);
     popMatrix();
   }
 }
