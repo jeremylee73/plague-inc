@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -418,10 +418,8 @@ void draw() {
     c.landTransmission();
     //c.planeTransmission();
   }
-<<<<<<< HEAD
   cities.get(0).planeTransmission();
   //rudimentary cure rate, very subject to change
-=======
   //displays total % infected and total % dead
   fill(205);
   rect(1220, 150, 100, 22);
@@ -432,10 +430,7 @@ void draw() {
   fill(0, 0, 0);
   float percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
   text("Dead: " + (int)percentDead + "%", 1220, 200);
-  //println(100.0 * totalDiseased / (cities.size()*cities.get(0).population));
-  
   //calculates and displays cure %
->>>>>>> 6de49416e23c617526dedf884d275878556b22f4
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
       cure.setDeveloped((int)(percentDead * 1.5));
