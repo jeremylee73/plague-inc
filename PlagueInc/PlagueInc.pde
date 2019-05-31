@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>//
+import java.awt.*; //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -423,12 +423,27 @@ void draw() {
   } 
   drawCities();
   
-
   for (City c : cities){
     c.planeTransmission();  
   }
   for (int i=0; i<planes.size(); i++){
-    planes.get(i).send();
+    if (planes.get(i).to.x > planes.get(i).from.x){
+      if (!(planes.get(i).x > planes.get(i).to.x)){
+        planes.get(i).send();
+      }
+    } else if (planes.get(i).to.y > planes.get(i).from.y){
+      if (!(planes.get(i).y > planes.get(i).to.y)){
+        planes.get(i).send();
+      }
+    } else if (planes.get(i).to.x < planes.get(i).from.x){
+      if (!(planes.get(i).x < planes.get(i).to.x)){
+        planes.get(i).send();
+      }
+    } else if (planes.get(i).to.y < planes.get(i).from.y){
+      if (!(planes.get(i).y < planes.get(i).to.y)){
+        planes.get(i).send();
+      }
+    }
   }
   
   for (City c : cities) {
