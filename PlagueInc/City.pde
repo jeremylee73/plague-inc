@@ -39,6 +39,7 @@ class City {
 
   void drawRoutes() {
     strokeWeight(4);
+    stroke(0);
     for (int i=0; i<cities.size(); i++) {
       for (int j=0; j<adjacent.size(); j++) {
         if (cities.get(i).name.equals(adjacent.get(j))) {
