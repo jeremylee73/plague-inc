@@ -17,8 +17,10 @@ void draw() {
   if (fadeAmt > 0)
     fadeAmt -= 1;
   fill(255,255,255,fadeAmt);
+  noStroke();
   rect(width/2,height/2, 50, 50);
+  ellipse(100,100,100,100);
   shape(shape, 100, 300);
-  if (fadeAmt <= 100) shape.setVisible(false);
+  //if (fadeAmt <= 100) shape.setVisible(false);
   image(img, wD2-img.width/2, hD2-img.height/2);
 }
