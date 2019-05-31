@@ -111,6 +111,7 @@ void citySetup() {
 }
 
 void drawCities() {
+  fill(255,255,255);
   for (int i=0; i<cities.size(); i++) {
     ellipse(cities.get(i).x, cities.get(i).y, 65, 65);
   }
@@ -407,6 +408,25 @@ void draw() {
   totalDead = 0;
   totalDiseased = 0;
   
+  size(1440, 785);
+  image(img, 0, 0);
+  for (City c : cities){
+    fill(0,0,0);
+    c.drawRoutes();
+    fill(255,255,255);
+    c.drawAirports();
+    c.drawDocks();
+  } 
+  drawCities();
+  
+
+  for (City c : cities){
+    c.planeTransmission();  
+  }
+  for (int i=0; i<planes.size(); i++){
+    planes.get(i).send();
+  }
+  
   for (City c : cities) {
     killDisease(c);
     spreadDisease(c);
@@ -421,11 +441,6 @@ void draw() {
       c.diseased = 1000000;
     }
     c.landTransmission();
-    c.planeTransmission();
-  }
-  
-  for (int i=0; i<planes.size(); i++){
-    planes.get(i).send();
   }
   
   //displays total % infected and total % dead

@@ -38,6 +38,7 @@ class City {
   }
 
   void drawRoutes() {
+    strokeWeight(4);
     for (int i=0; i<cities.size(); i++) {
       for (int j=0; j<adjacent.size(); j++) {
         if (cities.get(i).name.equals(adjacent.get(j))) {
@@ -45,7 +46,6 @@ class City {
         }
       }
     }
-    strokeWeight(4);
   }
 
   void drawAirports() {
@@ -158,19 +158,23 @@ class City {
   
   void planeTransmission(){
     if (hasAirport && airportOpen){
-      if (Math.random() > ((diseased * 1000) / (population * 1.0))){
+      if (Math.random() > ((diseased) / (population * 1.0))){
         for (int i=0; i<cities.size(); i++){
           if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
-            Plane newPlane = new Plane(x, y, this, cities.get(i), false);
-            planes.add(newPlane);
+            if (Math.random() < 0.0001){
+              Plane newPlane = new Plane(x, y, this, cities.get(i), false);
+              planes.add(newPlane);
+            }
           }
         }
       } else {
-        if (Math.random() > ((diseased * 1000) / (population * 1.0))){
+        if (Math.random() < ((diseased) / (population * 1.0))){
           for (int i=0; i<cities.size(); i++){
             if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
-              Plane newPlane = new Plane(x, y, this, cities.get(i), true);
-              planes.add(newPlane);
+              if (Math.random() < 0.0001){
+                Plane newPlane = new Plane(x, y, this, cities.get(i), true);
+                planes.add(newPlane);
+              }
             }
           }
         }
