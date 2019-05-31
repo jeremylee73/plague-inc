@@ -14,6 +14,8 @@ class City {
   boolean hasBubble;
   int green, blue, red;
   boolean bubblePopped;
+  PImage planeImg1 = loadImage("healthyplane.png");
+  PImage planeImg2 = loadImage("infectedplane.png");
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
     this.name = name;
@@ -155,19 +157,19 @@ class City {
   
   void planeTransmission(){
     if (hasAirport && airportOpen){
-      if (Math.random() > ((diseased * 100000) / (population * 1.0))){
+      if (Math.random() > ((diseased * 1000) / (population * 1.0))){
         for (int i=0; i<cities.size(); i++){
           if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
             Plane newPlane = new Plane(x, y, this, cities.get(i), false);
-            newPlane.send();
+            planes.add(newPlane);
           }
         }
       } else {
-        if (Math.random() > ((diseased * 100000) / (population * 1.0))){
+        if (Math.random() > ((diseased * 1000) / (population * 1.0))){
           for (int i=0; i<cities.size(); i++){
             if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
               Plane newPlane = new Plane(x, y, this, cities.get(i), true);
-            newPlane.send();
+              planes.add(newPlane);
             }
           }
         }
