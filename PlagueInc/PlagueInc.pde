@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -18,6 +18,7 @@ JLabel TMText;
 int totalDead;
 int totalDiseased;
 float percentDead;
+ArrayList<Plane> planes;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -360,6 +361,7 @@ void setup() {
   points = 0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
+  planes = new ArrayList<Plane>();
 
   textSize(16);
   fill(0, 0, 0);
@@ -420,9 +422,10 @@ void draw() {
     }
     c.landTransmission();
     c.planeTransmission();
-    for (int i=0; i<c.planes.size(); i++){
-      c.planes.get(i).send();  
-    }
+  }
+  
+  for (int i=0; i<planes.size(); i++){
+    planes.get(i).send();
   }
   
   //displays total % infected and total % dead
