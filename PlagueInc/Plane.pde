@@ -6,20 +6,12 @@ class Plane{
   float x;
   float y;
   PImage planeImg;
-  float newX;
-  float newY;
-  float countx;
-  float county;
   
   Plane(float x, float y, City from, City to, boolean isDiseased){
     this.from = from;
     this.to = to;
     this.x = x;
     this.y = y;
-    newX = x;
-    newY = y;
-    countx = x;
-    county = y;
     this.isDiseased = isDiseased;
     if (!isDiseased){
       planeImg = from.planeImg1;
@@ -27,9 +19,7 @@ class Plane{
       planeImg = from.planeImg2;
     }
     setAngle();
-    pushMatrix();
-    rotate(angle);
-    popMatrix();
+    //rotate(angle);
   }
   
   void setAngle(){
@@ -49,10 +39,8 @@ class Plane{
   }
   
   void send(){
-    pushMatrix();
-    countx += (to.x - from.x)/100;
-    county += (to.y - from.y)/100;
-    image(planeImg, countx, county, 50, 50);
-    popMatrix();
+    x += (to.x - from.x)/100;
+    y += (to.y - from.y)/100;
+    image(planeImg, x, y, 50, 50);
   }
 }
