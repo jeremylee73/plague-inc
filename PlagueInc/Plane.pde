@@ -19,7 +19,6 @@ class Plane{
       planeImg = from.planeImg2;
     }
     setAngle();
-    //rotate(angle);
   }
   
   void setAngle(){
