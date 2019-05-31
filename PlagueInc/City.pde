@@ -69,7 +69,6 @@ class City {
     fill(255, (int) GB, (int) GB, 1);
     ellipse(x, y, 65, 65);
     if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped) {
-      //this case is true longer than it should be? might be causing bug with bubbles visuals
       hasBubble = true;
       fill(255, green, blue);
       ellipse(x, y, 30, 30);
