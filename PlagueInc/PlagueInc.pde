@@ -1,4 +1,4 @@
-import java.awt.*; //<>//
+import java.awt.*; //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -153,7 +153,11 @@ void customize(DropdownList ddl) {
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
+    print("Before: ");
+    printMutationArray(accTMuts);
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
+    print("After: ");
+    printMutationArray(accTMuts);
     refreshDropDownList("<Transmission>");
     //adding mutation to Current Transmission DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
@@ -338,8 +342,8 @@ void mousePressed() {
       c.bubblePopped = true;
       fill(255, 255, 255);
       ellipse(c.x, c.y, 35, 35);
-      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
-      points+= 2;
+      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class //<>//
+      points+= 2; //<>//
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
