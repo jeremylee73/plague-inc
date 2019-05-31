@@ -162,7 +162,7 @@ class City {
         for (int i=0; i<cities.size(); i++){
           if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
             if (Math.random() < 0.0001){
-              Plane newPlane = new Plane(x, y, this, cities.get(i), false);
+              Plane newPlane = new Plane(x-32, y-32, this, cities.get(i), false);
               planes.add(newPlane);
             }
           }
@@ -172,7 +172,7 @@ class City {
           for (int i=0; i<cities.size(); i++){
             if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
               if (Math.random() < 0.0001){
-                Plane newPlane = new Plane(x, y, this, cities.get(i), true);
+                Plane newPlane = new Plane(x-32, y-32, this, cities.get(i), true);
                 planes.add(newPlane);
               }
             }
