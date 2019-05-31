@@ -72,6 +72,7 @@ class City {
     if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped) {
       hasBubble = true;
       fill(255, green, blue);
+      noStroke();
       ellipse(x, y, 30, 30);
       green++; 
       blue++;
@@ -80,6 +81,7 @@ class City {
     }
     if (bubblePopped && GB > 254) {
       fill(255, 255, 255);
+      noStroke();
       ellipse(x, y, 30, 30);
     }
   }
