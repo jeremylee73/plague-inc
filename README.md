@@ -66,6 +66,10 @@ Thursday, May 30
 -----------------------------------------------------------------------------------------------------------------------------
 Victor - I played around with pointRate to further finetune the balance of the game (so that pointRate "caps" at 1 after a certain point but also so that as more people die (indicating progression in the game) pointRate decreases as well to simulate the game getting increasingly harder, encouraging players to spend points wisely), and I also fixed the bug where pointRate could go below 1.
 
+Friday, May 31
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - I tried debugging the unstaging of tMutations when selling. I fixed the issue where first DNA bubble would develop a border around its circle.
+
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
@@ -75,7 +79,6 @@ Design Choices:
 BUGS:
 - fix where when selling mutations, it unstages the tMutations that had become available from the bought mutation (and then bug test this!).
 - cannot sell mutations while its post-reqs are still in "Current Mutations" list
-- test out pointRate and cureRate
 - overlapping city labels at the bottom poses a problem when the bubble shows up
 - infectivity and severity and lethality can exceed 100/100?
 
