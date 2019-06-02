@@ -76,6 +76,13 @@ Jeremy - I got the planes to be functional, including the rotations, by reloadin
 
 Victor - I tried debugging the unstaging of tMutations when selling. I fixed the issue where first DNA bubble would develop a border around its circle.
 
+Saturday, June 1
+-----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I changed the disease stats (infectivity, severity, lethality) to be out of 200 because they were exceeding 100. I also moved the position of the news so that it doesn't overlap with the mutation dropdownlist.
+
+Sunday, June 2
+-----------------------------------------------------------------------------------------------------------------------------
+
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
