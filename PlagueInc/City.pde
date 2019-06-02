@@ -183,4 +183,12 @@ class City {
       }
     }
   }
+  
+  void closeAirport(){
+    airportOpen = false;
+    fill(255,0,0);
+    stroke(0);
+    strokeWeight(4);
+    rect(x + 40, y - 25, 20, 20);
+  }
 }

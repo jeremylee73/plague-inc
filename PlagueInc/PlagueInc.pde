@@ -85,28 +85,28 @@ void citySetup() {
   ArrayList<String> adjacent10 = new ArrayList<String>();
   adjacent10.add("Castelia City");
   adjacent10.add("Straiton City");
-  City Nacrene = new City("Nacrene City", 1000000, adjacent10, false, true, 920, 500);
+  City Nacrene = new City("Nacrene City", 500000, adjacent10, false, true, 920, 500);
   cities.add(Nacrene);
 
   ArrayList<String> adjacent11 = new ArrayList<String>();
   adjacent11.add("Nacrene City");
   adjacent11.add("Accumula Town");
-  City Straiton = new City("Straiton City", 1000000, adjacent11, false, false, 1040, 480);
+  City Straiton = new City("Straiton City", 200000, adjacent11, false, false, 1040, 480);
   cities.add(Straiton);
 
   ArrayList<String> adjacent12 = new ArrayList<String>();
   adjacent12.add("Straiton City");
   adjacent12.add("Nuvema Town");
-  City Accumula = new City("Accumula Town", 1000000, adjacent12, false, false, 1070, 570);
+  City Accumula = new City("Accumula Town", 100000, adjacent12, false, false, 1070, 570);
   cities.add(Accumula);
 
   ArrayList<String> adjacent13 = new ArrayList<String>();
   adjacent13.add("Accumula Town");
-  City Nuvema = new City("Nuvema Town", 1000000, adjacent13, false, true, 1100, 660);
+  City Nuvema = new City("Nuvema Town", 100000, adjacent13, false, true, 1100, 660);
   cities.add(Nuvema);
 
   ArrayList<String> adjacent14 = new ArrayList<String>();
-  City Unity = new City("Unity Tower", 1000000, adjacent14, true, true, 410, 700);
+  City Unity = new City("Unity Tower", 200000, adjacent14, true, true, 410, 700);
   cities.add(Unity);
 }
 
@@ -462,6 +462,9 @@ void draw() {
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
+    if ((c.dead / (c.population * 1.0)) > 0.25){
+      c.closeAirport();  
+    }
     c.updateColor();
     c.updateDiseasedCount();
     c.updateDeadCount();
