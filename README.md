@@ -60,14 +60,20 @@ Victor - I successfully coded in the unstaging mutations for symptom mutations, 
 
 Wednesday, May 29
 -----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I got the planes moving but it slows down the entire program a lot.
+
 Victor - I tested out cureRate and pointRate growth curves and fixed the labels for total % infected and total % dead.
 
 Thursday, May 30
 -----------------------------------------------------------------------------------------------------------------------------
+Jeremy - The planes are now able to move to other cities, but they are overlapping each other and aren't rotating to face the city they are targetting.
+
 Victor - I played around with pointRate to further finetune the balance of the game (so that pointRate "caps" at 1 after a certain point but also so that as more people die (indicating progression in the game) pointRate decreases as well to simulate the game getting increasingly harder, encouraging players to spend points wisely), and I also fixed the bug where pointRate could go below 1.
 
 Friday, May 31
 -----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I got the planes to be functional, including the rotations, by reloading the background every time a plane is generated and sent. I also created Plane as a new class to make it easier to track the x and y coordinates of planes.
+
 Victor - I tried debugging the unstaging of tMutations when selling. I fixed the issue where first DNA bubble would develop a border around its circle.
 
 -----------------------------------------------------------------------------------------------------------------------------
