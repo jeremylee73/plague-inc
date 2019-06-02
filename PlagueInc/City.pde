@@ -129,7 +129,7 @@ class City {
               fill(205);
               rect(1220, 215, 160, 100);
               fill(0, 0, 0);
-              text(news.get(news.size() - 1), 1220, 235, 150, 100);
+              text(news.get(news.size() - 1), 1220, 220, 150, 100);
             }
           }
         }
