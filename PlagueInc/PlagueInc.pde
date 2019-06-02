@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -111,7 +111,7 @@ void citySetup() {
 }
 
 void drawCities() {
-  fill(255,255,255);
+  fill(255, 255, 255);
   for (int i=0; i<cities.size(); i++) {
     ellipse(cities.get(i).x, cities.get(i).y, 65, 65);
   }
@@ -343,13 +343,13 @@ void mousePressed() {
       c.bubblePopped = true;
       fill(255, 255, 255);
       ellipse(c.x, c.y, 35, 35);
-      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class //<>//
-      points+= 2; //<>//
+      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
+      points+= 2;
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  } //<>// //<>// //<>//
-  //processing background color //<>//
+  } //<>// //<>//
+  //processing background color
 }
 
 
@@ -358,7 +358,7 @@ void setup() {
   size(1440, 785);
   img = loadImage("map.png");
   image(img, 0, 0);
-  
+
   citySetup();
   drawCities();
   disease = new Disease();
@@ -377,7 +377,7 @@ void setup() {
   text("Cure: " + 0 + "%", 1220, 140);
   text("Infected: 0%", 1220, 170);
   text("Dead: 0%", 1220, 200);
-  
+
   percentDead = 0;
 
   cp5 = new ControlP5(this);
@@ -411,59 +411,62 @@ void setup() {
 void draw() {
   totalDead = 0;
   totalDiseased = 0;
-  
+
   size(1440, 785);
   image(img, 0, 0);
-  for (City c : cities){
-    fill(0,0,0);
+  for (City c : cities) {
+    fill(0, 0, 0);
     c.drawRoutes();
-    fill(255,255,255);
+    fill(255, 255, 255);
     c.drawAirports();
     c.drawDocks();
   }
   drawCities();
-  
-  for (City c : cities){
-    c.planeTransmission();  
+
+  for (City c : cities) {
+    if (Math.random() < (1/720.0)) {
+      c.sporadicBubble();
+    }
+    c.planeTransmission();
   }
-  
-  for (int i=0; i<planes.size(); i++){
+
+  for (int i=0; i<planes.size(); i++) {
     boolean toSend = true;
-    if (planes.get(i).to.x > planes.get(i).from.x){
-      if (planes.get(i).x > planes.get(i).to.x){
+    if (planes.get(i).to.x > planes.get(i).from.x) {
+      if (planes.get(i).x > planes.get(i).to.x) {
         toSend = false;
       }
     }
-    if (planes.get(i).to.y > planes.get(i).from.y){
-      if (planes.get(i).y > planes.get(i).to.y){
+    if (planes.get(i).to.y > planes.get(i).from.y) {
+      if (planes.get(i).y > planes.get(i).to.y) {
         toSend = false;
       }
     }
-    if (planes.get(i).to.x < planes.get(i).from.x){
-      if (planes.get(i).x < planes.get(i).to.x){
+    if (planes.get(i).to.x < planes.get(i).from.x) {
+      if (planes.get(i).x < planes.get(i).to.x) {
         toSend = false;
       }
     }
-    if (planes.get(i).to.y < planes.get(i).from.y){
-      if (planes.get(i).y < planes.get(i).to.y){
+    if (planes.get(i).to.y < planes.get(i).from.y) {
+      if (planes.get(i).y < planes.get(i).to.y) {
         toSend = false;
       }
     }
-    if (toSend){
+    if (toSend) {
       planes.get(i).send();
-      if (planes.get(i).isDiseased){
-        planes.get(i).to.diseased += 1;  
+      if (planes.get(i).isDiseased) {
+        planes.get(i).to.diseased += 1;
       }
     }
   }
-  
+
   for (City c : cities) {
     killDisease(c);
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
-    if ((c.dead / (c.population * 1.0)) > 0.25){
-      c.closeAirport();  
+    if ((c.dead / (c.population * 1.0)) > 0.25) {
+      c.closeAirport();
     }
     c.updateColor();
     c.updateDiseasedCount();
@@ -475,7 +478,7 @@ void draw() {
     }
     c.landTransmission();
   }
-  
+
   //displays total % infected and total % dead
   fill(205);
   rect(1220, 150, 100, 22);
