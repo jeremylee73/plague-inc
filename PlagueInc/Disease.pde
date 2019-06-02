@@ -344,9 +344,6 @@ class Disease {
       for (int j=0; j<arr2.size(); j++) {
         if (arr1.get(i).equals(arr2.get(j).name)) {
           found++;
-          println("prereqs specific: "+arr1.get(i));
-          print("tMutations: ");
-          printMutationArray(arr2);
         }
       }
     }
@@ -445,14 +442,12 @@ class Disease {
           }
         }
       }
-      printMutationArray(accessibleTMutations);
       
       for (int i = 0; i < accessibleTMutations.size(); i++){
         accMutName = accessibleTMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-1).compareTo(mut.name.substring(mut.name.length()-1)) >= 0){
           accessibleTMutations.add(i,mut);
           refreshDropDownList("<Transmission>");
-          printMutationArray(accessibleTMutations);
           return true;
         }
       }
@@ -461,7 +456,6 @@ class Disease {
       //the solution is to add mut to the end
       accessibleTMutations.add(mut);
       refreshDropDownList("<Transmission>");
-      printMutationArray(accessibleTMutations);
       return true;
     } else if (mut.type.equals("sMutation")){
       String accMutName;
@@ -472,6 +466,7 @@ class Disease {
         for (int j = 0; j < accMut.prereqs().size(); j++){
           if (accMut.prereqs().get(j).equals(mut.name)){
             accessibleSMutations.remove(accMut);
+            sMutations.remove(mut);
             i--; //so that indexing re-calibrates itself after removing an element from list
           }
         }
