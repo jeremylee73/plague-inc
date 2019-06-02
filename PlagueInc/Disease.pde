@@ -344,6 +344,9 @@ class Disease {
       for (int j=0; j<arr2.size(); j++) {
         if (arr1.get(i).equals(arr2.get(j).name)) {
           found++;
+          println("prereqs specific: "+arr1.get(i));
+          print("tMutations: ");
+          printMutationArray(arr2);
         }
       }
     }
@@ -437,6 +440,7 @@ class Disease {
         for (int j = 0; j < accMut.prereqs().size(); j++){
           if (accMut.prereqs().get(j).equals(mut.name)){
             accessibleTMutations.remove(accMut);
+            tMutations.remove(mut);
             i--;
           }
         }
