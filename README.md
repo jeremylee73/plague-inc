@@ -83,7 +83,9 @@ BUGS:
 - infectivity and severity and lethality can exceed 100/100?
 
 TO-DO features:
-- cure dissemination and also stopping game when dead == diseased
+- cure distribution and also stopping game when dead == diseased
+- sporadic bubbles
+- victory/loss screen
 - fill in circle darker gray as death count goes up
 - if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
 - automatic mutations
