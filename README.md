@@ -82,6 +82,8 @@ Jeremy - I changed the disease stats (infectivity, severity, lethality) to be ou
 
 Sunday, June 2
 -----------------------------------------------------------------------------------------------------------------------------
+Victor - I fixed the bug where when a player has bought a mutation then sold the mutation, the post-reqs of that bought mutation are still inside the data structure of "mutations that are currently activated". This caused a problem when buying new mutations, because the post-reqs of the first mutation showed up when it wasn't supposed to.
+
 
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
@@ -90,10 +92,8 @@ Design Choices:
 - However, when selling mutations, the mutations are inserted in the DropdownList so that it is ordered correctly according to tier level. We don't need to always put the sold mutations at the bottom of the DropdownList because the player can rely on the program to re-add the mutation to the Transmission/Symptom DropdownLists, and does not need the same type of clarity that is utilized in the philosophy for buying mutations.
 
 BUGS:
-- fix where when selling mutations, it unstages the tMutations that had become available from the bought mutation (and then bug test this!).
 - cannot sell mutations while its post-reqs are still in "Current Mutations" list
 - overlapping city labels at the bottom poses a problem when the bubble shows up
-- infectivity and severity and lethality can exceed 100/100?
 
 TO-DO features:
 - cure distribution and also stopping game when dead == diseased
