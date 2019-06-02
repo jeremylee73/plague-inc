@@ -14,6 +14,8 @@ class City {
   boolean hasBubble;
   int green, blue, red;
   boolean bubblePopped;
+  PImage planeImg1 = loadImage("healthyplane.png");
+  PImage planeImg2 = loadImage("infectedplane.png");
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
     this.name = name;
@@ -21,6 +23,8 @@ class City {
     this.adjacent = adjacent;
     this.hasAirport = hasAirport;
     this.hasDock = hasDock;
+    this.airportOpen = true;
+    this.dockOpen = true;
     diseased = 0;
     dead = 0;
     this.x = x;
@@ -34,6 +38,8 @@ class City {
   }
 
   void drawRoutes() {
+    strokeWeight(4);
+    stroke(0);
     for (int i=0; i<cities.size(); i++) {
       for (int j=0; j<adjacent.size(); j++) {
         if (cities.get(i).name.equals(adjacent.get(j))) {
@@ -41,7 +47,6 @@ class City {
         }
       }
     }
-    strokeWeight(4);
   }
 
   void drawAirports() {
@@ -65,9 +70,9 @@ class City {
     fill(255, (int) GB, (int) GB, 1);
     ellipse(x, y, 65, 65);
     if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped) {
-      //this case is true longer than it should be? might be causing bug with bubbles visuals
       hasBubble = true;
       fill(255, green, blue);
+      noStroke();
       ellipse(x, y, 30, 30);
       green++; 
       blue++;
@@ -76,6 +81,7 @@ class City {
     }
     if (bubblePopped && GB > 254) {
       fill(255, 255, 255);
+      noStroke();
       ellipse(x, y, 30, 30);
     }
   }
@@ -123,7 +129,7 @@ class City {
               fill(205);
               rect(1220, 215, 160, 100);
               fill(0, 0, 0);
-              text(news.get(news.size() - 1), 1220, 235, 150, 100);
+              text(news.get(news.size() - 1), 1220, 220, 150, 100);
             }
           }
         }
@@ -154,23 +160,35 @@ class City {
   
   void planeTransmission(){
     if (hasAirport && airportOpen){
-      if (Math.random() > (diseased / (population * 1.0))){
-        PImage planeImg = loadImage("healthyplane.png");
-        image(planeImg, x, y);
+      if (Math.random() > ((diseased) / (population * 1.0))){
         for (int i=0; i<cities.size(); i++){
-          if (cities.get(i).hasAirport && cities.get(i).airportOpen){
-              sendPlane(planeImg, cities.get(i));
+          if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
+            if (Math.random() < 0.0001){
+              Plane newPlane = new Plane(x, y, this, cities.get(i), false);
+              planes.add(newPlane);
+            }
           }
         }
       } else {
-        PImage planeImg = loadImage("infectedplane.png");
-        image(planeImg, x, y);
-        for (int i=0; i<cities.size(); i++){
-          if (cities.get(i).hasAirport && cities.get(i).airportOpen){
-              sendPlane(planeImg, cities.get(i));
+        if (Math.random() < ((diseased) / (population * 1.0))){
+          for (int i=0; i<cities.size(); i++){
+            if (!(cities.get(i).equals(this)) && cities.get(i).hasAirport && cities.get(i).airportOpen){
+              if (Math.random() < 0.0001){
+                Plane newPlane = new Plane(x, y, this, cities.get(i), true);
+                planes.add(newPlane);
+              }
+            }
           }
         }
       }
     }
+  }
+  
+  void closeAirport(){
+    airportOpen = false;
+    fill(255,0,0);
+    stroke(0);
+    strokeWeight(4);
+    rect(x + 40, y - 25, 20, 20);
   }
 }

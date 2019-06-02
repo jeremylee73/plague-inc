@@ -17,6 +17,8 @@ JComboBox TMList;
 JLabel TMText;
 int totalDead;
 int totalDiseased;
+float percentDead;
+ArrayList<Plane> planes;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -83,32 +85,33 @@ void citySetup() {
   ArrayList<String> adjacent10 = new ArrayList<String>();
   adjacent10.add("Castelia City");
   adjacent10.add("Straiton City");
-  City Nacrene = new City("Nacrene City", 1000000, adjacent10, false, true, 920, 500);
+  City Nacrene = new City("Nacrene City", 500000, adjacent10, false, true, 920, 500);
   cities.add(Nacrene);
 
   ArrayList<String> adjacent11 = new ArrayList<String>();
   adjacent11.add("Nacrene City");
   adjacent11.add("Accumula Town");
-  City Straiton = new City("Straiton City", 1000000, adjacent11, false, false, 1040, 480);
+  City Straiton = new City("Straiton City", 200000, adjacent11, false, false, 1040, 480);
   cities.add(Straiton);
 
   ArrayList<String> adjacent12 = new ArrayList<String>();
   adjacent12.add("Straiton City");
   adjacent12.add("Nuvema Town");
-  City Accumula = new City("Accumula Town", 1000000, adjacent12, false, false, 1070, 570);
+  City Accumula = new City("Accumula Town", 100000, adjacent12, false, false, 1070, 570);
   cities.add(Accumula);
 
   ArrayList<String> adjacent13 = new ArrayList<String>();
   adjacent13.add("Accumula Town");
-  City Nuvema = new City("Nuvema Town", 1000000, adjacent13, false, true, 1100, 660);
+  City Nuvema = new City("Nuvema Town", 100000, adjacent13, false, true, 1100, 660);
   cities.add(Nuvema);
 
   ArrayList<String> adjacent14 = new ArrayList<String>();
-  City Unity = new City("Unity Tower", 1000000, adjacent14, true, true, 410, 700);
+  City Unity = new City("Unity Tower", 200000, adjacent14, true, true, 410, 700);
   cities.add(Unity);
 }
 
 void drawCities() {
+  fill(255,255,255);
   for (int i=0; i<cities.size(); i++) {
     ellipse(cities.get(i).x, cities.get(i).y, 65, 65);
   }
@@ -151,7 +154,11 @@ void customize(DropdownList ddl) {
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
+    print("Before: ");
+    printMutationArray(accTMuts);
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
+    print("After: ");
+    printMutationArray(accTMuts);
     refreshDropDownList("<Transmission>");
     //adding mutation to Current Transmission DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
@@ -227,15 +234,15 @@ void updateDiseaseLabels() {
   fill(205);
   rect(1220, 0, 200, 22);
   fill(0, 0, 0);
-  text("Infectivity: " + (int) (disease.infectivity * 10000) + " / 100", 1220, 20);
+  text("Infectivity: " + (int) (disease.infectivity * 10000) + " / 200", 1220, 20);
   fill(205);
   rect(1220, 30, 200, 22);
   fill(0, 0, 0);
-  text("Severity: " + (int) (disease.severity * 10000) + " / 100", 1220, 50);
+  text("Severity: " + (int) (disease.severity * 10000) + " / 200", 1220, 50);
   fill(205);
   rect(1220, 60, 200, 22);
   fill(0, 0, 0);
-  text("Lethality: " + (int) (disease.lethality * 10000) + " / 100", 1220, 80);
+  text("Lethality: " + (int) (disease.lethality * 10000) + " / 200", 1220, 80);
   fill(205);
   rect(1220, 90, 100, 22);
   fill(0, 0, 0);
@@ -258,19 +265,19 @@ void updatePointRate() {
   if (disease.severity > 0.0050) {
     pointRate = 6;
   }
-  if (points > 70) {
+  if (percentDead > 25 || points > 70 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 80) {
+  if (percentDead > 35 || points > 80 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 90) {
+  if (percentDead > 45  || points > 90 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 100) {
+  if (percentDead > 55 || points > 100 && pointRate > 1) {
     pointRate--;
   }
-  if (points > 110) {
+  if (percentDead > 65 || points > 110 && pointRate > 1) {
     pointRate--;
   }
 }
@@ -336,13 +343,13 @@ void mousePressed() {
       c.bubblePopped = true;
       fill(255, 255, 255);
       ellipse(c.x, c.y, 35, 35);
-      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
-      points+= 2;
+      //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class //<>//
+      points+= 2; //<>//
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  }
-  //processing background color
+  } //<>// //<>// //<>//
+  //processing background color //<>//
 }
 
 
@@ -351,7 +358,7 @@ void setup() {
   size(1440, 785);
   img = loadImage("map.png");
   image(img, 0, 0);
-
+  
   citySetup();
   drawCities();
   disease = new Disease();
@@ -359,6 +366,7 @@ void setup() {
   points = 0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
+  planes = new ArrayList<Plane>();
 
   textSize(16);
   fill(0, 0, 0);
@@ -369,6 +377,8 @@ void setup() {
   text("Cure: " + 0 + "%", 1220, 140);
   text("Infected: 0%", 1220, 170);
   text("Dead: 0%", 1220, 200);
+  
+  percentDead = 0;
 
   cp5 = new ControlP5(this);
   d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
@@ -401,26 +411,85 @@ void setup() {
 void draw() {
   totalDead = 0;
   totalDiseased = 0;
+  
+  size(1440, 785);
+  image(img, 0, 0);
+  for (City c : cities){
+    fill(0,0,0);
+    c.drawRoutes();
+    fill(255,255,255);
+    c.drawAirports();
+    c.drawDocks();
+  }
+  drawCities();
+  
+  for (City c : cities){
+    c.planeTransmission();  
+  }
+  
+  for (int i=0; i<planes.size(); i++){
+    boolean toSend = true;
+    if (planes.get(i).to.x > planes.get(i).from.x){
+      if (planes.get(i).x > planes.get(i).to.x){
+        toSend = false;
+      }
+    }
+    if (planes.get(i).to.y > planes.get(i).from.y){
+      if (planes.get(i).y > planes.get(i).to.y){
+        toSend = false;
+      }
+    }
+    if (planes.get(i).to.x < planes.get(i).from.x){
+      if (planes.get(i).x < planes.get(i).to.x){
+        toSend = false;
+      }
+    }
+    if (planes.get(i).to.y < planes.get(i).from.y){
+      if (planes.get(i).y < planes.get(i).to.y){
+        toSend = false;
+      }
+    }
+    if (toSend){
+      planes.get(i).send();
+      if (planes.get(i).isDiseased){
+        planes.get(i).to.diseased += 1;  
+      }
+    }
+  }
+  
   for (City c : cities) {
     killDisease(c);
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
+    if ((c.dead / (c.population * 1.0)) > 0.25){
+      c.closeAirport();  
+    }
+    c.updateColor();
     c.updateDiseasedCount();
     c.updateDeadCount();
-    c.updateColor();
     updatePointRate();
     updateDiseaseLabels();
     if (c.diseased > 1000000) {
       c.diseased = 1000000;
     }
     c.landTransmission();
-    c.planeTransmission();
   }
-  //rudimentary cure rate, very subject to change
+  
+  //displays total % infected and total % dead
+  fill(205);
+  rect(1220, 150, 100, 22);
+  fill(0, 0, 0);
+  text("Infected: " + (totalDiseased * 100 / (cities.size()*cities.get(0).population)) + "%", 1220, 170);
+  fill(205);
+  rect(1220, 180, 100, 22);
+  fill(0, 0, 0);
+  percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
+  text("Dead: " + (int)percentDead + "%", 1220, 200);
+  //calculates and displays cure %
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
-      cure.setDeveloped(pow(totalDead * 0.00001, 2));
+      cure.setDeveloped((int)(percentDead * 1.5));
     }
     if (cure.developed() > 100) {
       cure.setDeveloped(100);
@@ -430,15 +499,6 @@ void draw() {
     fill(0, 0, 0);
     text("Cure: " + (int)cure.developed() + "%", 1220, 140);
   }
-  fill(205);
-  rect(1220, 150, 100, 22);
-  fill(0, 0, 0);
-  text("Infected: " + (totalDiseased / (cities.size()*cities.get(0).population)) + "%", 1220, 170);
-  fill(205);
-  rect(1220, 180, 100, 22);
-  fill(0, 0, 0);
-  text("Dead: " + (totalDead / (cities.size()*cities.get(0).population) ) + "%", 1220, 200);
-
   if (Math.random() < (1/180.0)) {
     points += pointRate;
   }

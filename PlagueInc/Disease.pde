@@ -452,6 +452,7 @@ class Disease {
         if (accMutName.substring(accMutName.length()-1).compareTo(mut.name.substring(mut.name.length()-1)) >= 0){
           accessibleTMutations.add(i,mut);
           refreshDropDownList("<Transmission>");
+          printMutationArray(accessibleTMutations);
           return true;
         }
       }
@@ -460,6 +461,7 @@ class Disease {
       //the solution is to add mut to the end
       accessibleTMutations.add(mut);
       refreshDropDownList("<Transmission>");
+      printMutationArray(accessibleTMutations);
       return true;
     } else if (mut.type.equals("sMutation")){
       String accMutName;
