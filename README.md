@@ -93,6 +93,7 @@ Design Choices:
 
 BUGS:
 - overlapping city labels at the bottom poses a problem when the bubble shows up
+- sporadic bubble should not appear for dead cities (where infected = 0 and dead is increasing), planes should not get overlapped by bubbles, test if sporadic bubble blends into red hue cities, balance the spawnRate
 
 TO-DO features:
 - command line "cheat code"
