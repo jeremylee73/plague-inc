@@ -68,7 +68,7 @@ class City {
 
   void updateColor() {
     double GB = (population - diseased) / (population * 1.0) * 255;
-    fill(255, (int) GB, (int) GB, 1);
+    fill(255, (int) GB, (int) GB);//, 150);
     ellipse(x, y, 65, 65);
     if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped && (green < 255 || blue < 255)) {
       hasBubble = true;
@@ -115,7 +115,7 @@ class City {
         red++;
       }
       noStroke();
-      fill(red, green, blue);
+      fill(red, green, blue);//, 150);
       ellipse(x, y, 30, 30);
     }
   }
