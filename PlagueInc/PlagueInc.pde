@@ -1,7 +1,9 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
+import java.io.PrintStream;
+import java.io.OutputStream;
 
 ControlP5 cp5;
 DropdownList d1, d2, dSell;
@@ -306,11 +308,11 @@ void printMutationArray(ArrayList<Mutation> ary) {
   println(str);
 }
 
-void printStringArray(ArrayList<String> ary){
+void printStringArray(ArrayList<String> ary) {
   String str = "[";
-  for (int i = 0; i < ary.size(); i++){
+  for (int i = 0; i < ary.size(); i++) {
     str+= ary.get(i);
-    if (i != ary.size() - 1){
+    if (i != ary.size() - 1) {
       str+= ", ";
     }
   }
@@ -348,12 +350,12 @@ void mousePressed() {
     //pops bubble if bubble is above the city and adds 2 points
     //this if statement calculates if mouse coords is within the bubble's hitbox
     if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && (c.hasBubble || c.hasSporadicBubble)) {
-      if (c.hasBubble){
+      if (c.hasBubble) {
         fill(255, 255, 255);
         c.bubblePopped = true;
       }
-      if (c.hasSporadicBubble){
-        fill(255,(int)c.GB, (int)c.GB);
+      if (c.hasSporadicBubble) {
+        fill(255, (int)c.GB, (int)c.GB);
         c.hasSporadicBubble = false;
       }
       ellipse(c.x, c.y, 35, 35);
@@ -362,13 +364,23 @@ void mousePressed() {
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  } //<>// //<>//
+  } //<>//
   //processing background color
 }
 
 
 
 void setup() {
+  //this segment of code prevents the annoying warning messages from showing up
+  //in the processing console
+  System.setErr(new PrintStream(new OutputStream() {
+    public void write(int b) {
+    }
+  }
+  ));
+  System.err.println("WARNING: Controller with name \"/<Symptom>\" already exists. overwriting reference of existing controller."); // will not be printed
+  System.err.println("WARNING: Controller with name \"/<Transmission>\" already exists. overwriting reference of existing controller."); // will not be printed
+
   size(1440, 785);
   img = loadImage("map.png");
   image(img, 0, 0);
