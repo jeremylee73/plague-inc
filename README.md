@@ -82,7 +82,7 @@ Jeremy - I changed the disease stats (infectivity, severity, lethality) to be ou
 
 Sunday, June 2
 -----------------------------------------------------------------------------------------------------------------------------
-Victor - I fixed the bug where when a player has bought a mutation then sold the mutation, the post-reqs of that bought mutation are still inside the data structure of "mutations that are currently activated". This caused a problem when buying new mutations, because the post-reqs of the first mutation showed up when it wasn't supposed to. I also made it so that the player cannot sell a mutation when its post-reqs aren't sold yet.
+Victor - I fixed the bug where when a player has bought a mutation then sold the mutation, the post-reqs of that bought mutation are still inside the data structure of "mutations that are currently activated". This caused a problem when buying new mutations, because the post-reqs of the first mutation showed up when it wasn't supposed to. I also made it so that the player cannot sell a mutation when its post-reqs aren't sold yet. I also implemented a system where random bubbles (referred to as sporadicBubbles in the code) pop up on the map after a city is infected.
 
 
 -----------------------------------------------------------------------------------------------------------------------------
@@ -93,10 +93,11 @@ Design Choices:
 
 BUGS:
 - overlapping city labels at the bottom poses a problem when the bubble shows up
-- sporadic bubble should not appear for dead cities (where infected = 0 and dead is increasing), planes should not get overlapped by bubbles, test if sporadic bubble blends into red hue cities, balance the spawnRate
+- planes should not get overlapped by sporadic bubbles
 
 TO-DO features:
 - command line "cheat code"
+- cure bubbles & aMutations
 - cure distribution and also stopping game when dead == diseased
 - sporadic bubbles
 - victory/loss screen
