@@ -154,11 +154,7 @@ void customize(DropdownList ddl) {
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    print("Before: ");
-    printMutationArray(accTMuts);
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
-    print("After: ");
-    printMutationArray(accTMuts);
     refreshDropDownList("<Transmission>");
     //adding mutation to Current Transmission DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
@@ -471,7 +467,7 @@ void draw() {
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
-    if ((c.dead / (c.population * 1.0)) > 0.25) {
+    if ((c.dead / (c.population * 1.0)) > 0.25 && c.airportOpen) {
       c.closeAirport();
     }
     c.updateColor();

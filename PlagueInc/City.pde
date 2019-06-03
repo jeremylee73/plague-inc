@@ -241,6 +241,7 @@ class City {
     strokeWeight(4);
     rect(x + 40, y - 25, 20, 20);
     news.add(name+"'s airport has closed.");
+    noStroke();
     fill(205);
     rect(1220, 215, 160, 100);
     fill(0, 0, 0);
