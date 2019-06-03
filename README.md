@@ -88,6 +88,10 @@ Sunday, June 2
 -----------------------------------------------------------------------------------------------------------------------------
 Victor - I added where if an airport is closed, then it will be displayed on the news. I am working to turn the shade of cities progressively darker as % of dead in that city increases.
 
+Sunday, June 2
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - I updated design choices to the README and working on debugging sporadic bubbles fading into the shading of dead cities. (There are a lot of bugs related to this so it took up my entire day).
+
 
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
@@ -104,16 +108,15 @@ Design Choices:
 - If the percentage of dead in a *specific* city exceeds 25%, then the airport is closed.
 - There are currently two ways to infect a city. Through land transmission or through infected plane transmission. **Subject to change if we decide to add boats**
 - People start dying only when lethality > 0 and the rate at which this happens is based on lethality.
-- Disease spread is based on 
+- **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar (<Transmission> or <Symptom>)**
 
 BUGS:
+- stats for selling
 - overlapping city labels at the bottom poses a problem when the bubble shows up
 - planes should not get overlapped by sporadic bubbles
 - make it so that sporadic bubble rate decreases as more cities are infected to balance the game
-- sporadic bubbles don't blend into black bubbles
 - add indication that an airport has closed or an airport is infected on the squares
 - fix what happens when u buy all tMutations or sMutations
-- fix sporadic bubbles/red bubbles for the disease == 0 but dead increasing
 
 TO-DO features:
 - choose which city to begin at
