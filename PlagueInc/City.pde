@@ -12,12 +12,13 @@ class City {
   boolean airportOpen;
   boolean dockOpen;
   boolean hasBubble;
-  int green, blue, red;
+  float red, green, blue;
   boolean bubblePopped;
   PImage planeImg1 = loadImage("healthyplane.png");
   PImage planeImg2 = loadImage("infectedplane.png");
   boolean hasSporadicBubble;
-  double GB;
+  double GB, R;
+  int RGBbubbleIncr;
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
     this.name = name;
@@ -69,16 +70,16 @@ class City {
 
   void updateColor() {
     GB = (population - diseased) / (population * 1.0) * 255;
-    double R = (population - dead) / (population * 1.0) * 255;
+    R = (population - dead) / (population * 1.0) * 255;
     if (diseased + dead == population) {
-      if (R > 62){
+      if (R > 62) {
         fill((int) R, 0, 0);
       } else {
         fill(62, 0, 0);
       }
-    } else if (dead > 0 && diseased == 0){
+    } else if (dead > 0 && diseased == 0) {
       //calculates correct shading of cities from white to gray
-      if (R > 62){
+      if (R > 62) {
         fill((int) R, (int)(R - 4.1129), (int)(R - 4.1129));
       } else {
         fill(62, (int)(R - 4.1129), (int)(R - 4.1129));
@@ -104,41 +105,34 @@ class City {
     }
 
     if (hasSporadicBubble) {
-      int greenIncr;
-      int blueIncr;
-      if (red == 255 && green == (int) GB && blue == (int) GB) {
+      if (RGBbubbleIncr == 1) {
         hasSporadicBubble = false;
         return;
       }
-      //determines direction incrementing based on current RGB color
-      if (green > (int) GB) {
-        greenIncr = -1;
-      } else {
-        greenIncr = 1;
-      }
-      if (blue > (int) GB) {
-        blueIncr = -1;
-      } else {
-        blueIncr = 1;
-      }
-      //stops incrementing if colors reached GB;
-      if (green != (int) GB) {
-        green += greenIncr;
-      }
-      if (blue != (int) GB) {
-        blue += blueIncr;
-      }
-      if (red != 255) {
-        red++;
-      }
+      RGBbubbleIncr--;
+      double redIncr;
+      double greenIncr;
+      double blueIncr;
+      //Determines direction incrementing based on current RGB color.
+      //180 frames is 3 seconds.
+      //How this formula works is red - (red - R)/180 then on next frame
+      //it's red - (red - R)/179 then on next frame it's
+      //red - (red - R)/178 ... until red - (red - R)/1
+      redIncr = (red - R)/RGBbubbleIncr;
+      greenIncr = (green - GB)/RGBbubbleIncr;
+      blueIncr = (blue - GB)/RGBbubbleIncr;
+      red -= (float)redIncr;
+      green -= (float)greenIncr;
+      blue -= (float)blueIncr;
       noStroke();
-      fill(red, green, blue);//, 150);
+      fill(red, green, blue);
       ellipse(x, y, 30, 30);
     }
   }
 
   void sporadicBubble() {
     if (!hasSporadicBubble && !hasBubble && diseased > 0) {
+      RGBbubbleIncr = 180;
       hasSporadicBubble = true;
       //RGB for sickly orange
       red = 247;
