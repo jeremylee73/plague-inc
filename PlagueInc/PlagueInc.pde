@@ -102,7 +102,7 @@ void citySetup() {
 
   ArrayList<String> adjacent13 = new ArrayList<String>();
   adjacent13.add("Accumula Town");
-  City Nuvema = new City("Nuvema Town", 100000, adjacent13, false, true, 1100, 660);
+  City Nuvema = new City("Nuvema Town", 100000, adjacent13, true, true, 1100, 660);
   cities.add(Nuvema);
 
   ArrayList<String> adjacent14 = new ArrayList<String>();
