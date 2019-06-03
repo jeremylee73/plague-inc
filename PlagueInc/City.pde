@@ -115,15 +115,24 @@ class City {
       double blueIncr;
       //Determines direction incrementing based on current RGB color.
       //180 frames is 3 seconds.
-      //How this formula works is red - (red - R)/180 then on next frame
-      //it's red - (red - R)/179 then on next frame it's
-      //red - (red - R)/178 ... until red - (red - R)/1
+      //How this formula works is red = red - (red - R)/180 then on next frame
+      //it's red = red - (red - R)/179 then on next frame it's
+      //red = red - (red - R)/178 ... until red = red - (red - R)/1
       redIncr = (red - R)/RGBbubbleIncr;
-      greenIncr = (green - GB)/RGBbubbleIncr;
-      blueIncr = (blue - GB)/RGBbubbleIncr;
       red -= (float)redIncr;
+      //to try and fix shading issues with sporadic bubbles
+      if (diseased + dead == population && dead > 0){
+        greenIncr = green/RGBbubbleIncr;
+        blueIncr = blue/RGBbubbleIncr;
+      } else {
+        greenIncr = (green - GB)/RGBbubbleIncr;
+        blueIncr = (blue - GB)/RGBbubbleIncr;
+      }
       green -= (float)greenIncr;
       blue -= (float)blueIncr;
+      if (name.equals("Nacrene City")){
+        println("red: "+red+", green: "+green+", blue: "+blue);
+      }
       noStroke();
       fill(red, green, blue);
       ellipse(x, y, 30, 30);
