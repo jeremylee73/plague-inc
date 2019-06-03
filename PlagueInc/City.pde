@@ -88,7 +88,7 @@ class City {
       fill((int) R, (int) GB, (int) GB);
     }
     ellipse(x, y, 65, 65);
-    if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped && (green < 255 || blue < 255)) {
+    if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped && (green < 255 || blue < 255) && diseased + dead != population) {
       hasBubble = true;
       fill(255, green, blue);
       noStroke();
@@ -120,6 +120,9 @@ class City {
       //red = red - (red - R)/178 ... until red = red - (red - R)/1
       redIncr = (red - R)/RGBbubbleIncr;
       red -= (float)redIncr;
+      if (red < 62 && diseased + dead == population && dead > 0){
+        red = 62;
+      }
       //to try and fix shading issues with sporadic bubbles
       if (diseased + dead == population && dead > 0){
         greenIncr = green/RGBbubbleIncr;
@@ -130,9 +133,6 @@ class City {
       }
       green -= (float)greenIncr;
       blue -= (float)blueIncr;
-      if (name.equals("Nacrene City")){
-        println("red: "+red+", green: "+green+", blue: "+blue);
-      }
       noStroke();
       fill(red, green, blue);
       ellipse(x, y, 30, 30);
