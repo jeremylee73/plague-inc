@@ -76,6 +76,13 @@ class City {
       } else {
         fill(62, 0, 0);
       }
+    } else if (dead > 0 && diseased == 0){
+      //calculates correct shading of cities from white to gray
+      if (R > 62){
+        fill((int) R, (int)(R - 4.1129), (int)(R - 4.1129));
+      } else {
+        fill(62, (int)(R - 4.1129), (int)(R - 4.1129));
+      }
     } else {
       fill((int) R, (int) GB, (int) GB);
     }
