@@ -17,6 +17,7 @@ class City {
   PImage planeImg1 = loadImage("healthyplane.png");
   PImage planeImg2 = loadImage("infectedplane.png");
   boolean hasSporadicBubble;
+  double GB;
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
     this.name = name;
@@ -67,7 +68,7 @@ class City {
   }
 
   void updateColor() {
-    double GB = (population - diseased) / (population * 1.0) * 255;
+    GB = (population - diseased) / (population * 1.0) * 255;
     fill(255, (int) GB, (int) GB);//, 150);
     ellipse(x, y, 65, 65);
     if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped && (green < 255 || blue < 255)) {

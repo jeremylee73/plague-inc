@@ -339,9 +339,15 @@ void mousePressed() {
   for (City c : cities) {
     //pops bubble if bubble is above the city and adds 2 points
     //this if statement calculates if mouse coords is within the bubble's hitbox
-    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && c.hasBubble) {
-      c.bubblePopped = true;
-      fill(255, 255, 255);
+    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && (c.hasBubble || c.hasSporadicBubble)) {
+      if (c.hasBubble){
+        fill(255, 255, 255);
+        c.bubblePopped = true;
+      }
+      if (c.hasSporadicBubble){
+        fill(255,(int)c.GB, (int)c.GB);
+        c.hasSporadicBubble = false;
+      }
       ellipse(c.x, c.y, 35, 35);
       //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
       points+= 2;
