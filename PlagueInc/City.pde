@@ -70,7 +70,7 @@ class City {
   void updateColor() {
     GB = (population - diseased) / (population * 1.0) * 255;
     double R = (population - dead) / (population * 1.0) * 255;
-    if (diseased + dead == population){
+    if (diseased + dead == population) {
       fill((int) R, 0, 0);
     } else {
       fill((int) R, (int) GB, (int) GB);
@@ -91,7 +91,7 @@ class City {
       noStroke();
       ellipse(x, y, 30, 30);
     }
-    
+
     if (hasSporadicBubble) {
       int greenIncr;
       int blueIncr;
@@ -240,5 +240,10 @@ class City {
     stroke(0);
     strokeWeight(4);
     rect(x + 40, y - 25, 20, 20);
+    news.add(name+"'s airport has closed.");
+    fill(205);
+    rect(1220, 215, 160, 100);
+    fill(0, 0, 0);
+    text(news.get(news.size() - 1), 1220, 220, 150, 100);
   }
 }
