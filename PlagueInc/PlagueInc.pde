@@ -306,6 +306,18 @@ void printMutationArray(ArrayList<Mutation> ary) {
   println(str);
 }
 
+void printStringArray(ArrayList<String> ary){
+  String str = "[";
+  for (int i = 0; i < ary.size(); i++){
+    str+= ary.get(i);
+    if (i != ary.size() - 1){
+      str+= ", ";
+    }
+  }
+  str+= "]";
+  println(str);
+}
+
 void controlEvent(ControlEvent theEvent) {
   //this skeleton code is credited to one of the examples on documentation
   //documentation stated this first if statement is necessary to not throw an error
