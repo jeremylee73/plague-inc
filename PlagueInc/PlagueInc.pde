@@ -430,7 +430,7 @@ void draw() {
   drawCities();
 
   for (City c : cities) {
-    if (Math.random() < (1/720.0)) {
+    if (Math.random() < (1/1000.0)) {
       c.sporadicBubble();
     }
     c.planeTransmission();
