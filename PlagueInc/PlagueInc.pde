@@ -371,8 +371,8 @@ void mousePressed() {
 
 
 void setup() {
-  //this segment of code prevents the annoying warning messages from showing up
-  //in the processing console
+  //this segment of code from StackOverflow prevents the annoying 
+  //warning messages from showing up in the processing console
   System.setErr(new PrintStream(new OutputStream() {
     public void write(int b) {
     }

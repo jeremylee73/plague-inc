@@ -71,7 +71,11 @@ class City {
     GB = (population - diseased) / (population * 1.0) * 255;
     double R = (population - dead) / (population * 1.0) * 255;
     if (diseased + dead == population) {
-      fill((int) R, 0, 0);
+      if (R > 62){
+        fill((int) R, 0, 0);
+      } else {
+        fill(62, 0, 0);
+      }
     } else {
       fill((int) R, (int) GB, (int) GB);
     }
