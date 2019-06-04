@@ -389,7 +389,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 200;//0;
+  points = 0;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
@@ -445,7 +445,7 @@ void draw() {
     c.drawRoutes();
     fill(255, 255, 255);
     c.drawAirports();
-    c.drawDocks();
+    //c.drawDocks();
   }
   drawCities();
 

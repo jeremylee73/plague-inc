@@ -37,7 +37,7 @@ class City {
     red = 255;
     drawRoutes();
     drawAirports();
-    drawDocks();
+    //drawDocks();
   }
 
   void drawRoutes() {
