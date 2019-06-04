@@ -157,10 +157,13 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     fill(205);
     rect(1220, 300, 1000, 1000);
+    rect(1220, 500, 170, 80);
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    if (disease.addTMutation(accTMuts.get((int) d1.getValue() - 1))){
-      fill(205);
-      rect(1220, 500, 170, 80);
+    Mutation mut = accTMuts.get((int) d1.getValue() - 1);
+    if (!disease.addTMutation(mut)){
+      fill(0, 0, 0);
+      textSize(10);
+      text("You do not have enough points for "+mut.name+".", 1220, 500, 150, 75);
     }
     refreshDropDownList("<Transmission>");
     refreshDropDownList("<Current Mutations>");
@@ -168,10 +171,13 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d2.getValue() != 0) {
     fill(205);
     rect(1220, 400, 1000, 1000);
+    rect(1220, 500, 170, 80);
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
-    if (disease.addSMutation(accSMuts.get((int) d2.getValue() - 1))){
-      fill(205);
-      rect(1220, 500, 170, 80);
+    Mutation mut = accSMuts.get((int) d2.getValue() - 1);
+    if (!disease.addSMutation(mut)){
+      fill(0, 0, 0);
+      textSize(10);
+      text("You do not have enough points for "+mut.name+".", 1220, 500, 150, 75);
     }
     refreshDropDownList("<Symptoms>");
     refreshDropDownList("<Current Mutations>");
@@ -417,7 +423,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 300;//0;
+  points = 0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
