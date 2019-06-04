@@ -557,27 +557,37 @@ class Disease {
     //finds out how many prereqs are bought
     for (int i = 0; i < mut.prereqs().size(); i++) {
       Mutation prereq = convertNameToMutation(mut.prereqs().get(i), allSMutations);
-      if (!prereq.name.equals(mut.name)) {
-        if (prereq.bought) {
-          numPrereqsBought++;
-        }
+      if (!prereq.name.equals(mut.name) && prereq.bought) {
+        numPrereqsBought++;
         Mutation prereqOfPrereq = null;
         //checks if the "tree" of each prereq originated from a base mutation
         for (int k = 0; k < prereq.prereqs().size(); k++) {
           prereqOfPrereq = convertNameToMutation(prereq.prereqs().get(k), allSMutations);
           if (!prereqOfPrereq.name.equals(mut.name)) {
-            hasTreeAsBase(mut, prereqOfPrereq);
+            treeHasBase(mut, prereq, prereqOfPrereq, false);
           }
         }
       }
     }
-    println(mut.name+ " - numPrereqsBought: " +numPrereqsBought);
+    //println(mut.name+ " - numPrereqsBought: " +numPrereqsBought);
     return true;
   }
 
-  boolean hasTreeAsBase(Mutation tryToSell, Mutation mut) {
-    //println("tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
-    return true;
+  boolean treeHasBase(Mutation original, Mutation tryToSell, Mutation mut, boolean treeHasBase) {
+    if (mut.isBase){
+      println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+      return true;
+    }
+    if (mut.bought){
+      for (int i = 0; i < mut.prereqs.size(); i++){
+        Mutation prereqOfMut = convertNameToMutation(mut.prereqs.get(i), allSMutations);
+        if (!prereqOfMut.name.equals(mut) && prereqOfMut.bought){
+          println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+          return treeHasBase(original, mut, prereqOfMut, treeHasBase);
+        }
+      }
+    }
+    return false;
   }
 
   Mutation convertNameToMutation(String thisName, ArrayList<Mutation> ary) {
