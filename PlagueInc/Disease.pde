@@ -92,18 +92,36 @@ class Disease {
   }
 
   void inputSMutations() {
-    ArrayList<String> sprereqs = new ArrayList<String>();
-    Mutation Nausea = new Mutation("Nausea (Tier 1)", 2, 1, 1, 0, sprereqs, "sMutation", true);
+    ArrayList<String> sprereqsb1 = new ArrayList<String>();
+    sprereqsb1.add("Vomiting (Tier 2)");
+    Mutation Nausea = new Mutation("Nausea (Tier 1)", 2, 1, 1, 0, sprereqsb1, "sMutation", true);
     allSMutations.add(Nausea);
-    Mutation Coughing = new Mutation("Coughing (Tier 1)", 4, 3, 1, 0, sprereqs, "sMutation", true);
+
+    ArrayList<String> sprereqsb2 = new ArrayList<String>();
+    sprereqsb2.add("Pneumonia (Tier 2)");
+    sprereqsb2.add("Sneezing (Tier 2)");
+    Mutation Coughing = new Mutation("Coughing (Tier 1)", 4, 3, 1, 0, sprereqsb2, "sMutation", true);
     allSMutations.add(Coughing);
-    Mutation Rash = new Mutation("Rash (Tier 1)", 3, 2, 1, 0, sprereqs, "sMutation", true);
+
+    ArrayList<String> sprereqsb3 = new ArrayList<String>();
+    sprereqsb3.add("Sweating (Tier 2)");
+    Mutation Rash = new Mutation("Rash (Tier 1)", 3, 2, 1, 0, sprereqsb3, "sMutation", true);
     allSMutations.add(Rash);
-    Mutation Insomnia = new Mutation("Insomnia (Tier 1)", 2, 0, 3, 0, sprereqs, "sMutation", true);
+
+    ArrayList<String> sprereqsb4 = new ArrayList<String>();
+    sprereqsb4.add("Paranoia (Tier 2)");
+    Mutation Insomnia = new Mutation("Insomnia (Tier 1)", 2, 0, 3, 0, sprereqsb4, "sMutation", true);
     allSMutations.add(Insomnia);
-    Mutation Cysts = new Mutation("Cysts (Tier 1)", 2, 2, 2, 0, sprereqs, "sMutation", true);
+
+    ArrayList<String> sprereqsb5 = new ArrayList<String>();
+    sprereqsb5.add("Hypersensitivity (Tier 2)");
+    sprereqsb5.add("Abscesses (Tier 2)");
+    Mutation Cysts = new Mutation("Cysts (Tier 1)", 2, 2, 2, 0, sprereqsb5, "sMutation", true);
     allSMutations.add(Cysts);
-    Mutation Anemia = new Mutation("Anemia (Tier 1)", 2, 1, 1, 0, sprereqs, "sMutation", true);
+
+    ArrayList<String> sprereqsb6 = new ArrayList<String>();
+    sprereqsb6.add("Hemophilia (Tier 2)");
+    Mutation Anemia = new Mutation("Anemia (Tier 1)", 2, 1, 1, 0, sprereqsb6, "sMutation", true);
     allSMutations.add(Anemia);
 
     ArrayList<String> sprereqs1 = new ArrayList<String>();
@@ -320,7 +338,7 @@ class Disease {
     }
     accessibleSMutations = new ArrayList();
     for (int i=0; i<allSMutations.size(); i++) {
-      if (allSMutations.get(i).prereqs.size() == 0) {
+      if (allSMutations.get(i).isBase) {
         accessibleSMutations.add(allSMutations.get(i));
       }
     }
@@ -328,45 +346,30 @@ class Disease {
   }
 
   boolean in(Mutation mut, ArrayList<Mutation> arr) {
-    for (int i=0; i<arr.size(); i++) {
-      if (mut.name.equals(arr.get(i).name)) {
-        return true;
-      }
-    }
-    return false;
+    return arr.contains(mut);
   }
 
   // arr1 has to be smaller than arr2
   boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2) {
+    boolean allInArr2 = true;
     if (arr1.size()>arr2.size()) {
       return false;
     }
-    int found = 0;
     for (int i=0; i<arr1.size(); i++) {
-      for (int j=0; j<arr2.size(); j++) {
-        if (arr1.get(i).equals(arr2.get(j).name)) {
-          found++;
-        }
-      }
+      allInArr2 = allInArr2 && arr2.contains(arr1.get(i));
     }
-    if (found == arr1.size()) {
-      return true;
-    }
-    return false;
+    return allInArr2;
   }
 
   boolean arrSIn(ArrayList<String> arr1, ArrayList<Mutation> arr2) {
+    boolean inArr2 = false;
     if (arr2.size() == 0) {
       return false;
     }
     for (int i=0; i<arr1.size(); i++) {
-      for (int j=0; j<arr2.size(); j++) {
-        if (arr1.get(i).equals(arr2.get(j).name)) {
-          return true;
-        }
-      }
+      inArr2 = inArr2 || arr2.contains(arr1.get(i));
     }
-    return false;
+    return inArr2;
   }
 
   void updateAccessibleMutations() {
@@ -553,34 +556,36 @@ class Disease {
     int numPrereqsBought = 0;
     //finds out how many prereqs are bought
     for (int i = 0; i < mut.prereqs().size(); i++) {
-      for (int j = 0; j < allSMutations.size(); j++) {
-        if (allSMutations.get(j).name.equals(mut.prereqs().get(i))) {
-          Mutation prereq = allSMutations.get(j);
-          if (prereq.bought) {
-            numPrereqsBought++;
-          }
-          Mutation prereqOfPrereq = null;
-          //checks if the "tree" of each prereq originated from a base mutation
-          for (int k = 0; k < prereq.prereqs().size(); k++) {
-            if (!prereq.prereqs().get(k).equals(mut.name)) {
-              for (int l = 0; l < allSMutations.size(); l++) {
-                if (allSMutations.get(l).name.equals(prereq.prereqs().get(k))) {
-                  prereqOfPrereq = allSMutations.get(l);
-                  hasTreeAsBase(mut, prereqOfPrereq);
-                }
-              }
-            }
+      Mutation prereq = convertNameToMutation(mut.prereqs().get(i), allSMutations);
+      if (!prereq.name.equals(mut.name)) {
+        if (prereq.bought) {
+          numPrereqsBought++;
+        }
+        Mutation prereqOfPrereq = null;
+        //checks if the "tree" of each prereq originated from a base mutation
+        for (int k = 0; k < prereq.prereqs().size(); k++) {
+          prereqOfPrereq = convertNameToMutation(prereq.prereqs().get(k), allSMutations);
+          if (!prereqOfPrereq.name.equals(mut.name)) {
+            hasTreeAsBase(mut, prereqOfPrereq);
           }
         }
       }
     }
-
-    //println(mut.name+ ": " +numPrereqsBought);
+    println(mut.name+ ": " +numPrereqsBought);
     return true;
   }
 
   boolean hasTreeAsBase(Mutation tryToSell, Mutation mut) {
-    println("tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+    //println("tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
     return true;
+  }
+
+  Mutation convertNameToMutation(String thisName, ArrayList<Mutation> ary) {
+    for (int i = 0; i < ary.size(); i++) {
+      if (ary.get(i).name.equals(thisName)) {
+        return ary.get(i);
+      }
+    }
+    return null;
   }
 }
