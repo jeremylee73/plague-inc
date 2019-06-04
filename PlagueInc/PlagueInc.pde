@@ -208,6 +208,7 @@ void Sell() {
   if (dSell.getValue() != 0) {
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
+    println(mut.name);
     disease.sell(mut);
     fill(205);
     rect(1220, 560, 1000, 1000);

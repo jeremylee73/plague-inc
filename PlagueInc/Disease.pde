@@ -14,278 +14,307 @@ class Disease {
   double lethality;
 
   void inputTMutations() {
-    ArrayList<String> prereqs = new ArrayList<String>();
+    ArrayList<Mutation> prereqs = new ArrayList<Mutation>();
     Mutation Bird1 = new Mutation("Bird 1", 12, 3, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Bird1);
 
-    ArrayList<String> prereqs1 = new ArrayList<String>();
-    prereqs1.add("Bird 1");
+    ArrayList<Mutation> prereqs1 = new ArrayList<Mutation>();
+    prereqs1.add(Bird1);
     Mutation Bird2 = new Mutation("Bird 2", 18, 6, 0, 0, prereqs1, "tMutation", false);
     allTMutations.add(Bird2);
 
     Mutation Rodent1 = new Mutation("Rodent 1", 10, 3, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Rodent1);
 
-    ArrayList<String> prereqs2 = new ArrayList<String>();
-    prereqs2.add("Rodent 1");
+    ArrayList<Mutation> prereqs2 = new ArrayList<Mutation>();
+    prereqs2.add(Rodent1);
     Mutation Rodent2 = new Mutation("Rodent 2", 16, 6, 0, 0, prereqs2, "tMutation", false);
     allTMutations.add(Rodent2);
 
     Mutation Livestock1 = new Mutation("Livestock 1", 7, 2, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Livestock1);
 
-    ArrayList<String> prereqs3 = new ArrayList<String>();
-    prereqs3.add("Livestock 1");
+    ArrayList<Mutation> prereqs3 = new ArrayList<Mutation>();
+    prereqs3.add(Livestock1);
     Mutation Livestock2 = new Mutation("Livestock 2", 12, 4, 0, 0, prereqs3, "tMutation", false);
     allTMutations.add(Livestock2);
 
     Mutation Insect1 = new Mutation("Insect 1", 9, 4, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Insect1);
 
-    ArrayList<String> prereqs4 = new ArrayList<String>();
-    prereqs4.add("Insect 1");
+    ArrayList<Mutation> prereqs4 = new ArrayList<Mutation>();
+    prereqs4.add(Insect1);
     Mutation Insect2 = new Mutation("Insect 2", 20, 8, 0, 0, prereqs4, "tMutation", false);
     allTMutations.add(Insect2);
 
     Mutation Blood1 = new Mutation("Blood 1", 8, 2, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Blood1);
 
-    ArrayList<String> prereqs5 = new ArrayList<String>();
-    prereqs5.add("Blood 1");
+    ArrayList<Mutation> prereqs5 = new ArrayList<Mutation>();
+    prereqs5.add(Blood1);
     Mutation Blood2 = new Mutation("Blood 2", 13, 4, 0, 0, prereqs5, "tMutation", false);
     allTMutations.add(Blood2);
 
     Mutation Air1 = new Mutation("Air 1", 9, 4, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Air1);
 
-    ArrayList<String> prereqs6 = new ArrayList<String>();
-    prereqs6.add("Air 1");
+    ArrayList<Mutation> prereqs6 = new ArrayList<Mutation>();
+    prereqs6.add(Air1);
     Mutation Air2 = new Mutation("Air 2", 14, 7, 0, 0, prereqs6, "tMutation", false);
     allTMutations.add(Air2);
 
     Mutation Water1 = new Mutation("Water 1", 9, 4, 0, 0, prereqs, "tMutation", true);
     allTMutations.add(Water1);
 
-    ArrayList<String> prereqs7 = new ArrayList<String>();
-    prereqs7.add("Water 1");
+    ArrayList<Mutation> prereqs7 = new ArrayList<Mutation>();
+    prereqs7.add(Water1);
     Mutation Water2 = new Mutation("Water 2", 15, 8, 0, 0, prereqs7, "tMutation", false);
     allTMutations.add(Water2);
 
-    ArrayList<String> prereqs8 = new ArrayList<String>();
-    prereqs8.add("Bird 2");
-    prereqs8.add("Rodent 2");
-    prereqs8.add("Livestock 2");
+    ArrayList<Mutation> prereqs8 = new ArrayList<Mutation>();
+    prereqs8.add(Bird2);
+    prereqs8.add(Rodent2);
+    prereqs8.add(Livestock2);
     Mutation ExtremeZoonosis = new Mutation("Extreme Zoonosis", 22, 5, 0, 0, prereqs8, "tMutation", false);
     allTMutations.add(ExtremeZoonosis);
 
-    ArrayList<String> prereqs9 = new ArrayList<String>();
-    prereqs9.add("Insect 2");
-    prereqs9.add("Blood 2");
+    ArrayList<Mutation> prereqs9 = new ArrayList<Mutation>();
+    prereqs9.add(Insect2);
+    prereqs9.add(Blood2);
     Mutation ExtremeHematophagy = new Mutation("Extreme Hematophagy", 24, 5, 0, 0, prereqs9, "tMutation", false);
     allTMutations.add(ExtremeHematophagy);
 
-    ArrayList<String> prereqs10 = new ArrayList<String>();
-    prereqs10.add("Air 2");
-    prereqs10.add("Water 2");
+    ArrayList<Mutation> prereqs10 = new ArrayList<Mutation>();
+    prereqs10.add(Air2);
+    prereqs10.add(Water2);
     Mutation ExtremeBioaerosol = new Mutation("Extreme Bioaerosol", 16, 5, 0, 0, prereqs10, "tMutation", false);
     allTMutations.add(ExtremeBioaerosol);
   }
 
   void inputSMutations() {
-    ArrayList<String> sprereqs = new ArrayList<String>();
-    Mutation Nausea = new Mutation("Nausea (Tier 1)", 2, 1, 1, 0, sprereqs, "sMutation", true);
+    Mutation PulmonaryEdema, Diarrhea, PulmonaryFibrosis, Fever, ImmuneSuppression;
+    Mutation SkinLesions, Vomiting, Dysentery, Insanity, Seizures, Paranoia;
+    Mutation Inflammation, Pneumonia, Sneezing, TotalOrganFailure, Paralysis, Coma;
+    Mutation SystemicInfection, Abscesses, Hypersensitivity, Sweating, Necrosis;
+    Mutation Tumors, InternalHemorrhaging, HemorrhagicShock, Hemophilia;
+    PulmonaryEdema = Diarrhea = PulmonaryFibrosis = Fever = ImmuneSuppression = null;
+    SkinLesions = Vomiting = Dysentery = Insanity = Seizures = Paranoia = null;
+    Inflammation = Pneumonia = Sneezing = TotalOrganFailure = Paralysis = Coma = null;
+    SystemicInfection = Abscesses = Hypersensitivity = Sweating = Necrosis = null;
+    Tumors = InternalHemorrhaging = HemorrhagicShock = Hemophilia = null;
+
+    ArrayList<Mutation> sprereqsb1 = new ArrayList<Mutation>();
+    sprereqsb1.add(Vomiting);
+    Mutation Nausea = new Mutation("Nausea (Tier 1)", 2, 1, 1, 0, sprereqsb1, "sMutation", true);
     allSMutations.add(Nausea);
-    Mutation Coughing = new Mutation("Coughing (Tier 1)", 4, 3, 1, 0, sprereqs, "sMutation", true);
+    
+    ArrayList<Mutation> sprereqsb2 = new ArrayList<Mutation>();
+    sprereqsb2.add(Pneumonia);
+    sprereqsb2.add(Sneezing);
+    Mutation Coughing = new Mutation("Coughing (Tier 1)", 4, 3, 1, 0, sprereqsb2, "sMutation", true);
     allSMutations.add(Coughing);
-    Mutation Rash = new Mutation("Rash (Tier 1)", 3, 2, 1, 0, sprereqs, "sMutation", true);
+    
+    ArrayList<Mutation> sprereqsb3 = new ArrayList<Mutation>();
+    sprereqsb3.add(Sweating);
+    Mutation Rash = new Mutation("Rash (Tier 1)", 3, 2, 1, 0, sprereqsb3, "sMutation", true);
     allSMutations.add(Rash);
-    Mutation Insomnia = new Mutation("Insomnia (Tier 1)", 2, 0, 3, 0, sprereqs, "sMutation", true);
+    
+    ArrayList<Mutation> sprereqsb4 = new ArrayList<Mutation>();
+    sprereqsb4.add(Paranoia);
+    Mutation Insomnia = new Mutation("Insomnia (Tier 1)", 2, 0, 3, 0, sprereqsb4, "sMutation", true);
     allSMutations.add(Insomnia);
-    Mutation Cysts = new Mutation("Cysts (Tier 1)", 2, 2, 2, 0, sprereqs, "sMutation", true);
+    
+    ArrayList<Mutation> sprereqsb5 = new ArrayList<Mutation>();
+    sprereqsb5.add(Hypersensitivity);
+    sprereqsb5.add(Abscesses);
+    Mutation Cysts = new Mutation("Cysts (Tier 1)", 2, 2, 2, 0, sprereqsb5, "sMutation", true);
     allSMutations.add(Cysts);
-    Mutation Anemia = new Mutation("Anemia (Tier 1)", 2, 1, 1, 0, sprereqs, "sMutation", true);
+    
+    ArrayList<Mutation> sprereqsb6 = new ArrayList<Mutation>();
+    sprereqsb6.add(Hemophilia);
+    Mutation Anemia = new Mutation("Anemia (Tier 1)", 2, 1, 1, 0, sprereqsb6, "sMutation", true);
     allSMutations.add(Anemia);
 
-    ArrayList<String> sprereqs1 = new ArrayList<String>();
-    sprereqs1.add("Nausea (Tier 1)");
-    sprereqs1.add("Pulmonary Edema (Tier 3)");
-    sprereqs1.add("Diarrhea (Tier 3)");
-    Mutation Vomiting = new Mutation("Vomiting (Tier 2)", 3, 3, 1, 0, sprereqs1, "sMutation", false);
+    ArrayList<Mutation> sprereqs1 = new ArrayList<Mutation>();
+    sprereqs1.add(Nausea);
+    sprereqs1.add(PulmonaryEdema);
+    sprereqs1.add(Diarrhea);
+    Vomiting = new Mutation("Vomiting (Tier 2)", 3, 3, 1, 0, sprereqs1, "sMutation", false);
     allSMutations.add(Vomiting);
 
-    ArrayList<String> sprereqs2 = new ArrayList<String>();
-    sprereqs2.add("Coughing (Tier 1)");
-    sprereqs2.add("Pulmonary Edema (Tier 3)");
-    sprereqs2.add("Pulmonary Fibrosis (Tier 3)");
-    Mutation Pneumonia = new Mutation("Pneumonia (Tier 2)", 3, 3, 2, 0, sprereqs2, "sMutation", false);
+    ArrayList<Mutation> sprereqs2 = new ArrayList<Mutation>();
+    sprereqs2.add(Coughing);
+    sprereqs2.add(PulmonaryEdema);
+    sprereqs2.add(PulmonaryFibrosis);
+    Pneumonia = new Mutation("Pneumonia (Tier 2)", 3, 3, 2, 0, sprereqs2, "sMutation", false);
     allSMutations.add(Pneumonia);
 
-    ArrayList<String> sprereqs3 = new ArrayList<String>();
-    sprereqs3.add("Coughing (Tier 1)");
-    sprereqs3.add("Fever (Tier 3)");
-    sprereqs3.add("Immune Suppression (Tier 3)");
-    Mutation Sneezing = new Mutation("Sneezing (Tier 2)", 5, 5, 1, 0, sprereqs3, "sMutation", false);
+    ArrayList<Mutation> sprereqs3 = new ArrayList<Mutation>();
+    sprereqs3.add(Coughing);
+    sprereqs3.add(Fever);
+    sprereqs3.add(ImmuneSuppression);
+    Sneezing = new Mutation("Sneezing (Tier 2)", 5, 5, 1, 0, sprereqs3, "sMutation", false);
     allSMutations.add(Sneezing);
 
-    ArrayList<String> sprereqs4 = new ArrayList<String>();
-    sprereqs4.add("Fever (Tier 3)");
-    sprereqs4.add("Rash (Tier 1)");
-    sprereqs4.add("Skin Lesions (Tier 3)");
-    Mutation Sweating = new Mutation("Sweating (Tier 2)", 3, 2, 1, 0, sprereqs4, "sMutation", false);
+    ArrayList<Mutation> sprereqs4 = new ArrayList<Mutation>();
+    sprereqs4.add(Fever);
+    sprereqs4.add(Rash);
+    sprereqs4.add(SkinLesions);
+    Sweating = new Mutation("Sweating (Tier 2)", 3, 2, 1, 0, sprereqs4, "sMutation", false);
     allSMutations.add(Sweating);
 
-    ArrayList<String> sprereqs5 = new ArrayList<String>();
-    sprereqs5.add("Insomnia (Tier 1)");
-    sprereqs5.add("Inflammation (Tier 3)");
-    sprereqs5.add("Seizures (Tier 3)");
-    Mutation Paranoia = new Mutation("Paranoia (Tier 2)", 4, 0, 4, 0, sprereqs5, "sMutation", false);
+    ArrayList<Mutation> sprereqs5 = new ArrayList<Mutation>();
+    sprereqs5.add(Insomnia);
+    sprereqs5.add(Inflammation);
+    sprereqs5.add(Seizures);
+    Paranoia = new Mutation("Paranoia (Tier 2)", 4, 0, 4, 0, sprereqs5, "sMutation", false);
     allSMutations.add(Paranoia);
 
-    ArrayList<String> sprereqs6 = new ArrayList<String>();
-    sprereqs6.add("Inflammation (Tier 3)");
-    sprereqs6.add("Cysts (Tier 1)");
-    sprereqs6.add("Paralysis (Tier 3)");
-    Mutation Hypersensitivity = new Mutation("Hypersensitivity (Tier 2)", 2, 1, 2, 0, sprereqs6, "sMutation", false);
+    ArrayList<Mutation> sprereqs6 = new ArrayList<Mutation>();
+    sprereqs6.add(Inflammation);
+    sprereqs6.add(Cysts);
+    sprereqs6.add(Paralysis);
+    Hypersensitivity = new Mutation("Hypersensitivity (Tier 2)", 2, 1, 2, 0, sprereqs6, "sMutation", false);
     allSMutations.add(Hypersensitivity);
 
-    ArrayList<String> sprereqs7 = new ArrayList<String>();
-    sprereqs7.add("Cysts (Tier 1)");
-    sprereqs7.add("Tumors (Tier 3)");
-    sprereqs7.add("Systemic Infection (Tier 3)");
-    Mutation Abscesses = new Mutation("Abscesses (Tier 2)", 2, 4, 4, 0, sprereqs7, "sMutation", false);
+    ArrayList<Mutation> sprereqs7 = new ArrayList<Mutation>();
+    sprereqs7.add(Cysts);
+    sprereqs7.add(Tumors);
+    sprereqs7.add(SystemicInfection);
+    Abscesses = new Mutation("Abscesses (Tier 2)", 2, 4, 4, 0, sprereqs7, "sMutation", false);
     allSMutations.add(Abscesses);
 
-    ArrayList<String> sprereqs8 = new ArrayList<String>();
-    sprereqs8.add("Tumors (Tier 3)");
-    sprereqs8.add("Anemia (Tier 1)");
-    sprereqs8.add("Internal Hemorrhaging (Tier 3)");
-    Mutation Hemophilia = new Mutation("Hemophilia (Tier 2)", 3, 4, 3, 0, sprereqs8, "sMutation", false);
+    ArrayList<Mutation> sprereqs8 = new ArrayList<Mutation>();
+    sprereqs8.add(Tumors);
+    sprereqs8.add(Anemia);
+    sprereqs8.add(InternalHemorrhaging);
+    Hemophilia = new Mutation("Hemophilia (Tier 2)", 3, 4, 3, 0, sprereqs8, "sMutation", false);
     allSMutations.add(Hemophilia);
 
-    ArrayList<String> sprereqs9 = new ArrayList<String>();
-    sprereqs9.add("Vomiting (Tier 2)");
-    sprereqs9.add("Pneumonia (Tier 2)");
-    sprereqs9.add("Diarrhea (Tier 3)");
-    sprereqs9.add("Pulmonary Fibrosis (Tier 3)");
-    Mutation PulmonaryEdema = new Mutation("Pulmonary Edema (Tier 3)", 7, 5, 4, 2, sprereqs9, "sMutation", false);
+    ArrayList<Mutation> sprereqs9 = new ArrayList<Mutation>();
+    sprereqs9.add(Vomiting);
+    sprereqs9.add(Pneumonia);
+    sprereqs9.add(Diarrhea);
+    sprereqs9.add(PulmonaryFibrosis);
+    PulmonaryEdema = new Mutation("Pulmonary Edema (Tier 3)", 7, 5, 4, 2, sprereqs9, "sMutation", false);
     allSMutations.add(PulmonaryEdema);
 
-    ArrayList<String> sprereqs10 = new ArrayList<String>();
-    sprereqs10.add("Sneezing (Tier 2)");
-    sprereqs10.add("Sweating (Tier 2)");
-    sprereqs10.add("Immune Suppression (Tier 3)");
-    sprereqs10.add("Skin Lesions (Tier 3)");
-    Mutation Fever = new Mutation("Fever (Tier 3)", 9, 4, 3, 3, sprereqs10, "sMutation", false);
+    ArrayList<Mutation> sprereqs10 = new ArrayList<Mutation>();
+    sprereqs10.add(Sneezing);
+    sprereqs10.add(Sweating);
+    sprereqs10.add(ImmuneSuppression);
+    sprereqs10.add(SkinLesions);
+    Fever = new Mutation("Fever (Tier 3)", 9, 4, 3, 3, sprereqs10, "sMutation", false);
     allSMutations.add(Fever);
 
-    ArrayList<String> sprereqs11 = new ArrayList<String>();
-    sprereqs11.add("Paranoia (Tier 2)");
-    sprereqs11.add("Hypersensitivity (Tier 2)");
-    sprereqs11.add("Seizures (Tier 3)");
-    sprereqs11.add("Paralysis (Tier 3)");
-    Mutation Inflammation = new Mutation("Inflammation (Tier 3)", 5, 2, 2, 2, sprereqs11, "sMutation", false);
+    ArrayList<Mutation> sprereqs11 = new ArrayList<Mutation>();
+    sprereqs11.add(Paranoia);
+    sprereqs11.add(Hypersensitivity);
+    sprereqs11.add(Seizures);
+    sprereqs11.add(Paralysis);
+    Inflammation = new Mutation("Inflammation (Tier 3)", 5, 2, 2, 2, sprereqs11, "sMutation", false);
     allSMutations.add(Inflammation);
 
-    ArrayList<String> sprereqs12 = new ArrayList<String>();
-    sprereqs12.add("Abscesses (Tier 2)");
-    sprereqs12.add("Hemophilia (Tier 2)");
-    sprereqs12.add("Systemic Infection (Tier 3)");
-    sprereqs12.add("Internal Hemorrhaging (Tier 3)");
-    Mutation Tumors = new Mutation("Tumors (Tier 3)", 11, 2, 0, 4, sprereqs12, "sMutation", false);
+    ArrayList<Mutation> sprereqs12 = new ArrayList<Mutation>();
+    sprereqs12.add(Abscesses);
+    sprereqs12.add(Hemophilia);
+    sprereqs12.add(SystemicInfection);
+    sprereqs12.add(InternalHemorrhaging);
+    Tumors = new Mutation("Tumors (Tier 3)", 11, 2, 0, 4, sprereqs12, "sMutation", false);
     allSMutations.add(Tumors);
 
-    ArrayList<String> sprereqs13 = new ArrayList<String>();
-    sprereqs13.add("Vomiting (Tier 2)");
-    sprereqs13.add("Pulmonary Edema (Tier 3)");
-    sprereqs13.add("Dysentery (Tier 4)");
-    Mutation Diarrhea = new Mutation("Diarrhea (Tier 3)", 6, 6, 4, 0, sprereqs13, "sMutation", false);
+    ArrayList<Mutation> sprereqs13 = new ArrayList<Mutation>();
+    sprereqs13.add(Vomiting);
+    sprereqs13.add(PulmonaryEdema);
+    sprereqs13.add(Dysentery);
+    Diarrhea = new Mutation("Diarrhea (Tier 3)", 6, 6, 4, 0, sprereqs13, "sMutation", false);
     allSMutations.add(Diarrhea);
 
-    ArrayList<String> sprereqs14 = new ArrayList<String>();
-    sprereqs14.add("Pneumonia (Tier 2)");
-    sprereqs14.add("Pulmonary Edema (Tier 3)");
-    sprereqs14.add("Total Organ Failure (Tier 4)");
-    Mutation PulmonaryFibrosis = new Mutation("Pulmonary Fibrosis (Tier 3)", 6, 3, 3, 2, sprereqs14, "sMutation", false);
+    ArrayList<Mutation> sprereqs14 = new ArrayList<Mutation>();
+    sprereqs14.add(Pneumonia);
+    sprereqs14.add(PulmonaryEdema);
+    sprereqs14.add(TotalOrganFailure);
+    PulmonaryFibrosis = new Mutation("Pulmonary Fibrosis (Tier 3)", 6, 3, 3, 2, sprereqs14, "sMutation", false);
     allSMutations.add(PulmonaryFibrosis);
 
-    ArrayList<String> sprereqs15 = new ArrayList<String>();
-    sprereqs15.add("Sneezing (Tier 2)");
-    sprereqs15.add("Fever (Tier 3)");
-    sprereqs15.add("Total Organ Failure (Tier 4)");
-    Mutation ImmuneSuppression = new Mutation("Immune Suppression (Tier 3)", 12, 2, 6, 4, sprereqs15, "sMutation", false);
+    ArrayList<Mutation> sprereqs15 = new ArrayList<Mutation>();
+    sprereqs15.add(Sneezing);
+    sprereqs15.add(Fever);
+    sprereqs15.add(TotalOrganFailure);
+    ImmuneSuppression = new Mutation("Immune Suppression (Tier 3)", 12, 2, 6, 4, sprereqs15, "sMutation", false);
     allSMutations.add(ImmuneSuppression);
 
-    ArrayList<String> sprereqs16 = new ArrayList<String>();
-    sprereqs16.add("Sweating (Tier 2)");
-    sprereqs16.add("Fever (Tier 3)");
-    sprereqs16.add("Necrosis (Tier 4)");
-    Mutation SkinLesions = new Mutation("Skin Lesions (Tier 3)", 8, 11, 4, 0, sprereqs16, "sMutation", false);
+    ArrayList<Mutation> sprereqs16 = new ArrayList<Mutation>();
+    sprereqs16.add(Sweating);
+    sprereqs16.add(Fever);
+    sprereqs16.add(Necrosis);
+    SkinLesions = new Mutation("Skin Lesions (Tier 3)", 8, 11, 4, 0, sprereqs16, "sMutation", false);
     allSMutations.add(SkinLesions);
 
-    ArrayList<String> sprereqs17 = new ArrayList<String>();
-    sprereqs17.add("Paranoia (Tier 2)");
-    sprereqs17.add("Inflammation (Tier 3)");
-    sprereqs17.add("Insanity (Tier 4)");
-    Mutation Seizures = new Mutation("Seizures (Tier 3)", 4, 1, 7, 3, sprereqs17, "sMutation", false);
+    ArrayList<Mutation> sprereqs17 = new ArrayList<Mutation>();
+    sprereqs17.add(Paranoia);
+    sprereqs17.add(Inflammation);
+    sprereqs17.add(Insanity);
+    Seizures = new Mutation("Seizures (Tier 3)", 4, 1, 7, 3, sprereqs17, "sMutation", false);
     allSMutations.add(Seizures);
 
-    ArrayList<String> sprereqs18 = new ArrayList<String>();
-    sprereqs18.add("Inflammation (Tier 3)");
-    sprereqs18.add("Hypersensitivity (Tier 2)");
-    sprereqs18.add("Coma (Tier 4)");
-    Mutation Paralysis = new Mutation("Paralysis (Tier 3)", 10, 1, 5, 1, sprereqs18, "sMutation", false);
+    ArrayList<Mutation> sprereqs18 = new ArrayList<Mutation>();
+    sprereqs18.add(Inflammation);
+    sprereqs18.add(Hypersensitivity);
+    sprereqs18.add(Coma);
+    Paralysis = new Mutation("Paralysis (Tier 3)", 10, 1, 5, 1, sprereqs18, "sMutation", false);
     allSMutations.add(Paralysis);
 
-    ArrayList<String> sprereqs19 = new ArrayList<String>();
-    sprereqs19.add("Coma (Tier 4)");
-    sprereqs19.add("Tumors (Tier 3)");
-    sprereqs19.add("Abscesses (Tier 2)");
-    Mutation SystemicInfection = new Mutation("Systemic Infection (Tier 3)", 17, 6, 7, 6, sprereqs19, "sMutation", false);
+    ArrayList<Mutation> sprereqs19 = new ArrayList<Mutation>();
+    sprereqs19.add(Coma);
+    sprereqs19.add(Tumors);
+    sprereqs19.add(Abscesses);
+    SystemicInfection = new Mutation("Systemic Infection (Tier 3)", 17, 6, 7, 6, sprereqs19, "sMutation", false);
     allSMutations.add(SystemicInfection);
 
-    ArrayList<String> sprereqs20 = new ArrayList<String>();
-    sprereqs20.add("Tumors (Tier 3)");
-    sprereqs20.add("Hemophilia (Tier 2)");
-    sprereqs20.add("Hemorrhagic Shock (Tier 4)");
-    Mutation InternalHemorrhaging = new Mutation("Internal Hemorrhaging (Tier 3)", 12, 0, 9, 7, sprereqs20, "sMutation", false);
+    ArrayList<Mutation> sprereqs20 = new ArrayList<Mutation>();
+    sprereqs20.add(Tumors);
+    sprereqs20.add(Hemophilia);
+    sprereqs20.add(HemorrhagicShock);
+    InternalHemorrhaging = new Mutation("Internal Hemorrhaging (Tier 3)", 12, 0, 9, 7, sprereqs20, "sMutation", false);
     allSMutations.add(InternalHemorrhaging);
 
-    ArrayList<String> sprereqs21 = new ArrayList<String>();
-    sprereqs21.add("Diarrhea (Tier 3)");
-    sprereqs21.add("Insanity (Tier 4)");
-    Mutation Dysentery = new Mutation("Dysentery (Tier 4)", 19, 8, 15, 8, sprereqs21, "sMutation", false);
+    ArrayList<Mutation> sprereqs21 = new ArrayList<Mutation>();
+    sprereqs21.add(Diarrhea);
+    sprereqs21.add(Insanity);
+    Dysentery = new Mutation("Dysentery (Tier 4)", 19, 8, 15, 8, sprereqs21, "sMutation", false);
     allSMutations.add(Dysentery);
 
-    ArrayList<String> sprereqs22 = new ArrayList<String>();
-    sprereqs22.add("Pulmonary Fibrosis (Tier 3)");
-    sprereqs22.add("Immune Suppression (Tier 3)");
-    sprereqs22.add("Coma (Tier 4)");
-    Mutation TotalOrganFailure = new Mutation("Total Organ Failure (Tier 4)", 28, 0, 20, 25, sprereqs22, "sMutation", false);
+    ArrayList<Mutation> sprereqs22 = new ArrayList<Mutation>();
+    sprereqs22.add(PulmonaryFibrosis);
+    sprereqs22.add(ImmuneSuppression);
+    sprereqs22.add(Coma);
+    TotalOrganFailure = new Mutation("Total Organ Failure (Tier 4)", 28, 0, 20, 25, sprereqs22, "sMutation", false);
     allSMutations.add(TotalOrganFailure);
 
-    ArrayList<String> sprereqs23 = new ArrayList<String>();
-    sprereqs23.add("Skin Lesions (Tier 3)");
-    sprereqs23.add("Hemorrhagic Shock (Tier 4)");
-    Mutation Necrosis = new Mutation("Necrosis (Tier 4)", 27, 10, 20, 13, sprereqs23, "sMutation", false);
+    ArrayList<Mutation> sprereqs23 = new ArrayList<Mutation>();
+    sprereqs23.add(SkinLesions);
+    sprereqs23.add(HemorrhagicShock);
+    Necrosis = new Mutation("Necrosis (Tier 4)", 27, 10, 20, 13, sprereqs23, "sMutation", false);
     allSMutations.add(Necrosis);
 
-    ArrayList<String> sprereqs24 = new ArrayList<String>();
-    sprereqs24.add("Seizures (Tier 3)");
-    sprereqs24.add("Dysentery (Tier 4)");
-    Mutation Insanity = new Mutation("Insanity (Tier 4)", 18, 6, 15, 0, sprereqs24, "sMutation", false);
+    ArrayList<Mutation> sprereqs24 = new ArrayList<Mutation>();
+    sprereqs24.add(Seizures);
+    sprereqs24.add(Dysentery);
+    Insanity = new Mutation("Insanity (Tier 4)", 18, 6, 15, 0, sprereqs24, "sMutation", false);
     allSMutations.add(Insanity);
 
-    ArrayList<String> sprereqs25 = new ArrayList<String>();
-    sprereqs25.add("Paralysis (Tier 3)");
-    sprereqs25.add("Systemic Infection (Tier 3)");
-    sprereqs25.add("Total Organ Failure (Tier 4)");
-    Mutation Coma = new Mutation("Coma (Tier 4)", 21, 0, 15, 2, sprereqs25, "sMutation", false);
+    ArrayList<Mutation> sprereqs25 = new ArrayList<Mutation>();
+    sprereqs25.add(Paralysis);
+    sprereqs25.add(SystemicInfection);
+    sprereqs25.add(TotalOrganFailure);
+    Coma = new Mutation("Coma (Tier 4)", 21, 0, 15, 2, sprereqs25, "sMutation", false);
     allSMutations.add(Coma);
 
-    ArrayList<String> sprereqs26 = new ArrayList<String>();
-    sprereqs26.add("Internal Hemorrhaging (Tier 3)");
-    sprereqs26.add("Necrosis (Tier 4)");
-    Mutation HemorrhagicShock = new Mutation("Hemorrhagic Shock (Tier 4)", 23, 0, 15, 15, sprereqs26, "sMutation", false);
+    ArrayList<Mutation> sprereqs26 = new ArrayList<Mutation>();
+    sprereqs26.add(InternalHemorrhaging);
+    sprereqs26.add(Necrosis);
+    HemorrhagicShock = new Mutation("Hemorrhagic Shock (Tier 4)", 23, 0, 15, 15, sprereqs26, "sMutation", false);
     allSMutations.add(HemorrhagicShock);
   }
 
@@ -328,45 +357,30 @@ class Disease {
   }
 
   boolean in(Mutation mut, ArrayList<Mutation> arr) {
-    for (int i=0; i<arr.size(); i++) {
-      if (mut.name.equals(arr.get(i).name)) {
-        return true;
-      }
-    }
-    return false;
+    return arr.contains(mut);
   }
 
   // arr1 has to be smaller than arr2
-  boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2) {
+  boolean arrIn(ArrayList<Mutation> arr1, ArrayList<Mutation> arr2) {
+    boolean allInArr2 = true;
     if (arr1.size()>arr2.size()) {
       return false;
     }
-    int found = 0;
     for (int i=0; i<arr1.size(); i++) {
-      for (int j=0; j<arr2.size(); j++) {
-        if (arr1.get(i).equals(arr2.get(j).name)) {
-          found++;
-        }
-      }
+      allInArr2 = allInArr2 && arr2.contains(arr1.get(i));
     }
-    if (found == arr1.size()) {
-      return true;
-    }
-    return false;
+    return allInArr2;
   }
 
-  boolean arrSIn(ArrayList<String> arr1, ArrayList<Mutation> arr2) {
+  boolean arrSIn(ArrayList<Mutation> arr1, ArrayList<Mutation> arr2) {
+    boolean inArr2 = false;
     if (arr2.size() == 0) {
       return false;
     }
     for (int i=0; i<arr1.size(); i++) {
-      for (int j=0; j<arr2.size(); j++) {
-        if (arr1.get(i).equals(arr2.get(j).name)) {
-          return true;
-        }
-      }
+      inArr2 = inArr2 || arr2.contains(arr1.get(i));
     }
-    return false;
+    return inArr2;
   }
 
   void updateAccessibleMutations() {
@@ -445,13 +459,16 @@ class Disease {
     infectivity += m.infIncrement / 10000.0;
     severity += m.sevIncrement / 10000.0;
     lethality += m.letIncrement / 10000.0;
-    for (int i=0; i<allSMutations.size(); i++) {
-      Mutation mut = allSMutations.get(i);
+    //for (int i=0; i<allSMutations.size(); i++) {
+    //  Mutation mut = allSMutations.get(i);
       //if prereqs are met and mutation is not already in the dropdownlist
-      if (arrSIn(mut.prereqs, sMutations) && !(in(mut, accessibleSMutations)) && !(in(mut, sMutations))) {
-        accessibleSMutations.add(mut);
+      println("arrSIn: "+ arrSIn(m.prereqs, sMutations));
+      println("!in(mut, accSMuts): "+!(in(m, accessibleSMutations)));
+      println("!(in(mut, sMutations)): "+!(in(m, sMutations)));
+      if (arrSIn(m.prereqs, sMutations) && !(in(m, accessibleSMutations)) && !(in(m, sMutations))) {
+        accessibleSMutations.add(m);
       }
-    }
+   // }
     return true;
   }
 
@@ -473,11 +490,8 @@ class Disease {
     //allow player to sell the mutation (this is how it works in-game too)
     print(" "+checkIfCanSell(mut));
     for (int i = 0; i < acquiredMutations.size(); i++) {
-      accMut = acquiredMutations.get(i);
-      for (int j = 0; j < accMut.prereqs().size(); j++) {
-        if (accMut.prereqs().get(j).equals(mut.name)) {
-          return false;
-        }
+      if (acquiredMutations.get(i).prereqs().contains(mut)) {
+        return false;
       }
     }
 
@@ -496,15 +510,13 @@ class Disease {
       //removes post-reqs when selling the mutation
       for (int i = 0; i < accessibleTMutations.size(); i++) {
         accMut = accessibleTMutations.get(i);
-        for (int j = 0; j < accMut.prereqs().size(); j++) {
-          if (accMut.prereqs().get(j).equals(mut.name)) {
-            accessibleTMutations.remove(accMut);
-            tMutations.remove(mut);
-            i--;
-          }
+        if (accMut.prereqs().contains(mut)) {
+          accessibleTMutations.remove(accMut);
+          tMutations.remove(mut);
+          i--;
         }
       }
-
+      //puts sold mutation in right place in the Accessible dropdownlist
       for (int i = 0; i < accessibleTMutations.size(); i++) {
         accMutName = accessibleTMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-1).compareTo(mut.name.substring(mut.name.length()-1)) >= 0) {
@@ -523,15 +535,13 @@ class Disease {
       //removes post-reqs when selling the mutation
       for (int i = 0; i < accessibleSMutations.size(); i++) {
         accMut = accessibleSMutations.get(i);
-        for (int j = 0; j < accMut.prereqs().size(); j++) {
-          if (accMut.prereqs().get(j).equals(mut.name)) {
-            accessibleSMutations.remove(accMut);
-            sMutations.remove(mut);
-            i--; //so that indexing re-calibrates itself after removing an element from list
-          }
+        if (accMut.prereqs().contains(mut)) {
+          accessibleSMutations.remove(accMut);
+          sMutations.remove(mut);
+          i--; //so that indexing re-calibrates itself after removing an element from list
         }
       }
-
+      //puts sold mutation in right place in the Accessible dropdownlist
       for (int i = 0; i < accessibleSMutations.size(); i++) {
         accMutName = accessibleSMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-8).compareTo(mut.name.substring(mut.name.length()-8)) >= 0) {
@@ -553,34 +563,37 @@ class Disease {
     int numPrereqsBought = 0;
     //finds out how many prereqs are bought
     for (int i = 0; i < mut.prereqs().size(); i++) {
-      for (int j = 0; j < allSMutations.size(); j++) {
-        if (allSMutations.get(j).name.equals(mut.prereqs().get(i))) {
-          Mutation prereq = allSMutations.get(j);
-          if (prereq.bought) {
-            numPrereqsBought++;
-          }
+      Mutation prereq = mut.prereqs().get(i);
+      if (!prereq.equals(mut)) {
+        println("prereq: "+prereq);
+        if (prereq.bought) {
+          numPrereqsBought++;
           Mutation prereqOfPrereq = null;
           //checks if the "tree" of each prereq originated from a base mutation
-          for (int k = 0; k < prereq.prereqs().size(); k++) {
-            if (!prereq.prereqs().get(k).equals(mut.name)) {
-              for (int l = 0; l < allSMutations.size(); l++) {
-                if (allSMutations.get(l).name.equals(prereq.prereqs().get(k))) {
-                  prereqOfPrereq = allSMutations.get(l);
-                  hasTreeAsBase(mut, prereqOfPrereq);
-                }
-              }
+          for (int j = 0; j < prereq.prereqs().size(); j++) {
+            prereqOfPrereq = prereq.prereqs().get(j);
+            if (!prereqOfPrereq.equals(mut)) {
+              hasTreeAsBase(mut, prereq, prereqOfPrereq);
             }
           }
         }
       }
     }
-
     //println(mut.name+ ": " +numPrereqsBought);
     return true;
   }
 
-  boolean hasTreeAsBase(Mutation tryToSell, Mutation mut) {
-    println("tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+  boolean hasTreeAsBase(Mutation original, Mutation upperTree, Mutation lowerTree) {
+    //finds prereqs of lowerTree
+    for (int i = 0; i < lowerTree.prereqs().size(); i++) {
+      Mutation prereqOfLowerTree = lowerTree.prereqs().get(i);
+      if (!prereqOfLowerTree.equals(upperTree)) {
+        if (prereqOfLowerTree.bought) {
+          hasTreeAsBase(original, lowerTree, prereqOfLowerTree);
+          println("original: "+original.name+", prereq: "+upperTree.name+", prereqOfTryToSell: "+lowerTree.name);
+        }
+      }
+    }
     return true;
   }
 }
