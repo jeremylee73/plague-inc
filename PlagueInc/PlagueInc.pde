@@ -437,7 +437,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 0;
+  points = 300;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();

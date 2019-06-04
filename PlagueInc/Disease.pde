@@ -448,10 +448,10 @@ class Disease {
     infectivity += m.infIncrement / 10000.0;
     severity += m.sevIncrement / 10000.0;
     lethality += m.letIncrement / 10000.0;
-    for (int i=0; i<allSMutations.size(); i++) {
-      Mutation mut = allSMutations.get(i);
-      //if prereqs are met and mutation is not already in the dropdownlist
-      if (arrSIn(mut.prereqs, sMutations) && !(in(mut, accessibleSMutations)) && !(in(mut, sMutations))) {
+    for (int i=0; i<m.prereqs.size(); i++) {
+      Mutation mut = convertNameToMutation(m.prereqs.get(i), allSMutations);
+      //if mutation is not already in the dropdownlist or already bought
+      if (!(in(mut, accessibleSMutations)) && !(in(mut, sMutations))) {
         accessibleSMutations.add(mut);
       }
     }
@@ -571,7 +571,7 @@ class Disease {
         }
       }
     }
-    println(mut.name+ ": " +numPrereqsBought);
+    println(mut.name+ " - numPrereqsBought: " +numPrereqsBought);
     return true;
   }
 
