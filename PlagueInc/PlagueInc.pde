@@ -158,25 +158,13 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
     refreshDropDownList("<Transmission>");
-    //adding mutation to Current Transmission DropdownList
-    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
-    dSell.clear();
-    dSell.addItem("<Current Mutations>", 0);
-    for (int i=1; i<=acqMuts.size(); i++) {
-      dSell.addItem(acqMuts.get(i-1).name, i);
-    }
+    refreshDropDownList("<Current Mutations>");
   }
   if (d2.getValue() != 0) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
     refreshDropDownList("<Symptoms>");
-    //adding mutation to Current Transmissions DropdownList
-    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
-    dSell.clear();
-    dSell.addItem("<Current Mutations>", 0);
-    for (int i=1; i<=acqMuts.size(); i++) {
-      dSell.addItem(acqMuts.get(i-1).name, i);
-    }
+    refreshDropDownList("<Current Mutations>");
   }
 }
 
@@ -205,6 +193,13 @@ boolean refreshDropDownList(String name) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
     return true;
+  } else if (name.equals("<Current Mutations>")){
+    ArrayList<Mutation> acqMuts = disease.acquiredMutations;
+    dSell.clear();
+    dSell.addItem("<Current Mutations>", 0);
+    for (int i=1; i<=acqMuts.size(); i++) {
+      dSell.addItem(acqMuts.get(i-1).name, i);
+    }
   }
   return false;
 }
