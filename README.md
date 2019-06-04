@@ -114,12 +114,10 @@ Design Choices:
 - **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar (<Transmission> or <Symptom>)**
 
 BUGS:
-- stats for selling
 - overlapping city labels at the bottom poses a problem when the bubble shows up
 - planes should not get overlapped by sporadic bubbles
 - make it so that sporadic bubble rate decreases as more cities are infected to balance the game
 - add indication that an airport has closed or an airport is infected on the squares
-- fix what happens when u buy all tMutations or sMutations
 
 TO-DO features:
 - choose which city to begin at
@@ -128,18 +126,11 @@ TO-DO features:
 - land borders closing
 - cure distribution and also stopping game when dead == diseased
 - victory/loss screen
-- if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
-- automatic mutations
 - implement feature where u get less and less refund for selling, and eventually u need to pay (which means showing stats for selling too)
 - we might not even be able to get to the point of customizing transmission mutations lmao (hopefully we can add aMutations though)
-- putting names of city next to them (and display % infected and % dead for each city if have time)
+- putting names of city next to them
 - refer to Prototype for more things
 
-Extra Features:
-- feature where you warn user if they don't have enough points to buy a mutation
-- mistaking connected mutations as "hanging" mutations - not super important rn cuz super complicated and selling is only useful when mutations mutate randomly
-- outskirt towns? (not mandatory, only if have extra time)
-
-The Required Significant Algorithm that is part of the project:
+The Required Significant Algorithm that is part of the project: 
 - selling and adding items to dropdownlists, and updating lists appropiately?
 - the shading of the cities respectively to dead and disease percentage and bubble shading?
