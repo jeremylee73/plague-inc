@@ -1,5 +1,11 @@
 # PlagueInc
 
+Project Description
+-----------------------------------------------------------------------------------------------------------------------------
+We are recreating the game Plague Inc., which is a game in which the player controls the development of a disease and attempts to cause extinction through strategically mutating the disease. The disease has three stats (infectivity, severity, and lethality). Infectivity affects the rate at which the disease spreads. Severity affects both the rate at which points get accumulated and how fast the cure develops. Lethality affects the rate at which the disease kills people. There are two types of mutations in the game that we implemented: transmission and symptom. The transmission mutations focus on increasing the disease's infectivity and severity, while the symptom mutations focus on increasing the disease's severity and lethality. Each mutation has a cost associated with it, which you pay for in points, and each mutation increases each of the three stats by a certain amount. Additionally, some mutations have prerequisites. For example, you cannot mutate Blood 2 before you get Blood 1.
+
+The disease can spread in two ways. Either it can be transmitted by land to an adjacent city, or it can be transmitted by plane, but this can only occur from a city with an open airport to another city with an open airport. Once a certain number of people die, a cure effort begins, and once the cure reaches 100% development, it begins deployment, and if there are no more people with the disease left, the player loses. Finally, there are also random mutations that occur during the game. These help you develop your disease without expending any points, and if you do not want the mutation, you can always sell it for a refund.
+
 Thursday, May 16
 -----------------------------------------------------------------------------------------------------------------------------
 Jeremy - I wrote the logistic function simulator in the Experiments folder so that we can develop the Disease class later on more easily.
@@ -134,6 +140,6 @@ Extra Features:
 - mistaking connected mutations as "hanging" mutations - not super important rn cuz super complicated and selling is only useful when mutations mutate randomly
 - outskirt towns? (not mandatory, only if have extra time)
 
-The Required Significant Algorithm that is part of the project: 
+The Required Significant Algorithm that is part of the project:
 - selling and adding items to dropdownlists, and updating lists appropiately?
 - the shading of the cities respectively to dead and disease percentage and bubble shading?
