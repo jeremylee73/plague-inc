@@ -182,6 +182,13 @@ void Confirm() { //there's a bug with confirm where it sometimes throws an error
     refreshDropDownList("<Symptoms>");
     refreshDropDownList("<Current Mutations>");
   }
+  if (dSell.getValue() != 0){
+    fill(205);
+    rect(1220, 500, 170, 80);
+    fill(0, 0, 0);
+    textSize(10);
+    text("You cannot buy an already acquired mutation.", 1220, 500, 150, 75);
+  }
 }
 
 boolean refreshDropDownList(String name) {
@@ -239,6 +246,13 @@ void Sell() {
     for (int i=1; i <= acqMuts.size(); i++) {
       dSell.addItem(acqMuts.get(i-1).name, i);
     }
+  }
+  if (d1.getValue() != 0 || d2.getValue() != 0){
+    fill(205);
+    rect(1220, 500, 170, 80);
+    fill(0, 0, 0);
+    textSize(10);
+    text("You cannot sell a mutation that hasn't been bought yet.", 1220, 500, 150, 75);
   }
 }
 
