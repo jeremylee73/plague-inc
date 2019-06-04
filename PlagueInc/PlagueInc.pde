@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -424,7 +424,7 @@ void setup() {
   d2.getCaptionLabel().set("<Symptom>");
 
   dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
-  dSell.addItem("<Current Transmissions>", 0);
+  dSell.addItem("<Current Mutations>", 0);
   customize(dSell);
   dSell.getCaptionLabel().set("<Current Mutations>");
 
@@ -504,6 +504,12 @@ void draw() {
     }
     c.landTransmission();
   }
+
+  if (Math.random() < 0.0005){
+    disease.addRandomMutation();  
+  }
+
+  disease.updateAccessibleMutations();
 
   //displays total % infected and total % dead
   fill(205);
