@@ -367,6 +367,21 @@ class Disease {
     return false;
   }
 
+  void updateAccessibleMutations(){
+    for (int i=0; i<tMutations.size(); i++){
+      if (in(tMutations.get(i), accessibleTMutations)){
+        accessibleTMutations.remove(tMutations.get(i));
+      }
+    }
+    for (int i=0; i<sMutations.size(); i++){
+      if (in(sMutations.get(i), accessibleSMutations)){
+        accessibleSMutations.remove(sMutations.get(i));
+      }
+    }
+  }
+
+
+
   boolean addTMutation(Mutation m) {
     if (points < m.cost) {
       return false;
