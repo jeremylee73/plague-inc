@@ -1,7 +1,9 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
+import java.io.PrintStream;
+import java.io.OutputStream;
 
 ControlP5 cp5;
 DropdownList d1, d2, dSell;
@@ -154,11 +156,7 @@ void customize(DropdownList ddl) {
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    print("Before: ");
-    printMutationArray(accTMuts);
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
-    print("After: ");
-    printMutationArray(accTMuts);
     refreshDropDownList("<Transmission>");
     //adding mutation to Current Transmission DropdownList
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
@@ -310,6 +308,18 @@ void printMutationArray(ArrayList<Mutation> ary) {
   println(str);
 }
 
+void printStringArray(ArrayList<String> ary) {
+  String str = "[";
+  for (int i = 0; i < ary.size(); i++) {
+    str+= ary.get(i);
+    if (i != ary.size() - 1) {
+      str+= ", ";
+    }
+  }
+  str+= "]";
+  println(str);
+}
+
 void controlEvent(ControlEvent theEvent) {
   //this skeleton code is credited to one of the examples on documentation
   //documentation stated this first if statement is necessary to not throw an error
@@ -339,22 +349,38 @@ void mousePressed() {
   for (City c : cities) {
     //pops bubble if bubble is above the city and adds 2 points
     //this if statement calculates if mouse coords is within the bubble's hitbox
-    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && c.hasBubble) {
-      c.bubblePopped = true;
-      fill(255, 255, 255);
+    if ((Math.pow((mouseX - c.x), 2) + Math.pow((mouseY - c.y), 2) < 225) && (c.hasBubble || c.hasSporadicBubble)) {
+      if (c.hasBubble) {
+        fill(255, 255, 255);
+        c.bubblePopped = true;
+      }
+      if (c.hasSporadicBubble) {
+        fill(255, (int)c.GB, (int)c.GB);
+        c.hasSporadicBubble = false;
+      }
       ellipse(c.x, c.y, 35, 35);
       //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
       points+= 2;
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  } //<>// //<>//
+  } //<>//
   //processing background color
 }
 
 
 
 void setup() {
+  //this segment of code from StackOverflow prevents the annoying 
+  //warning messages from showing up in the processing console
+  System.setErr(new PrintStream(new OutputStream() {
+    public void write(int b) {
+    }
+  }
+  ));
+  System.err.println("WARNING: Controller with name \"/<Symptom>\" already exists. overwriting reference of existing controller."); // will not be printed
+  System.err.println("WARNING: Controller with name \"/<Transmission>\" already exists. overwriting reference of existing controller."); // will not be printed
+
   size(1440, 785);
   img = loadImage("map.png");
   image(img, 0, 0);
@@ -363,7 +389,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 0;
+  points = 200;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
@@ -424,7 +450,7 @@ void draw() {
   drawCities();
 
   for (City c : cities) {
-    if (Math.random() < (1/720.0)) {
+    if (Math.random() < (1/1000.0)) {
       c.sporadicBubble();
     }
     c.planeTransmission();
@@ -465,7 +491,7 @@ void draw() {
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
-    if ((c.dead / (c.population * 1.0)) > 0.25) {
+    if ((c.dead / (c.population * 1.0)) > 0.25 && c.airportOpen) {
       c.closeAirport();
     }
     c.updateColor();

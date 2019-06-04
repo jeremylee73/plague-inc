@@ -12,11 +12,13 @@ class City {
   boolean airportOpen;
   boolean dockOpen;
   boolean hasBubble;
-  int green, blue, red;
+  float red, green, blue;
   boolean bubblePopped;
   PImage planeImg1 = loadImage("healthyplane.png");
   PImage planeImg2 = loadImage("infectedplane.png");
   boolean hasSporadicBubble;
+  double GB, R;
+  int RGBbubbleIncr;
 
   City(String name, int population, ArrayList<String> adjacent, boolean hasAirport, boolean hasDock, int x, int y) {
     this.name = name;
@@ -67,10 +69,26 @@ class City {
   }
 
   void updateColor() {
-    double GB = (population - diseased) / (population * 1.0) * 255;
-    fill(255, (int) GB, (int) GB, 1);
+    GB = (population - diseased) / (population * 1.0) * 255;
+    R = (population - dead) / (population * 1.0) * 255;
+    if (diseased + dead == population) {
+      if (R > 62) {
+        fill((int) R, 0, 0);
+      } else {
+        fill(62, 0, 0);
+      }
+    } else if (dead > 0 && diseased == 0) {
+      //calculates correct shading of cities from white to gray
+      if (R > 62) {
+        fill((int) R, (int)(R - 4.1129), (int)(R - 4.1129));
+      } else {
+        fill(62, (int)(R - 4.1129), (int)(R - 4.1129));
+      }
+    } else {
+      fill((int) R, (int) GB, (int) GB);
+    }
     ellipse(x, y, 65, 65);
-    if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped && (green < 255 || blue < 255)) {
+    if (GB > 254 && (diseased > 0 || dead > 0) && !bubblePopped && (green < 255 || blue < 255) && diseased + dead != population) {
       hasBubble = true;
       fill(255, green, blue);
       noStroke();
@@ -85,35 +103,36 @@ class City {
       noStroke();
       ellipse(x, y, 30, 30);
     }
-    
+
     if (hasSporadicBubble) {
-      int greenIncr;
-      int blueIncr;
-      if (red == 255 && green == (int) GB && blue == (int) GB) {
+      if (RGBbubbleIncr == 1) {
         hasSporadicBubble = false;
         return;
       }
-      //determines direction incrementing based on current RGB color
-      if (green > (int) GB) {
-        greenIncr = -1;
+      RGBbubbleIncr--;
+      double redIncr;
+      double greenIncr;
+      double blueIncr;
+      //Determines direction incrementing based on current RGB color.
+      //180 frames is 3 seconds.
+      //How this formula works is red = red - (red - R)/180 then on next frame
+      //it's red = red - (red - R)/179 then on next frame it's
+      //red = red - (red - R)/178 ... until red = red - (red - R)/1
+      redIncr = (red - R)/RGBbubbleIncr;
+      red -= (float)redIncr;
+      if (red < 62 && diseased + dead == population && dead > 0){
+        red = 62;
+      }
+      //to try and fix shading issues with sporadic bubbles
+      if (diseased + dead == population && dead > 0){
+        greenIncr = green/RGBbubbleIncr;
+        blueIncr = blue/RGBbubbleIncr;
       } else {
-        greenIncr = 1;
+        greenIncr = (green - GB)/RGBbubbleIncr;
+        blueIncr = (blue - GB)/RGBbubbleIncr;
       }
-      if (blue > (int) GB) {
-        blueIncr = -1;
-      } else {
-        blueIncr = 1;
-      }
-      //stops incrementing if colors reached GB;
-      if (green != (int) GB) {
-        green += greenIncr;
-      }
-      if (blue != (int) GB) {
-        blue += blueIncr;
-      }
-      if (red != 255) {
-        red++;
-      }
+      green -= (float)greenIncr;
+      blue -= (float)blueIncr;
       noStroke();
       fill(red, green, blue);
       ellipse(x, y, 30, 30);
@@ -122,6 +141,7 @@ class City {
 
   void sporadicBubble() {
     if (!hasSporadicBubble && !hasBubble && diseased > 0) {
+      RGBbubbleIncr = 180;
       hasSporadicBubble = true;
       //RGB for sickly orange
       red = 247;
@@ -234,5 +254,11 @@ class City {
     stroke(0);
     strokeWeight(4);
     rect(x + 40, y - 25, 20, 20);
+    news.add(name+"'s airport has closed.");
+    noStroke();
+    fill(205);
+    rect(1220, 215, 160, 100);
+    fill(0, 0, 0);
+    text(news.get(news.size() - 1), 1220, 220, 150, 100);
   }
 }

@@ -84,28 +84,50 @@ Sunday, June 2
 -----------------------------------------------------------------------------------------------------------------------------
 Victor - I fixed the bug where when a player has bought a mutation then sold the mutation, the post-reqs of that bought mutation are still inside the data structure of "mutations that are currently activated". This caused a problem when buying new mutations, because the post-reqs of the first mutation showed up when it wasn't supposed to. I also made it so that the player cannot sell a mutation when its post-reqs aren't sold yet. I also implemented a system where random bubbles (referred to as sporadicBubbles in the code) pop up on the map after a city is infected.
 
+Sunday, June 2
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - I added where if an airport is closed, then it will be displayed on the news. I am working to turn the shade of cities progressively darker as % of dead in that city increases.
+
+Sunday, June 2
+-----------------------------------------------------------------------------------------------------------------------------
+Victor - I updated design choices to the README and working on debugging sporadic bubbles fading into the shading of dead cities. (There are a lot of bugs related to this so it took up my entire day).
+
 
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
 - When buying mutations, the branching out (post-requirement) mutations are put at the bottom of the DropdownList to show clarity in what mutations lead to what kind of new mutations become available (it is easier to see what new mutations become available if they can always expect a consistent place to find their new mutations - the bottom).
 - However, when selling mutations, the mutations are inserted in the DropdownList so that it is ordered correctly according to tier level. We don't need to always put the sold mutations at the bottom of the DropdownList because the player can rely on the program to re-add the mutation to the Transmission/Symptom DropdownLists, and does not need the same type of clarity that is utilized in the philosophy for buying mutations.
+- To have a decrease in pointRate, either of two things needs to happen. Either lethality exceeds a certain threshold (we have multiple thresholds, each decreasing pointRate by 1 if they're passed) or the player has a certain number of points already (multiple thresholds for this too).
+- We have deadRate be linear and infection rate be logistic so that people die faster than they are infected (making the player be careful about when to invest in mutations that cause a lot of deaths).
+- We do not allow players to sell lower tier mutations before all their post-requisite mutations are sold.
+- We make the random bubble popup rate decrease as more cities are infected (so that players don't accumulate too many points just by infecting every city first then pouring all their money into the killing mutations - that would make the game too easy).
+- The cure is 1.5 * percentage of people dead, meaning that at 67% of the population dead with no attempt to stop the cure effort, the player will lose. Even at 50%, with no attempt to stop the cure effort, the cure progress is 75%. This incentivizes the player to actively try to stop the cure effort. **(Cure to dead ratio subject to change)**
+- We made the point rate and sporadic bubbles pop up on a random basis to increase the RNGness of the game.
+- When red and orange bubbles show up on the map, the player must pop them to get their points. If the player does not do this and the bubbles fade away, then no points are gained (making sure the player is actively engaged in the game).
+- If the percentage of dead in a *specific* city exceeds 25%, then the airport is closed.
+- There are currently two ways to infect a city. Through land transmission or through infected plane transmission. **Subject to change if we decide to add boats**
+- People start dying only when lethality > 0 and the rate at which this happens is based on lethality.
+- **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar (<Transmission> or <Symptom>)**
 
 BUGS:
+- stats for selling
 - overlapping city labels at the bottom poses a problem when the bubble shows up
 - planes should not get overlapped by sporadic bubbles
+- make it so that sporadic bubble rate decreases as more cities are infected to balance the game
+- add indication that an airport has closed or an airport is infected on the squares
+- fix what happens when u buy all tMutations or sMutations
 
 TO-DO features:
+- choose which city to begin at
 - command line "cheat code"
 - cure bubbles & aMutations
+- land borders closing
 - cure distribution and also stopping game when dead == diseased
-- sporadic bubbles
 - victory/loss screen
-- fill in circle darker gray as death count goes up
 - if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
 - automatic mutations
 - implement feature where u get less and less refund for selling, and eventually u need to pay (which means showing stats for selling too)
-- when ports/airports close, display that as news
 - we might not even be able to get to the point of customizing transmission mutations lmao (hopefully we can add aMutations though)
 - putting names of city next to them (and display % infected and % dead for each city if have time)
 - refer to Prototype for more things
@@ -117,3 +139,4 @@ Extra Features:
 
 The Required Significant Algorithm that is part of the project: 
 - selling and adding items to dropdownlists, and updating lists appropiately?
+- the shading of the cities respectively to dead and disease percentage and bubble shading?
