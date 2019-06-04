@@ -82,12 +82,13 @@ Jeremy - I changed the disease stats (infectivity, severity, lethality) to be ou
 
 Sunday, June 2
 -----------------------------------------------------------------------------------------------------------------------------
-Victor - I fixed the bug where when a player has bought a mutation then sold the mutation, the post-reqs of that bought mutation are still inside the data structure of "mutations that are currently activated". This caused a problem when buying new mutations, because the post-reqs of the first mutation showed up when it wasn't supposed to. I also made it so that the player cannot sell a mutation when its post-reqs aren't sold yet. I also implemented a system where random bubbles (referred to as sporadicBubbles in the code) pop up on the map after a city is infected.
+Jeremy - I editted the population sizes because the cities at the bottom of the map were harder to reach and took significantly more time to infect. I also moved the news feature up so it didn't overlap with the DropDownLists. I also added the closeAirport feature, so whenever a city begins to lose a significant amount of its population, its airport will close and prevent any incoming or outgoing planes.
 
-Sunday, June 2
+Victor - I fixed the bug where when a player has bought a mutation then sold the mutation, the post-reqs of that bought mutation are still inside the data structure of "mutations that are currently activated". This caused a problem when buying new mutations, because the post-reqs of the first mutation showed up when it wasn't supposed to. I also made it so that the player cannot sell a mutation when its post-reqs aren't sold yet. I also implemented a system where random bubbles (referred to as sporadicBubbles in the code) pop up on the map after a city is infected. I added where if an airport is closed, then it will be displayed on the news. I am working to turn the shade of cities progressively darker as % of dead in that city increases. I updated design choices to the README and working on debugging sporadic bubbles fading into the shading of dead cities. (There are a lot of bugs related to this so it took up my entire day).
+
+Monday, June 3
 -----------------------------------------------------------------------------------------------------------------------------
-Victor - I added where if an airport is closed, then it will be displayed on the news. I am working to turn the shade of cities progressively darker as % of dead in that city increases.
-
+Jeremy - I added the random mutation feature so every once in a while, there will be a random mutation, and it appears in the news.
 
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
@@ -104,16 +105,15 @@ Design Choices:
 - If the percentage of dead in a *specific* city exceeds 25%, then the airport is closed.
 - There are currently two ways to infect a city. Through land transmission or through infected plane transmission. **Subject to change if we decide to add boats**
 - People start dying only when lethality > 0 and the rate at which this happens is based on lethality.
-- Disease spread is based on 
+- **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar (<Transmission> or <Symptom>)**
 
 BUGS:
+- stats for selling
 - overlapping city labels at the bottom poses a problem when the bubble shows up
 - planes should not get overlapped by sporadic bubbles
 - make it so that sporadic bubble rate decreases as more cities are infected to balance the game
-- sporadic bubbles don't blend into black bubbles
 - add indication that an airport has closed or an airport is infected on the squares
 - fix what happens when u buy all tMutations or sMutations
-- fix sporadic bubbles/red bubbles for the disease == 0 but dead increasing
 
 TO-DO features:
 - choose which city to begin at

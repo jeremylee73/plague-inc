@@ -367,6 +367,59 @@ class Disease {
     return false;
   }
 
+  void updateAccessibleMutations(){
+    for (int i=0; i<tMutations.size(); i++){
+      if (in(tMutations.get(i), accessibleTMutations)){
+        accessibleTMutations.remove(tMutations.get(i));
+      }
+    }
+    for (int i=0; i<sMutations.size(); i++){
+      if (in(sMutations.get(i), accessibleSMutations)){
+        accessibleSMutations.remove(sMutations.get(i));
+      }
+    }
+  }
+
+  void addRandomMutation(){
+    Mutation mut;
+    if (Math.random() < 0.5){
+      int index = (int) Math.floor(Math.random() * (accessibleTMutations.size() + 1));
+      mut = accessibleTMutations.get(index);
+      tMutations.add(mut);
+      accessibleTMutations.remove(mut);
+      for (int i=0; i<allTMutations.size(); i++) {
+        Mutation mut2 = allTMutations.get(i);
+        //if prereqs are met and mutation is not already in the dropdownlist
+        if (arrIn(mut2.prereqs, tMutations) && !(in(mut2, accessibleTMutations)) && !(in(mut2, tMutations))) {
+          accessibleTMutations.add(mut2);
+        }
+      }
+    } else {
+      int index = (int) Math.floor(Math.random() * (accessibleSMutations.size() + 1));
+      mut = accessibleSMutations.get(index);
+      sMutations.add(mut);
+      accessibleSMutations.remove(mut);
+      for (int i=0; i<allSMutations.size(); i++) {
+        Mutation mut2 = allSMutations.get(i);
+        //if prereqs are met and mutation is not already in the dropdownlist
+        if (arrSIn(mut2.prereqs, sMutations) && !(in(mut2, accessibleSMutations)) && !(in(mut2, sMutations))) {
+          accessibleSMutations.add(mut2);
+        }
+      }
+    }
+    news.add(mut.name + " mutated.");
+    noStroke();
+    fill(205);
+    rect(1220, 215, 160, 100);
+    fill(0, 0, 0);
+    text(news.get(news.size() - 1), 1220, 220, 150, 100);
+    dSell.addItem(mut.name, 0);
+    acquiredMutations.add(0, mut);
+    infectivity += mut.infIncrement / 10000.0;
+    severity += mut.sevIncrement / 10000.0;
+    lethality += mut.letIncrement / 10000.0;
+  }
+
   boolean addTMutation(Mutation m) {
     if (points < m.cost) {
       return false;
