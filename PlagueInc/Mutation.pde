@@ -7,8 +7,9 @@ class Mutation{
   ArrayList<String> prereqs;
   String type;
   boolean bought;
+  boolean isBase;
   
-  Mutation(String name, int cost, int infIncrement, int sevIncrement, int letIncrement, ArrayList<String> prereqs, String typeOfMutation){
+  Mutation(String name, int cost, int infIncrement, int sevIncrement, int letIncrement, ArrayList<String> prereqs, String typeOfMutation, boolean isBaseMutation){
     this.name = name;
     this.cost = cost;
     this.infIncrement = infIncrement;
@@ -18,6 +19,7 @@ class Mutation{
     //type refers to whether this mutation is a "tMutation", a "sMutation", or a "aMutation"
     type = typeOfMutation;
     bought = false;
+    isBase = isBaseMutation;
   }
   
   String name(){
@@ -46,5 +48,9 @@ class Mutation{
   
   boolean bought(){
     return bought;
+  }
+  
+  boolean isBase(){
+    return isBase;
   }
 }

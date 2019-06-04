@@ -389,7 +389,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 0;//0;
+  points = 200;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
@@ -432,10 +432,6 @@ void setup() {
   cp5.addButton("Sell").setValue(0).setPosition(1300, 680).setSize(70, 40);
 
   cities.get(0).diseased = 1;
-  
-  for (int i = 0; i < disease.allSMutations.size(); i++){
-    disease.checkIfCanSell(disease.allSMutations.get(i));
-  }
 }
 
 void draw() {
