@@ -179,14 +179,16 @@ class Disease {
     allSMutations.add(Fever);
 
     ArrayList<String> sprereqs11 = new ArrayList<String>();
-    sprereqs10.add("Paranoia (Tier 2)");
-    sprereqs10.add("Hypersensitivity (Tier 2)");
-    sprereqs10.add("Seizures (Tier 3)");
-    sprereqs10.add("Paralysis (Tier 3)");
-    Mutation Inflammation = new Mutation("Inflammation (Tier 3)", 5, 2, 2, 2, sprereqs10, "sMutation");
+    sprereqs11.add("Paranoia (Tier 2)");
+    sprereqs11.add("Hypersensitivity (Tier 2)");
+    sprereqs11.add("Seizures (Tier 3)");
+    sprereqs11.add("Paralysis (Tier 3)");
+    Mutation Inflammation = new Mutation("Inflammation (Tier 3)", 5, 2, 2, 2, sprereqs11, "sMutation");
     allSMutations.add(Inflammation);
 
     ArrayList<String> sprereqs12 = new ArrayList<String>();
+    sprereqs12.add("Abscesses (Tier 2)");
+    sprereqs12.add("Hemophilia (Tier 2)");
     sprereqs12.add("Systemic Infection (Tier 3)");
     sprereqs12.add("Internal Hemorrhaging (Tier 3)");
     Mutation Tumors = new Mutation("Tumors (Tier 3)", 11, 2, 0, 4, sprereqs12, "sMutation");
@@ -383,10 +385,14 @@ class Disease {
   void addRandomMutation(){
     Mutation mut;
     if (Math.random() < 0.5){
-      int index = (int) Math.floor(Math.random() * (accessibleTMutations.size() + 1));
+      if (accessibleTMutations.size() == 0){
+        return;
+      }
+      int index = (int) (Math.random() * accessibleTMutations.size());
       mut = accessibleTMutations.get(index);
       tMutations.add(mut);
       accessibleTMutations.remove(mut);
+      mut.bought = true;
       for (int i=0; i<allTMutations.size(); i++) {
         Mutation mut2 = allTMutations.get(i);
         //if prereqs are met and mutation is not already in the dropdownlist
@@ -395,10 +401,14 @@ class Disease {
         }
       }
     } else {
-      int index = (int) Math.floor(Math.random() * (accessibleSMutations.size() + 1));
+      if (accessibleSMutations.size() == 0){
+        return;
+      }
+      int index = (int) (Math.random() * accessibleSMutations.size());
       mut = accessibleSMutations.get(index);
       sMutations.add(mut);
       accessibleSMutations.remove(mut);
+      mut.bought = true;
       for (int i=0; i<allSMutations.size(); i++) {
         Mutation mut2 = allSMutations.get(i);
         //if prereqs are met and mutation is not already in the dropdownlist
@@ -555,7 +565,7 @@ class Disease {
   
   boolean checkIfCanSell(Mutation mut){
     int numPrereqsBought = mut.prereqs().size();
-    println(numPrereqsBought);
+    //println(mut.name+ ": " +numPrereqsBought);
     return true;
   }
 }

@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -389,7 +389,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 200;//0;
+  points = 0;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
@@ -432,6 +432,10 @@ void setup() {
   cp5.addButton("Sell").setValue(0).setPosition(1300, 680).setSize(70, 40);
 
   cities.get(0).diseased = 1;
+  
+  for (int i = 0; i < disease.allSMutations.size(); i++){
+    disease.checkIfCanSell(disease.allSMutations.get(i));
+  }
 }
 
 void draw() {
@@ -445,7 +449,7 @@ void draw() {
     c.drawRoutes();
     fill(255, 255, 255);
     c.drawAirports();
-    c.drawDocks();
+    //c.drawDocks();
   }
   drawCities();
 
@@ -506,7 +510,7 @@ void draw() {
   }
 
   if (Math.random() < 0.0005){
-    disease.addRandomMutation();  //uncomment later
+    disease.addRandomMutation();
   }
 
   disease.updateAccessibleMutations();
