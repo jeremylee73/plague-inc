@@ -6,6 +6,7 @@ class Mutation{
   int letIncrement;
   ArrayList<String> prereqs;
   String type;
+  boolean bought;
   
   Mutation(String name, int cost, int infIncrement, int sevIncrement, int letIncrement, ArrayList<String> prereqs, String typeOfMutation){
     this.name = name;
@@ -16,6 +17,7 @@ class Mutation{
     this.prereqs = prereqs;
     //type refers to whether this mutation is a "tMutation", a "sMutation", or a "aMutation"
     type = typeOfMutation;
+    bought = false;
   }
   
   String name(){
@@ -40,5 +42,9 @@ class Mutation{
   
   ArrayList<String> prereqs(){
     return prereqs;
+  }
+  
+  boolean bought(){
+    return bought;
   }
 }

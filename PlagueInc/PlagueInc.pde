@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -506,7 +506,7 @@ void draw() {
   }
 
   if (Math.random() < 0.0005){
-    disease.addRandomMutation();  
+    disease.addRandomMutation();  //uncomment later
   }
 
   disease.updateAccessibleMutations();

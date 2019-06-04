@@ -552,4 +552,10 @@ class Disease {
     }
     return false;
   }
+  
+  boolean checkIfCanSell(Mutation mut){
+    int numPrereqsBought = mut.prereqs().size();
+    println(numPrereqsBought);
+    return true;
+  }
 }
