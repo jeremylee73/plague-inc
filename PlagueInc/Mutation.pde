@@ -4,12 +4,12 @@ class Mutation{
   int infIncrement;
   int sevIncrement;
   int letIncrement;
-  ArrayList<Mutation> prereqs;
+  ArrayList<String> prereqs;
   String type;
   boolean bought;
   boolean isBase;
   
-  Mutation(String name, int cost, int infIncrement, int sevIncrement, int letIncrement, ArrayList<Mutation> prereqs, String typeOfMutation, boolean isBaseMutation){
+  Mutation(String name, int cost, int infIncrement, int sevIncrement, int letIncrement, ArrayList<String> prereqs, String typeOfMutation, boolean isBaseMutation){
     this.name = name;
     this.cost = cost;
     this.infIncrement = infIncrement;
@@ -42,7 +42,7 @@ class Mutation{
     return letIncrement;
   }
   
-  ArrayList<Mutation> prereqs(){
+  ArrayList<String> prereqs(){
     return prereqs;
   }
   

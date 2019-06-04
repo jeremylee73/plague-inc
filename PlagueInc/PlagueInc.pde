@@ -155,12 +155,16 @@ void customize(DropdownList ddl) {
 
 void Confirm() { //there's a bug with confirm where it sometimes throws an error
   if (d1.getValue() != 0) {
+    fill(205);
+    rect(1220, 300, 1000, 1000);
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
     disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
     refreshDropDownList("<Transmission>");
     refreshDropDownList("<Current Mutations>");
   }
   if (d2.getValue() != 0) {
+    fill(205);
+    rect(1220, 400, 1000, 1000);
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
     disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
     refreshDropDownList("<Symptoms>");
@@ -208,7 +212,6 @@ void Sell() {
   if (dSell.getValue() != 0) {
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
-    println(mut.name);
     disease.sell(mut);
     fill(205);
     rect(1220, 560, 1000, 1000);
@@ -385,7 +388,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 200;//0;
+  points = 300;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
