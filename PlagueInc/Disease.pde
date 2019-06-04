@@ -413,6 +413,7 @@ class Disease {
     rect(1220, 215, 160, 100);
     fill(0, 0, 0);
     text(news.get(news.size() - 1), 1220, 220, 150, 100);
+    dSell.addItem(mut.name, 0);
     acquiredMutations.add(0, mut);
     infectivity += mut.infIncrement / 10000.0;
     severity += mut.sevIncrement / 10000.0;
