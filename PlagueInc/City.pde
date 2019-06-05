@@ -68,6 +68,18 @@ class City {
     }
   }
 
+  void writeNames() {
+    for (int i=0; i<cities.size(); i++) {
+      int cityx = cities.get(i).x;
+      int cityy = cities.get(i).y;
+      fill(255);
+      rect(cityx-85, cityy, 55, 35);
+      fill(0,0,0);
+      textSize(10);
+      text(cities.get(i).name,cityx-80,cityy+5,50,30);
+    }
+  }
+
   void updateColor() {
     GB = (population - diseased) / (population * 1.0) * 255;
     R = (population - dead) / (population * 1.0) * 255;
