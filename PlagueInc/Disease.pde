@@ -476,6 +476,9 @@ class Disease {
         accMut = acquiredMutations.get(i);
         for (int j = 0; j < accMut.prereqs().size(); j++) {
           if (accMut.prereqs().get(j).equals(mut.name)) {
+            fill(0, 0, 0);
+            textSize(8);
+            text("You need to sell \""+accMut.name+"\" first before selling \""+mut.name+"\".", 1220, 500, 150, 75);
             return false;
           }
         }
@@ -521,7 +524,6 @@ class Disease {
       //checks if the post-reqs of the mutation the player is trying
       //to sell is in acquired mutations. If so, then don't
       //allow player to sell the mutation (this is how it works in-game too)
-      print(" "+checkIfCanSell(mut));
       if (!checkIfCanSell(mut)) {
         return false;
       }
@@ -570,10 +572,9 @@ class Disease {
     //finds out how many prereqs are bought
     for (int i = 0; i < mut.prereqs().size(); i++) {
       Mutation prereq = convertNameToMutation(mut.prereqs().get(i), allSMutations);
-      println(prereq.name);
       if (!prereq.name.equals(mut.name) && prereq.bought) {
         numPrereqsBought++;
-        if (prereq.isBase){
+        if (prereq.isBase) {
           prereqsThatReachedBase.add(prereq);
         }
         Mutation prereqOfPrereq = null;
@@ -586,18 +587,20 @@ class Disease {
         }
       }
     }
-    println(numPrereqsBought);
-    printMutationArray(prereqsThatReachedBase);
+    if (prereqsThatReachedBase.size() != numPrereqsBought) {
+      fill(0, 0, 0);
+      textSize(8);
+      text("You need to sell \""+printMutationArray(leftoverMutations(prereqsThatReachedBase, mut.prereqs))+"\" first before selling \""+mut.name+"\".", 1220, 500, 150, 75);
+    }
     return prereqsThatReachedBase.size() == numPrereqsBought;
   }
 
+  //HIGHLIGHT ALGORITHM
   boolean treeHasBase(Mutation original, Mutation prereqOriginal, Mutation tryToSell, Mutation mut, boolean treeHasBase) {
     if (prereqsThatReachedBase.contains(prereqOriginal)) {
       return false;
     }
     if (mut.isBase || prereqOriginal.isBase) {
-      println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
-      println("reached base!");
       prereqsThatReachedBase.add(prereqOriginal);
       return true;
     }
@@ -620,5 +623,24 @@ class Disease {
       }
     }
     return null;
+  }
+
+  //arr2 is bigger than arr1
+  //output is an ArrayList of mutations that are not present in arr1 but present in arr2 AND are bought
+  ArrayList<Mutation> leftoverMutations(ArrayList<Mutation> arr1, ArrayList<String> arr2) {
+    if (arr2.size() < arr1.size()) {
+      return null;
+    }
+    ArrayList<Mutation> mutVersion = new ArrayList<Mutation>();
+    for (int i = 0; i < arr2.size(); i++) {
+      mutVersion.add(convertNameToMutation(arr2.get(i), allSMutations));
+    }
+    for (int i = 0; i < mutVersion.size(); i++) {
+      if (arr1.contains(mutVersion.get(i)) || !mutVersion.get(i).bought()) {
+        mutVersion.remove(i);
+        i--;
+      }
+    }
+    return mutVersion;
   }
 }
