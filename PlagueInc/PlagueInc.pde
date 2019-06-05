@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import java.awt.*; //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+=======
+import java.awt.*; //<>// //<>// //<>// //<>//
+>>>>>>> b162158afa752d8e1603b35f820b4a5afc1d274d
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -153,18 +157,43 @@ void customize(DropdownList ddl) {
   ddl.setColorActive(color(255, 128));
 }
 
-void Confirm() { //there's a bug with confirm where it sometimes throws an error
+void Confirm() {
   if (d1.getValue() != 0) {
+    fill(205);
+    rect(1220, 300, 1000, 1000);
+    rect(1220, 500, 170, 80);
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    disease.addTMutation(accTMuts.get((int) d1.getValue() - 1));
-    refreshDropDownList("<Transmission>");
-    refreshDropDownList("<Current Mutations>");
+    Mutation mut = accTMuts.get((int) d1.getValue() - 1);
+    if (!disease.addTMutation(mut)) {
+      fill(0, 0, 0);
+      textSize(10);
+      text("You do not have enough points for "+mut.name+".", 1220, 500, 150, 75);
+    } else {
+      refreshDropDownList("<Transmission>");
+      refreshDropDownList("<Current Mutations>");
+    }
   }
   if (d2.getValue() != 0) {
+    fill(205);
+    rect(1220, 400, 1000, 1000);
+    rect(1220, 500, 170, 80);
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
-    disease.addSMutation(accSMuts.get((int) d2.getValue() - 1));
-    refreshDropDownList("<Symptoms>");
-    refreshDropDownList("<Current Mutations>");
+    Mutation mut = accSMuts.get((int) d2.getValue() - 1);
+    if (!disease.addSMutation(mut)) {
+      fill(0, 0, 0);
+      textSize(10);
+      text("You do not have enough points for "+mut.name+".", 1220, 500, 150, 75);
+    } else {
+      refreshDropDownList("<Symptoms>");
+      refreshDropDownList("<Current Mutations>");
+    }
+  }
+  if (dSell.getValue() != 0) {
+    fill(205);
+    rect(1220, 500, 170, 80);
+    fill(0, 0, 0);
+    textSize(10);
+    text("You cannot buy an already acquired mutation.", 1220, 500, 150, 75);
   }
 }
 
@@ -193,7 +222,7 @@ boolean refreshDropDownList(String name) {
       d2.addItem(accSMuts.get(i-1).name, i);
     }
     return true;
-  } else if (name.equals("<Current Mutations>")){
+  } else if (name.equals("<Current Mutations>")) {
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     dSell.clear();
     dSell.addItem("<Current Mutations>", 0);
@@ -208,18 +237,28 @@ void Sell() {
   if (dSell.getValue() != 0) {
     ArrayList<Mutation> acqMuts = disease.acquiredMutations;
     Mutation mut = acqMuts.get((int) (dSell.getValue()-1));
-    disease.sell(mut);
     fill(205);
-    rect(1220, 560, 1000, 1000);
-    dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
-    dSell.addItem("<Current Transmissions>", 0);
-    customize(dSell);
-    dSell.getCaptionLabel().set("<Current Mutations>");
-    //dSell.clear();
-    //dSell.addItem("<Current Mutations>", 0);
-    for (int i=1; i <= acqMuts.size(); i++) {
-      dSell.addItem(acqMuts.get(i-1).name, i);
+    rect(1220, 500, 170, 80);
+    if (disease.sell(mut)) {
+      fill(205);
+      rect(1220, 560, 1000, 1000);
+      dSell = cp5.addDropdownList("<Current Transmissions>").setPosition(1220, 560);
+      dSell.addItem("<Current Transmissions>", 0);
+      customize(dSell);
+      dSell.getCaptionLabel().set("<Current Mutations>");
+      //dSell.clear();
+      //dSell.addItem("<Current Mutations>", 0);
+      for (int i=1; i <= acqMuts.size(); i++) {
+        dSell.addItem(acqMuts.get(i-1).name, i);
+      }
     }
+  }
+  if (d1.getValue() != 0 || d2.getValue() != 0) {
+    fill(205);
+    rect(1220, 500, 170, 80);
+    fill(0, 0, 0);
+    textSize(10);
+    text("You cannot sell a mutation that hasn't been bought yet.", 1220, 500, 150, 75);
   }
 }
 
@@ -275,23 +314,35 @@ void updatePointRate() {
   }
 }
 
-void putStatsText(Mutation mut) {
+void putStatsText(Mutation mut, String action) {
+  String symbol = "";
+  String costOrRefund = "";
+  if (action.equals("buy")) {
+    symbol = "+";
+    costOrRefund = "Cost";
+  } else if (action.equals("sell")) {
+    symbol = "-";
+    costOrRefund = "Refund";
+  }
   fill(0, 0, 0);
   textSize(10);
   text(mut.name(), 1220, 510);
   String stats = "";
-  stats+="Infectivity: +"+mut.infIncrement()+"  ";
-  stats+="Severity: +"+mut.sevIncrement()+"  ";
+  stats+="Infectivity: "+symbol+mut.infIncrement()+"  ";
+  stats+="Severity: "+symbol+mut.sevIncrement()+"  ";
   //spacing for visual purposes
-  stats+="Lethality: +"+mut.letIncrement()+"   ";
+  stats+="Lethality: "+symbol+mut.letIncrement()+"  ";
   if (mut.letIncrement() < 10) {
     stats+= " ";
   }
-  stats+="Cost: "+mut.cost()+" Points";
+  if (costOrRefund.equals("Cost")) {
+    stats+= " ";
+  }
+  stats+=costOrRefund+": "+mut.cost()+" Points";
   text(stats, 1220, 515, 150, 75);
 }
 
-void printMutationArray(ArrayList<Mutation> ary) {
+String printMutationArray(ArrayList<Mutation> ary) {
   String str = "[";
   for (int i = 0; i < ary.size(); i++) {
     if (i != 0) {
@@ -300,10 +351,10 @@ void printMutationArray(ArrayList<Mutation> ary) {
     str+= ary.get(i).name;
   }
   str+="]";
-  println(str);
+  return str;
 }
 
-void printStringArray(ArrayList<String> ary) {
+String printStringArray(ArrayList<String> ary) {
   String str = "[";
   for (int i = 0; i < ary.size(); i++) {
     str+= ary.get(i);
@@ -312,7 +363,7 @@ void printStringArray(ArrayList<String> ary) {
     }
   }
   str+= "]";
-  println(str);
+  return str;
 }
 
 void controlEvent(ControlEvent theEvent) {
@@ -323,18 +374,26 @@ void controlEvent(ControlEvent theEvent) {
   } else if (theEvent.isController()) {
     if (theEvent.getController() == d1) {
       fill(205);
-      rect(1220, 500, 170, 320);
+      rect(1220, 500, 170, 80);
       if (theEvent.getController().getValue() != 0) {
         Mutation mut = disease.accessibleTMutations.get((int)theEvent.getController().getValue()-1);
-        putStatsText(mut);
+        putStatsText(mut, "buy");
       }
     }
     if (theEvent.getController() == d2) {
       fill(205);
-      rect(1220, 500, 170, 320);
+      rect(1220, 500, 170, 80);
       if (theEvent.getController().getValue() != 0) {
         Mutation mut = disease.accessibleSMutations.get((int)theEvent.getController().getValue()-1);
-        putStatsText(mut);
+        putStatsText(mut, "buy");
+      }
+    }
+    if (theEvent.getController() == dSell) {
+      fill(205);
+      rect(1220, 500, 170, 80);
+      if (theEvent.getController().getValue() != 0) {
+        Mutation mut = disease.acquiredMutations.get((int)theEvent.getController().getValue()-1);
+        putStatsText(mut, "sell");
       }
     }
   }
@@ -359,7 +418,7 @@ void mousePressed() {
       //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
       //etc, don't have to be as rigid as following actual game 100%
     }
-  } //<>//
+  }
   //processing background color
 }
 
@@ -384,7 +443,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 200;//0;
+  points = 300;//0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
@@ -500,8 +559,8 @@ void draw() {
     c.landTransmission();
   }
 
-  if (Math.random() < 0.0005){
-    disease.addRandomMutation();
+  if (Math.random() < 0.0005) {
+    //disease.addRandomMutation(); //uncomment later
   }
 
   disease.updateAccessibleMutations();
