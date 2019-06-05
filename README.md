@@ -25,14 +25,14 @@ The disease will automatically begin at the top of the map at the Pokemon League
 The goal of the game is to infect everyone in the world and use the disease to kill people. The disease will begin to kill when lethality goes above 0, but as soon as the number of people dead reaches a certain point, a cure will begin developing. If you kill everyone in the world before a cure reaches 100% development, you win, and if the cure reaches 100%, you lose automatically.
 
 -----------------------------------------------------------------------------------------------------------------------------
-3. **Significant Algorithm:**
+[3]. **Significant Algorithm:**
 -----------------------------------------------------------------------------------------------------------------------------
 - We have multiple significant algorithms, but we will highlight the one that shows the most about what we have learned over CS / CS prowess. A big part of our code is selling and buying mutations, as that is a fundamental part of the game. When selling mutations, one must check that one doesn't leave a "dangling" mutation, aka a mutation that isn't connected to any base mutations (the mutations that the player has available to them upon starting). We wrote a method to detect whether selling a mutation would create a dangling mutation, and if it does, then prevent the player from selling that mutation.
 - The method is called checkIfCanSell(Mutation) and it returns true if the mutation does not produce a dangling mutation, false otherwise.
 - First we look at the adjacent mutations to the one that the player wants to sell. We use multiple loops and if cases to determine if these adjacent mutations are already bought (if they aren't bought, then these adjacent mutations have no consideration in whether a dangling mutation can be produced or not). It then looks at the tree of each bought adjacent mutation and checks if that tree originates from a base mutation via a recursive method called "treeHasBase". While recursively backtracking, we make sure that the method does not look in the same place twice by putting if statement barriers that bars it from looking at a path already taken or from "crossing" the original mutation that the player wanted to sell (if this crossing-over happened, then the algorithm would interpret more trees having base mutations than there are). Only if all the bought adjacent mutations have a base mutation as the root of their tree will the checkIfCanSell method return true, since there will be no dangling mutation when detaching the mutation the player wants to sell. If not all the bought adjacent mutations have a base mutation at the root of their tree, then the checkIfCanSell method will return false (since that will dangle a mutation).
 
 -----------------------------------------------------------------------------------------------------------------------------
-4. **Dev Log**
+[4]. **Dev Log**
 -----------------------------------------------------------------------------------------------------------------------------
 
 Thursday, May 16
@@ -134,7 +134,7 @@ Jeremy - I fixed the bug where the percentage of people infected was lower than 
 Victor - I continued to work on the selling system for converging trees of base mutations and finally did it. I also did an assortment of other minor details to add to the aesthetics of game, which one can see in the commit log.
 
 -----------------------------------------------------------------------------------------------------------------------------
-5. **Design Choices:**
+[5]. **Design Choices:**
 -----------------------------------------------------------------------------------------------------------------------------
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
 - When buying mutations, the branching out (post-requirement) mutations are put at the bottom of the DropdownList to show clarity in what mutations lead to what kind of new mutations become available (it is easier to see what new mutations become available if they can always expect a consistent place to find their new mutations - the bottom).
@@ -158,6 +158,6 @@ Victor - I continued to work on the selling system for converging trees of base 
 - Unfortunately, we did not have enough time to implement the ability mutations or cure bubbles, but with smart choices, the player should be able to win (plus this makes the game harder and more enjoyable!).
 
 -----------------------------------------------------------------------------------------------------------------------------
-6. **Cheat Code:**
+[6]. **Cheat Code:**
 -----------------------------------------------------------------------------------------------------------------------------
 - There is an area in the middle of the map of a circular canopy surrounding a circular pavement of stone surrounding a circular moat of water around a tree. If the player presses in the area inside that circular moat of water, he or she will be rewarded with plentiful points.
