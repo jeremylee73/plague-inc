@@ -98,7 +98,7 @@ class City {
     } else {
       hasBubble = false;
     }
-    if (bubblePopped && GB > 254.9) {
+    if (bubblePopped && GB > 254.9 && diseased + dead != population) {
       fill(255, 255, 255);
       noStroke();
       ellipse(x, y, 30, 30);
