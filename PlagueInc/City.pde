@@ -123,7 +123,8 @@ class City {
       if (red < 62 && diseased + dead == population && dead > 0){
         red = 62;
       }
-      //to try and fix shading issues with sporadic bubbles
+      //to fix shading issues with sporadic bubbles where it would not turn 
+      //dark red as cities turned dark red
       if (diseased + dead == population && dead > 0){
         greenIncr = green/RGBbubbleIncr;
         blueIncr = blue/RGBbubbleIncr;
@@ -143,7 +144,7 @@ class City {
     if (!hasSporadicBubble && !hasBubble && diseased > 0) {
       RGBbubbleIncr = 180;
       hasSporadicBubble = true;
-      //RGB for sickly orange
+      //RGB code for sickly orange color
       red = 247;
       green = 172;
       blue = 30;
