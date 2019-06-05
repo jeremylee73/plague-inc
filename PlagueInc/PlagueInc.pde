@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -575,20 +575,21 @@ void draw() {
   fill(205);
   rect(1220, 150, 100, 22);
   fill(0, 0, 0);
-  text("Infected: " + (totalDiseased * 100 / (cities.size()*cities.get(0).population)) + "%", 1220, 170);
-  fill(205);
-  rect(1220, 180, 100, 22);
-  fill(0, 0, 0);
   int totalPop = 0;
   for (int i=0; i<cities.size(); i++) {
     totalPop += cities.get(i).population;
   }
+  text("Infected: " + (totalDiseased * 100 / (totalPop)) + "%", 1220, 170);
+  fill(205);
+  rect(1220, 180, 100, 22);
+  fill(0, 0, 0);
   percentDead = totalDead * 100.0 / (totalPop);
   text("Dead: " + (int)percentDead + "%", 1220, 200);
   //calculates and displays cure %
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
-      cure.setDeveloped((int)(percentDead * 1.5));
+      double deathIndex = -0.04 * Math.pow(percentDead - 50, 2.0) + 100;
+      cure.setDeveloped((float)(cure.developed() + ((1 / (disease.severity * 10000)) * (deathIndex / 100.0))));
     }
     if (cure.developed() > 100) {
       cure.setDeveloped(100);
