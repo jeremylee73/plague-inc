@@ -3,7 +3,7 @@
 ![PlagueInc Logo](https://hb.imgix.net/f37da7a8936fa2b6a1a757b07477bd7f91b294f9.jpg?auto=compress,format&fit=crop&h=353&w=616&s=e71f4ff04f589002fd9740826097e895)
 
 **Table of Contents**
-[1]. Project Description
+1. Project Description
 2. Directions
 3. Significant Algorithm
 4. Devlog
@@ -18,7 +18,7 @@ We are recreating the game Plague Inc., which is a game in which the player cont
 The disease can spread in two ways. Either it can be transmitted by land to an adjacent city, or it can be transmitted by plane, but this can only occur from a city with an open airport to another city with an open airport. Once a certain number of people die, a cure effort begins, and once the cure reaches 100% development, it begins deployment, and if there are no more people with the disease left, the player loses. Also, when a certain number of people in a city die, the airport closes, so no more planes can come in or go out of the city. Finally, there are also random mutations that occur during the game. These help you develop your disease without expending any points, and if you do not want the mutation, you can always sell it for a refund.
 
 -----------------------------------------------------------------------------------------------------------------------------
-2. **Directions**
+[2]. **Directions**
 -----------------------------------------------------------------------------------------------------------------------------
 The disease will automatically begin at the top of the map at the Pokemon League. Your points will increase incrementally, and when your points reach a high enough point, you can begin to buy mutations. You will also see red/orange circles pop up on cities. You can click those bubbles to get bonus points. On the right of the screen are the two drop down lists for transmission and symptom mutations. Once you choose a mutation, you can see how it will affect the disease, and if you want to commit to it, you can click the commit button. Likewise, you can sell mutations by selecting a mutation on the bottom drop down list and clicking "Sell". If you evolve mutations that increase severity, the rate at which you gain points increases.
 
