@@ -546,7 +546,7 @@ void draw() {
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
-    if ((c.dead / (c.population * 1.0)) > 0.25 && c.airportOpen) {
+    if ((c.dead / (c.population * 1.0)) > 0.25) {
       c.closeAirport();
     }
     c.updateColor();
