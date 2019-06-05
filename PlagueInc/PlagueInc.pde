@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>//
+import java.awt.*; //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -577,7 +577,11 @@ void draw() {
   fill(205);
   rect(1220, 180, 100, 22);
   fill(0, 0, 0);
-  percentDead = totalDead * 100.0 / (cities.size()*cities.get(0).population);
+  int totalPop = 0;
+  for (int i=0; i<cities.size(); i++){
+    totalPop += cities.get(i).population; 
+  }
+  percentDead = totalDead * 100.0 / (totalPop);
   text("Dead: " + (int)percentDead + "%", 1220, 200);
   //calculates and displays cure %
   if (totalDead >= 10000 ) {
