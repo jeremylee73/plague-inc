@@ -1,4 +1,4 @@
-import java.awt.*; //<>//
+import java.awt.*; //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -22,6 +22,8 @@ int totalDiseased;
 float percentDead;
 ArrayList<Plane> planes;
 boolean cheatCodeOn;
+PImage victoryImg;
+PImage defeatImg;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -431,6 +433,8 @@ void setup() {
   size(1440, 785);
   img = loadImage("map.png");
   image(img, 0, 0);
+  victoryImg = loadImage("victory.png");
+  defeatImg = loadImage("defeat.png");
 
   citySetup();
   drawCities();
@@ -598,7 +602,6 @@ void draw() {
   
   if (totalDead == totalPop){
     size(1440,785);
-    PImage victoryImg = loadImage("victory.png");
     image(victoryImg, 0, 0);
     d1.remove();
     d2.remove();
@@ -606,7 +609,6 @@ void draw() {
   }
   if (cure.developed() >= 100){
     size(1440,785);
-    PImage defeatImg = loadImage("defeat.png");
     image(defeatImg, 0, 0);
     d1.remove();
     d2.remove();
