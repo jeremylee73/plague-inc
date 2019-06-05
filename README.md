@@ -1,28 +1,37 @@
 # PlagueInc
 
+![PlagueInc Logo](https://hb.imgix.net/f37da7a8936fa2b6a1a757b07477bd7f91b294f9.jpg?auto=compress,format&fit=crop&h=353&w=616&s=e71f4ff04f589002fd9740826097e895)
+
 **Table of Contents**
 1. Project Description
 2. Directions
-3. Devlog
-4. Design Choices (warning: clutterd)
-5. Cheat Codes
-6. 
+3. Significant Algorithm
+4. Devlog
+5. Design Choices (warning: cluttered)
+6. Cheat Code
 
-Project Description
+1. **Project Description**
 -----------------------------------------------------------------------------------------------------------------------------
 We are recreating the game Plague Inc., which is a game in which the player controls the development of a disease and attempts to cause extinction through strategically mutating the disease. The disease has three stats (infectivity, severity, and lethality). Infectivity affects the rate at which the disease spreads. Severity affects both the rate at which points get accumulated and how fast the cure develops. Lethality affects the rate at which the disease kills people. There are two types of mutations in the game that we implemented: transmission and symptom. The transmission mutations focus on increasing the disease's infectivity and severity, while the symptom mutations focus on increasing the disease's severity and lethality. Each mutation has a cost associated with it, which you pay for in points, and each mutation increases each of the three stats by a certain amount. Additionally, some mutations have prerequisites. For example, you cannot mutate Blood 2 before you get Blood 1.
 
 The disease can spread in two ways. Either it can be transmitted by land to an adjacent city, or it can be transmitted by plane, but this can only occur from a city with an open airport to another city with an open airport. Once a certain number of people die, a cure effort begins, and once the cure reaches 100% development, it begins deployment, and if there are no more people with the disease left, the player loses. Also, when a certain number of people in a city die, the airport closes, so no more planes can come in or go out of the city. Finally, there are also random mutations that occur during the game. These help you develop your disease without expending any points, and if you do not want the mutation, you can always sell it for a refund.
 
 -----------------------------------------------------------------------------------------------------------------------------
-Directions
+2. **Directions**
 -----------------------------------------------------------------------------------------------------------------------------
 The disease will automatically begin at the top of the map at the Pokemon League. Your points will increase incrementally, and when your points reach a high enough point, you can begin to buy mutations. You will also see red/orange circles pop up on cities. You can click those bubbles to get bonus points. On the right of the screen are the two drop down lists for transmission and symptom mutations. Once you choose a mutation, you can see how it will affect the disease, and if you want to commit to it, you can click the commit button. Likewise, you can sell mutations by selecting a mutation on the bottom drop down list and clicking "Sell". If you evolve mutations that increase severity, the rate at which you gain points increases.
 
 The goal of the game is to infect everyone in the world and use the disease to kill people. The disease will begin to kill when lethality goes above 0, but as soon as the number of people dead reaches a certain point, a cure will begin developing. If you kill everyone in the world before a cure reaches 100% development, you win, and if the cure reaches 100%, you lose automatically.
 
 -----------------------------------------------------------------------------------------------------------------------------
-Dev Log
+3. **Significant Algorithm:**
+-----------------------------------------------------------------------------------------------------------------------------
+- We have multiple significant algorithms, but we will highlight the one that shows the most about what we have learned over CS / CS prowess. A big part of our code is selling and buying mutations, as that is a fundamental part of the game. When selling mutations, one must check that one doesn't leave a "dangling" mutation, aka a mutation that isn't connected to any base mutations (the mutations that the player has available to them upon starting). We wrote a method to detect whether selling a mutation would create a dangling mutation, and if it does, then prevent the player from selling that mutation.
+- The method is called checkIfCanSell(Mutation) and it returns true if the mutation does not produce a dangling mutation, false otherwise.
+- First we look at the adjacent mutations to the one that the player wants to sell. We use multiple loops and if cases to determine if these adjacent mutations are already bought (if they aren't bought, then these adjacent mutations have no consideration in whether a dangling mutation can be produced or not). It then looks at the tree of each bought adjacent mutation and checks if that tree originates from a base mutation via a recursive method called "treeHasBase". While recursively backtracking, we make sure that the method does not look in the same place twice by putting if statement barriers that bars it from looking at a path already taken or from "crossing" the original mutation that the player wanted to sell (if this crossing-over happened, then the algorithm would interpret more trees having base mutations than there are). Only if all the bought adjacent mutations have a base mutation as the root of their tree will the checkIfCanSell method return true, since there will be no dangling mutation when detaching the mutation the player wants to sell. If not all the bought adjacent mutations have a base mutation at the root of their tree, then the checkIfCanSell method will return false (since that will dangle a mutation).
+
+-----------------------------------------------------------------------------------------------------------------------------
+4. **Dev Log**
 -----------------------------------------------------------------------------------------------------------------------------
 
 Thursday, May 16
@@ -124,7 +133,7 @@ Jeremy - I fixed the bug where the percentage of people infected was lower than 
 Victor - I continued to work on the selling system for converging trees of base mutations and finally did it. I also did an assortment of other minor details to add to the aesthetics of game, which one can see in the commit log.
 
 -----------------------------------------------------------------------------------------------------------------------------
-**Design Choices:**
+5. **Design Choices:**
 -----------------------------------------------------------------------------------------------------------------------------
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
 - When buying mutations, the branching out (post-requirement) mutations are put at the bottom of the DropdownList to show clarity in what mutations lead to what kind of new mutations become available (it is easier to see what new mutations become available if they can always expect a consistent place to find their new mutations - the bottom).
@@ -148,13 +157,6 @@ Victor - I continued to work on the selling system for converging trees of base 
 - Unfortunately, we did not have enough time to implement the ability mutations or cure bubbles, but with smart choices, the player should be able to win (plus this makes the game harder and more enjoyable!).
 
 -----------------------------------------------------------------------------------------------------------------------------
-**Cheat Codes:**
+6. **Cheat Code:**
 -----------------------------------------------------------------------------------------------------------------------------
 - There is an area in the middle of the map of a circular canopy surrounding a circular pavement of stone surrounding a circular moat of water around a tree. If the player presses in the area inside that circular moat of water, he or she will be rewarded with plentiful points.
-
-TO-DO features:
-- refer to Prototype for more things
-
-The Required Significant Algorithm that is part of the project: 
-- selling and adding items to dropdownlists, and updating lists appropiately?
-- the shading of the cities respectively to dead and disease percentage and bubble shading?
