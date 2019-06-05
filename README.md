@@ -104,7 +104,7 @@ Jeremy - I added the random mutation feature so every once in a while, there wil
 
 Tuesday, June 4
 -----------------------------------------------------------------------------------------------------------------------------
-Jeremy - I fixed the bug where the percentage of people infected was lower than it was supposed to be. I also added the win and loss screens when the people dead reached the total population and when the cure reached 100% respectively.
+Jeremy - I fixed the bug where the percentage of people infected was lower than it was supposed to be. I also added the win and loss screens when the people dead reached the total population and when the cure reached 100% respectively. I also added a modified cure rate algorithm to be logistic and based on severity and number of people dead. Previously, the cure was unbeatable because the cure rate was constantly 1.5 times the death rate.
 
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
