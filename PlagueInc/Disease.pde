@@ -1,16 +1,13 @@
 class Disease {
   ArrayList<Mutation> allTMutations;
   ArrayList<Mutation> allSMutations;
-  ArrayList<Mutation> allAMutations;
   ArrayList<Mutation> tMutations;
   ArrayList<Mutation> sMutations;
-  ArrayList<Mutation> aMutations;
   ArrayList<Mutation> accessibleTMutations;
   ArrayList<Mutation> accessibleSMutations;
-  ArrayList<Mutation> accessibleAMutations;
   ArrayList<Mutation> acquiredMutations;
   ArrayList<Mutation> prereqsThatReachedBase;
-  double infectivity; //should start at 0.0005 and hit till 0.01 w/o any extra mutations
+  double infectivity;
   double severity;
   double lethality;
 
@@ -314,13 +311,10 @@ class Disease {
     lethality = 0.0;
     tMutations = new ArrayList<Mutation>();
     sMutations = new ArrayList<Mutation>();
-    aMutations = new ArrayList<Mutation>();
     accessibleTMutations = new ArrayList<Mutation>();
     accessibleSMutations = new ArrayList<Mutation>();
-    accessibleAMutations = new ArrayList<Mutation>();
     allTMutations = new ArrayList<Mutation>();
     allSMutations = new ArrayList<Mutation>();
-    allAMutations = new ArrayList<Mutation>();
     acquiredMutations = new ArrayList<Mutation>();
     inputTMutations();
     inputSMutations();
@@ -330,7 +324,6 @@ class Disease {
   void diseaseSetup() {
     tMutations = new ArrayList();
     sMutations = new ArrayList();
-    aMutations = new ArrayList();
     accessibleTMutations = new ArrayList();
     for (int i=0; i<allTMutations.size(); i++) {
       if (allTMutations.get(i).prereqs.size() == 0) {
@@ -343,7 +336,6 @@ class Disease {
         accessibleSMutations.add(allSMutations.get(i));
       }
     }
-    accessibleAMutations = new ArrayList();
   }
 
   boolean in(Mutation mut, ArrayList<Mutation> arr) {
@@ -455,16 +447,6 @@ class Disease {
     return true;
   }
 
-  boolean addAMutation(Mutation m) {
-    if (points < m.cost) {
-      return false;
-    }
-    accessibleAMutations.remove(m);
-    aMutations.add(m);
-    m.bought = true;
-    return true;
-  }
-
   boolean sell(Mutation mut) {
     String accMutName;
     Mutation accMut;
@@ -560,8 +542,6 @@ class Disease {
       accessibleSMutations.add(mut);
       refreshDropDownList("<Symptoms>");
       return true;
-    } else if (mut.type.equals("aMutation")) {
-      //implement later
     }
     return false;
   }

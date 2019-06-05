@@ -16,7 +16,7 @@ class Mutation{
     this.sevIncrement = sevIncrement;
     this.letIncrement = letIncrement;
     this.prereqs = prereqs;
-    //type refers to whether this mutation is a "tMutation", a "sMutation", or a "aMutation"
+    //type refers to whether this mutation is a "tMutation" or a "sMutation"
     type = typeOfMutation;
     bought = false;
     isBase = isBaseMutation;

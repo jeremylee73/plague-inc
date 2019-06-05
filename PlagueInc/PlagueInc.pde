@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>//
+import java.awt.*; //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -195,8 +195,6 @@ void Confirm() {
 boolean refreshDropDownList(String name) {
   if (name.equals("<Transmission>")) {
     ArrayList<Mutation> accTMuts = disease.accessibleTMutations;
-    //d1.clear();
-    //d1.addItem("<Transmission>", 0);
     d1 = cp5.addDropdownList("<Transmission>").setPosition(1220, 300);
     d1.addItem("<Transmission>", 0);
     customize(d1);
@@ -207,8 +205,6 @@ boolean refreshDropDownList(String name) {
     return true;
   } else if (name.equals("<Symptoms>")) {
     ArrayList<Mutation> accSMuts = disease.accessibleSMutations;
-    //d2.clear();
-    //d2.addItem("<Symptom>", 0);
     d2 = cp5.addDropdownList("<Symptom>").setPosition(1220, 400);
     d2.addItem("<Symptom>", 0);
     customize(d2);
@@ -241,8 +237,6 @@ void Sell() {
       dSell.addItem("<Current Transmissions>", 0);
       customize(dSell);
       dSell.getCaptionLabel().set("<Current Mutations>");
-      //dSell.clear();
-      //dSell.addItem("<Current Mutations>", 0);
       for (int i=1; i <= acqMuts.size(); i++) {
         dSell.addItem(acqMuts.get(i-1).name, i);
       }
@@ -365,7 +359,7 @@ void controlEvent(ControlEvent theEvent) {
   //this skeleton code is credited to one of the examples on documentation
   //documentation stated this first if statement is necessary to not throw an error
   if (theEvent.isGroup()) {
-    //from what I've seen, this method is never activated in our code
+    //from what I've seen, this if case is never activated in our code
   } else if (theEvent.isController()) {
     if (theEvent.getController() == d1) {
       fill(205);
@@ -410,11 +404,8 @@ void mousePressed() {
       ellipse(c.x, c.y, 35, 35);
       //when bubblePopped, c.hasBubble is set to false b/c of updateColor method within City class
       points+= 2;
-      //CAN PLAY AROUND WITH GAME DESIGN IF PLAYER CHOOSES TO IGNORE BUBBLE OR POPS IT MORE QUICKLY,
-      //etc, don't have to be as rigid as following actual game 100%
     }
   }
-  //processing background color
   if (pow((mouseX - 605), 2) + pow((mouseY - 325), 2) <= 225) {
     cheatCodeOn = true;
   }
@@ -447,7 +438,7 @@ void setup() {
   cure = new Cure();
   points = 0;
   pointRate = 1;
-  news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
+  news = new ArrayList();
   planes = new ArrayList<Plane>();
 
   textSize(16);
@@ -562,7 +553,7 @@ void draw() {
   }
 
   if (Math.random() < 0.0005) {
-    //disease.addRandomMutation(); //uncomment later
+    disease.addRandomMutation();
   }
 
   disease.updateAccessibleMutations();
