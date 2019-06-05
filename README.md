@@ -3,7 +3,7 @@
 ![PlagueInc Logo](https://hb.imgix.net/f37da7a8936fa2b6a1a757b07477bd7f91b294f9.jpg?auto=compress,format&fit=crop&h=353&w=616&s=e71f4ff04f589002fd9740826097e895)
 
 **Table of Contents**
-1. Project Description
+1. []Project Description
 2. Directions
 3. Significant Algorithm
 4. Devlog
