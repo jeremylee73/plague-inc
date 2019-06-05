@@ -1,4 +1,4 @@
-import java.awt.*; //<>// //<>// //<>// //<>//
+import java.awt.*; //<>// //<>// //<>// //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -583,7 +583,8 @@ void draw() {
   //calculates and displays cure %
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
-      cure.setDeveloped((int)(percentDead * 1.5));
+      double deathIndex = -0.04 * Math.pow(percentDead - 50, 2.0) + 100;
+      cure.setDeveloped((float)(cure.developed() + (disease.severity * (deathIndex / 100.0))));
     }
     if (cure.developed() > 100) {
       cure.setDeveloped(100);
