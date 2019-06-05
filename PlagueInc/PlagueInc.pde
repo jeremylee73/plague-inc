@@ -21,6 +21,7 @@ int totalDead;
 int totalDiseased;
 float percentDead;
 ArrayList<Plane> planes;
+boolean cheatCodeOn;
 
 void citySetup() {
   ArrayList<String> adjacent = new ArrayList<String>();
@@ -416,6 +417,13 @@ void mousePressed() {
     }
   }
   //processing background color
+  if (pow((mouseX - 605),2) + pow((mouseY - 325),2) <= 225){
+    cheatCodeOn = true;
+  }
+}
+
+void mouseReleased(){
+  cheatCodeOn = false;
 }
 
 
@@ -439,7 +447,7 @@ void setup() {
   drawCities();
   disease = new Disease();
   cure = new Cure();
-  points = 300;//0;
+  points = 0;
   pointRate = 1;
   news = new ArrayList(); //ADD FEATURE LATER WHERE PAST NEWS IS IN A DROPDOWN MENU
   planes = new ArrayList<Plane>();
@@ -586,5 +594,8 @@ void draw() {
   }
   if (Math.random() < (1/180.0)) {
     points += pointRate;
+  }
+  if (cheatCodeOn){
+    points+=1;
   }
 }
