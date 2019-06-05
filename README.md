@@ -4,7 +4,13 @@ Project Description
 -----------------------------------------------------------------------------------------------------------------------------
 We are recreating the game Plague Inc., which is a game in which the player controls the development of a disease and attempts to cause extinction through strategically mutating the disease. The disease has three stats (infectivity, severity, and lethality). Infectivity affects the rate at which the disease spreads. Severity affects both the rate at which points get accumulated and how fast the cure develops. Lethality affects the rate at which the disease kills people. There are two types of mutations in the game that we implemented: transmission and symptom. The transmission mutations focus on increasing the disease's infectivity and severity, while the symptom mutations focus on increasing the disease's severity and lethality. Each mutation has a cost associated with it, which you pay for in points, and each mutation increases each of the three stats by a certain amount. Additionally, some mutations have prerequisites. For example, you cannot mutate Blood 2 before you get Blood 1.
 
-The disease can spread in two ways. Either it can be transmitted by land to an adjacent city, or it can be transmitted by plane, but this can only occur from a city with an open airport to another city with an open airport. Once a certain number of people die, a cure effort begins, and once the cure reaches 100% development, it begins deployment, and if there are no more people with the disease left, the player loses. Finally, there are also random mutations that occur during the game. These help you develop your disease without expending any points, and if you do not want the mutation, you can always sell it for a refund.
+The disease can spread in two ways. Either it can be transmitted by land to an adjacent city, or it can be transmitted by plane, but this can only occur from a city with an open airport to another city with an open airport. Once a certain number of people die, a cure effort begins, and once the cure reaches 100% development, it begins deployment, and if there are no more people with the disease left, the player loses. Also, when a certain number of people in a city die, the airport closes, so no more planes can come in or go out of the city. Finally, there are also random mutations that occur during the game. These help you develop your disease without expending any points, and if you do not want the mutation, you can always sell it for a refund.
+
+Directions
+-----------------------------------------------------------------------------------------------------------------------------
+The disease will automatically begin at the top of the map at the Pokemon League. Your points will increase incrementally, and when your points reach a high enough point, you can begin to buy mutations. You will also see red/orange circles pop up on cities. You can click those bubbles to get bonus points. On the right of the screen are the two drop down lists for transmission and symptom mutations. Once you choose a mutation, you can see how it will affect the disease, and if you want to commit to it, you can click the commit button. Likewise, you can sell mutations by selecting a mutation on the bottom drop down list and clicking "Sell". If you evolve mutations that increase severity, the rate at which you gain points increases.
+
+The goal of the game is to infect everyone in the world and use the disease to kill people. The disease will begin to kill when lethality goes above 0, but as soon as the number of people dead reaches a certain point, a cure will begin developing. If you kill everyone in the world before a cure reaches 100% development, you win, and if the cure reaches 100%, you lose automatically.
 
 Thursday, May 16
 -----------------------------------------------------------------------------------------------------------------------------
@@ -114,10 +120,12 @@ Design Choices:
 - **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar (<Transmission> or <Symptom>)**
 
 BUGS:
+- stats for selling
 - overlapping city labels at the bottom poses a problem when the bubble shows up
 - planes should not get overlapped by sporadic bubbles
 - make it so that sporadic bubble rate decreases as more cities are infected to balance the game
 - add indication that an airport has closed or an airport is infected on the squares
+- fix what happens when u buy all tMutations or sMutations
 
 TO-DO features:
 - choose which city to begin at
@@ -126,11 +134,18 @@ TO-DO features:
 - land borders closing
 - cure distribution and also stopping game when dead == diseased
 - victory/loss screen
+- if they try to buy an item on already acquired mutations, display warning message (do same for selling an item on mutations not bought yet)
+- automatic mutations
 - implement feature where u get less and less refund for selling, and eventually u need to pay (which means showing stats for selling too)
 - we might not even be able to get to the point of customizing transmission mutations lmao (hopefully we can add aMutations though)
-- putting names of city next to them
+- putting names of city next to them (and display % infected and % dead for each city if have time)
 - refer to Prototype for more things
 
-The Required Significant Algorithm that is part of the project: 
+Extra Features:
+- feature where you warn user if they don't have enough points to buy a mutation
+- mistaking connected mutations as "hanging" mutations - not super important rn cuz super complicated and selling is only useful when mutations mutate randomly
+- outskirt towns? (not mandatory, only if have extra time)
+
+The Required Significant Algorithm that is part of the project:
 - selling and adding items to dropdownlists, and updating lists appropiately?
 - the shading of the cities respectively to dead and disease percentage and bubble shading?
