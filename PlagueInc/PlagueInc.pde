@@ -1,5 +1,4 @@
 import java.awt.*; //<>//
->>>>>>> b162158afa752d8e1603b35f820b4a5afc1d274d
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
