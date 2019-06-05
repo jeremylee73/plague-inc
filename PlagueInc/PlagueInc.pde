@@ -600,12 +600,14 @@ void draw() {
     points+=1;
   }
   
-  if (totalDead == totalPop){
+  if (totalDead == totalPop || totalDiseased == 0){
     size(1440,785);
     image(victoryImg, 0, 0);
     d1.remove();
     d2.remove();
     dSell.remove();
+    cp5.hide();
+    noLoop();
   }
   if (cure.developed() >= 100){
     size(1440,785);
@@ -613,5 +615,7 @@ void draw() {
     d1.remove();
     d2.remove();
     dSell.remove();
+    cp5.hide();
+    noLoop();
   }
 }
