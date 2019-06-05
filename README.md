@@ -1,5 +1,13 @@
 # PlagueInc
 
+**Table of Contents**
+1. Project Description
+2. Directions
+3. Devlog
+4. Design Choices (warning: clutterd)
+5. Cheat Codes
+6. 
+
 Project Description
 -----------------------------------------------------------------------------------------------------------------------------
 We are recreating the game Plague Inc., which is a game in which the player controls the development of a disease and attempts to cause extinction through strategically mutating the disease. The disease has three stats (infectivity, severity, and lethality). Infectivity affects the rate at which the disease spreads. Severity affects both the rate at which points get accumulated and how fast the cure develops. Lethality affects the rate at which the disease kills people. There are two types of mutations in the game that we implemented: transmission and symptom. The transmission mutations focus on increasing the disease's infectivity and severity, while the symptom mutations focus on increasing the disease's severity and lethality. Each mutation has a cost associated with it, which you pay for in points, and each mutation increases each of the three stats by a certain amount. Additionally, some mutations have prerequisites. For example, you cannot mutate Blood 2 before you get Blood 1.
@@ -116,7 +124,8 @@ Jeremy - I fixed the bug where the percentage of people infected was lower than 
 Victor - I continued to work on the selling system for converging trees of base mutations and finally did it. I also did an assortment of other minor details to add to the aesthetics of game, which one can see in the commit log.
 
 -----------------------------------------------------------------------------------------------------------------------------
-Design Choices:
+**Design Choices:**
+-----------------------------------------------------------------------------------------------------------------------------
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
 - When buying mutations, the branching out (post-requirement) mutations are put at the bottom of the DropdownList to show clarity in what mutations lead to what kind of new mutations become available (it is easier to see what new mutations become available if they can always expect a consistent place to find their new mutations - the bottom).
 - However, when selling mutations, the mutations are inserted in the DropdownList so that it is ordered correctly according to tier level. We don't need to always put the sold mutations at the bottom of the DropdownList because the player can rely on the program to re-add the mutation to the Transmission/Symptom DropdownLists, and does not need the same type of clarity that is utilized in the philosophy for buying mutations.
@@ -127,18 +136,20 @@ Design Choices:
 - Random bubbles do not pop up for cities with 0 people infected, even if they have the number of people dead > 0.
 - We have random mutations spontaneously mutate! So keep an eye on that news bar.
 - Airport squares turn red when the airport has closed.
-- The cure is 1.5 * percentage of people dead, meaning that at 67% of the population dead with no attempt to stop the cure effort, the player will lose. Even at 50%, with no attempt to stop the cure effort, the cure progress is 75%. This incentivizes the player to actively try to stop the cure effort. **(Cure to dead ratio subject to change)**
+- The cure rate is dependent on percent dead and severity of the disease.
 - We made the point rate and sporadic bubbles pop up on a random basis to increase the RNGness of the game.
 - When red and orange bubbles show up on the map, the player must pop them to get their points. If the player does not do this and the bubbles fade away, then no points are gained (making sure the player is actively engaged in the game).
 - If the percentage of dead in a *specific* city exceeds 25%, then the airport is closed.
 - There are currently two ways to infect a city, through land transmission or through infected plane transmission.
 - People start dying only when lethality > 0 and the rate at which this happens is based on lethality.
-- **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar (<Transmission> or <Symptom>)**
+- **DO NOT SELECT TWO MUTATIONS IN DIFFERENT DROPDOWNLISTS IF YOU DO NOT WANT TO BUY BOTH WHEN YOU CLICK CONFIRM. This will buy both of them at the same time. To deselect, click the top bar ("Transmission" or "Symptom")**
 - We have a lot of player input. Examples include when player tries to buy a mutation that is already bought, we display a warning message in the same area that stats are displayed. When a player tries to sell a mutation that would result in a "dangling" mutation attached to no base mutation, we tell the player which mutation(s) must be sold before he/she can sell that desired mutation in the area where stats are shown.
 - In general, player input/warning messages are shown in the area where stats are shown (below 2nd DropdownList but above 3rd DropdownList).
 - Unfortunately, we did not have enough time to implement the ability mutations or cure bubbles, but with smart choices, the player should be able to win (plus this makes the game harder and more enjoyable!).
 
-Cheat Codes:
+-----------------------------------------------------------------------------------------------------------------------------
+**Cheat Codes:**
+-----------------------------------------------------------------------------------------------------------------------------
 - There is an area in the middle of the map of a circular canopy surrounding a circular pavement of stone surrounding a circular moat of water around a tree. If the player presses in the area inside that circular moat of water, he or she will be rewarded with plentiful points.
 
 TO-DO features:
