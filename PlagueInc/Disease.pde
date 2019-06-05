@@ -425,12 +425,6 @@ class Disease {
     lethality += m.letIncrement / 10000.0;
     for (int i=0; i<allTMutations.size(); i++) {
       Mutation mut = allTMutations.get(i);
-      if (mut.name.equals("Bird 2")){
-        println(mut.name);
-        printMutationArray(tMutations);
-        printStringArray(mut.prereqs());
-        println("arrIn: "+arrIn(mut.prereqs, tMutations)+", !in(mut, accTMuts: "+!(in(mut, accessibleTMutations))+", !in(mut, tMuts): "+!(in(mut, tMutations)));
-      }
       //if prereqs are met and mutation is not already in the dropdownlist
       if (arrIn(mut.prereqs, tMutations) && !(in(mut, accessibleTMutations)) && !(in(mut, tMutations))) {
         accessibleTMutations.add(mut);
@@ -576,35 +570,41 @@ class Disease {
     //finds out how many prereqs are bought
     for (int i = 0; i < mut.prereqs().size(); i++) {
       Mutation prereq = convertNameToMutation(mut.prereqs().get(i), allSMutations);
+      println(prereq.name);
       if (!prereq.name.equals(mut.name) && prereq.bought) {
         numPrereqsBought++;
+        if (prereq.isBase){
+          prereqsThatReachedBase.add(prereq);
+        }
         Mutation prereqOfPrereq = null;
         //checks if the "tree" of each prereq originated from a base mutation
         for (int k = 0; k < prereq.prereqs().size(); k++) {
           prereqOfPrereq = convertNameToMutation(prereq.prereqs().get(k), allSMutations);
-          if (!prereqOfPrereq.name.equals(mut.name)) {
+          if (!prereqOfPrereq.name.equals(mut.name) && prereqOfPrereq.bought) {
             treeHasBase(mut, prereq, prereq, prereqOfPrereq, false);
           }
         }
       }
     }
-    return prereqsThatReachedBase.size() >= numPrereqsBought;
+    println(numPrereqsBought);
+    printMutationArray(prereqsThatReachedBase);
+    return prereqsThatReachedBase.size() == numPrereqsBought;
   }
 
   boolean treeHasBase(Mutation original, Mutation prereqOriginal, Mutation tryToSell, Mutation mut, boolean treeHasBase) {
-    if (mut.isBase || prereqOriginal.isBase) {
-      //println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
-      //println("reached base!");
-      prereqsThatReachedBase.add(prereqOriginal);
-      return true;
-    }
     if (prereqsThatReachedBase.contains(prereqOriginal)) {
       return false;
+    }
+    if (mut.isBase || prereqOriginal.isBase) {
+      println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+      println("reached base!");
+      prereqsThatReachedBase.add(prereqOriginal);
+      return true;
     }
     if (mut.bought) {
       for (int i = 0; i < mut.prereqs.size(); i++) {
         Mutation prereqOfMut = convertNameToMutation(mut.prereqs.get(i), allSMutations);
-        if (!prereqOfMut.name.equals(tryToSell.name) && !prereqOfMut.name.equals(original.name) && prereqOfMut.bought) {
+        if (!prereqOfMut.name.equals(tryToSell.name) && !prereqOfMut.name.equals(original.name) && !mut.name.equals(original.name) && prereqOfMut.bought) {
           //println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
           return treeHasBase(original, prereqOriginal, mut, prereqOfMut, treeHasBase);
         }
