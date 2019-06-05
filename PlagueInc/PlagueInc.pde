@@ -583,7 +583,7 @@ void draw() {
   //calculates and displays cure %
   if (totalDead >= 10000 ) {
     if (cure.developed() <= 100) {
-      double deathIndex = -0.04 * Math.pow(percentDead - 50, 2.0) + 100;
+      double deathIndex = -0.01 * Math.pow(percentDead - 50, 2.0) + 25;
       cure.setDeveloped((float)(cure.developed() + ((1 / (disease.severity * 10000)) * (deathIndex / 100.0))));
     }
     if (cure.developed() > 100) {
