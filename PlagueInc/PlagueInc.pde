@@ -496,8 +496,12 @@ void draw() {
   }
   drawCities();
 
+  int numCitiesInfected = 0;
   for (City c : cities) {
-    if (Math.random() < (1/1000.0)) {
+    if (c.diseased > 0){
+      numCitiesInfected++;
+    }
+    if (Math.random() < (1/(720.0 + numCitiesInfected*100))) {
       c.sporadicBubble();
     }
     c.planeTransmission();
