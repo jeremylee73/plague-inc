@@ -102,6 +102,10 @@ Monday, June 3
 -----------------------------------------------------------------------------------------------------------------------------
 Jeremy - I added the random mutation feature so every once in a while, there will be a random mutation, and it appears in the news.
 
+Tuesday, June 4
+-----------------------------------------------------------------------------------------------------------------------------
+Jeremy - I fixed the bug where the percentage of people infected was lower than it was supposed to be. I also added the win and loss screens when the people dead reached the total population and when the cure reached 100% respectively.
+
 -----------------------------------------------------------------------------------------------------------------------------
 Design Choices:
 - When buying or selling mutations, the warning that shows up in the Processing terminal does not actually cause any problems with the running of the game. The code that led to the warning message does not break the code, but it is necessary to refresh the DropdownLists when buying or selling.
