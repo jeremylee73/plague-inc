@@ -10,6 +10,7 @@
 5. Design Choices (warning: cluttered)
 6. Cheat Code
 
+-----------------------------------------------------------------------------------------------------------------------------
 1. **Project Description**
 -----------------------------------------------------------------------------------------------------------------------------
 We are recreating the game Plague Inc., which is a game in which the player controls the development of a disease and attempts to cause extinction through strategically mutating the disease. The disease has three stats (infectivity, severity, and lethality). Infectivity affects the rate at which the disease spreads. Severity affects both the rate at which points get accumulated and how fast the cure develops. Lethality affects the rate at which the disease kills people. There are two types of mutations in the game that we implemented: transmission and symptom. The transmission mutations focus on increasing the disease's infectivity and severity, while the symptom mutations focus on increasing the disease's severity and lethality. Each mutation has a cost associated with it, which you pay for in points, and each mutation increases each of the three stats by a certain amount. Additionally, some mutations have prerequisites. For example, you cannot mutate Blood 2 before you get Blood 1.
