@@ -546,7 +546,7 @@ void draw() {
     spreadDisease(c);
     totalDead += c.dead;
     totalDiseased += c.diseased;
-    if ((c.dead / (c.population * 1.0)) > 0.25 && c.airportOpen) {
+    if ((c.dead / (c.population * 1.0)) > 0.25) {
       c.closeAirport();
     }
     c.updateColor();
@@ -600,7 +600,7 @@ void draw() {
     points+=1;
   }
   
-  if (totalDead == totalPop || totalDiseased == 0){
+  if (totalDead == totalPop){
     size(1440,785);
     image(victoryImg, 0, 0);
     d1.remove();
@@ -610,7 +610,7 @@ void draw() {
     cp5.getController("Sell").remove();
     noLoop();
   }
-  if (cure.developed() >= 100){
+  if (cure.developed() >= 100 || totalDiseased == 0){
     size(1440,785);
     image(defeatImg, 0, 0);
     d1.remove();

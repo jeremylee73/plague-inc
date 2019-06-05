@@ -98,7 +98,7 @@ class City {
     } else {
       hasBubble = false;
     }
-    if (bubblePopped && GB > 254.9) {
+    if (bubblePopped && GB > 254.9 && diseased + dead != population) {
       fill(255, 255, 255);
       noStroke();
       ellipse(x, y, 30, 30);
@@ -120,12 +120,12 @@ class City {
       //red = red - (red - R)/178 ... until red = red - (red - R)/1
       redIncr = (red - R)/RGBbubbleIncr;
       red -= (float)redIncr;
-      if (red < 62 && diseased + dead == population && dead > 0){
+      if (red < 62 && diseased + dead == population && dead > 0) {
         red = 62;
       }
       //to fix shading issues with sporadic bubbles where it would not turn 
       //dark red as cities turned dark red
-      if (diseased + dead == population && dead > 0){
+      if (diseased + dead == population && dead > 0) {
         greenIncr = green/RGBbubbleIncr;
         blueIncr = blue/RGBbubbleIncr;
       } else {
@@ -250,16 +250,18 @@ class City {
   }
 
   void closeAirport() {
+    if (airportOpen) {
+      news.add(name+"'s airport has closed.");
+      noStroke();
+      fill(205);
+      rect(1220, 215, 160, 100);
+      fill(0, 0, 0);
+      text(news.get(news.size() - 1), 1220, 220, 150, 100);
+    }
     airportOpen = false;
     fill(255, 0, 0);
     stroke(0);
     strokeWeight(4);
     rect(x + 40, y - 25, 20, 20);
-    news.add(name+"'s airport has closed.");
-    noStroke();
-    fill(205);
-    rect(1220, 215, 160, 100);
-    fill(0, 0, 0);
-    text(news.get(news.size() - 1), 1220, 220, 150, 100);
   }
 }
