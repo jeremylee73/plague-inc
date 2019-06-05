@@ -595,4 +595,21 @@ void draw() {
   if (cheatCodeOn) {
     points+=1;
   }
+  
+  if (totalDead == totalPop){
+    size(1440,785);
+    PImage victoryImg = loadImage("victory.png");
+    image(victoryImg, 0, 0);
+    d1.remove();
+    d2.remove();
+    dSell.remove();
+  }
+  if (cure.developed() >= 100){
+    size(1440,785);
+    PImage defeatImg = loadImage("defeat.png");
+    image(defeatImg, 0, 0);
+    d1.remove();
+    d2.remove();
+    dSell.remove();
+  }
 }
