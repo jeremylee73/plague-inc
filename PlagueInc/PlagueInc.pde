@@ -1,4 +1,4 @@
-import java.awt.*; //<>//
+import java.awt.*; //<>// //<>//
 import java.awt.event.*;
 import javax.swing.*;
 import controlP5.*;
@@ -603,6 +603,8 @@ void draw() {
     d1.remove();
     d2.remove();
     dSell.remove();
+    cp5.getController("Confirm").remove();
+    cp5.getController("Sell").remove();
   }
   if (cure.developed() >= 100){
     size(1440,785);
@@ -611,5 +613,7 @@ void draw() {
     d1.remove();
     d2.remove();
     dSell.remove();
+    cp5.getController("Confirm").remove();
+    cp5.getController("Sell").remove();
   }
 }
