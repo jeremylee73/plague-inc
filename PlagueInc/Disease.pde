@@ -9,6 +9,7 @@ class Disease {
   ArrayList<Mutation> accessibleSMutations;
   ArrayList<Mutation> accessibleAMutations;
   ArrayList<Mutation> acquiredMutations;
+  ArrayList<Mutation> prereqsThatReachedBase;
   double infectivity; //should start at 0.0005 and hit till 0.01 w/o any extra mutations
   double severity;
   double lethality;
@@ -351,25 +352,21 @@ class Disease {
 
   // arr1 has to be smaller than arr2
   boolean arrIn(ArrayList<String> arr1, ArrayList<Mutation> arr2) {
-    boolean allInArr2 = true;
     if (arr1.size()>arr2.size()) {
       return false;
     }
+    int found = 0;
     for (int i=0; i<arr1.size(); i++) {
-      allInArr2 = allInArr2 && arr2.contains(arr1.get(i));
+      for (int j=0; j<arr2.size(); j++) {
+        if (arr1.get(i).equals(arr2.get(j).name)) {
+          found++;
+        }
+      }
     }
-    return allInArr2;
-  }
-
-  boolean arrSIn(ArrayList<String> arr1, ArrayList<Mutation> arr2) {
-    boolean inArr2 = false;
-    if (arr2.size() == 0) {
-      return false;
+    if (found == arr1.size()) {
+      return true;
     }
-    for (int i=0; i<arr1.size(); i++) {
-      inArr2 = inArr2 || arr2.contains(arr1.get(i));
-    }
-    return inArr2;
+    return false;
   }
 
   void updateAccessibleMutations() {
@@ -428,6 +425,12 @@ class Disease {
     lethality += m.letIncrement / 10000.0;
     for (int i=0; i<allTMutations.size(); i++) {
       Mutation mut = allTMutations.get(i);
+      if (mut.name.equals("Bird 2")){
+        println(mut.name);
+        printMutationArray(tMutations);
+        printStringArray(mut.prereqs());
+        println("arrIn: "+arrIn(mut.prereqs, tMutations)+", !in(mut, accTMuts: "+!(in(mut, accessibleTMutations))+", !in(mut, tMuts): "+!(in(mut, tMutations)));
+      }
       //if prereqs are met and mutation is not already in the dropdownlist
       if (arrIn(mut.prereqs, tMutations) && !(in(mut, accessibleTMutations)) && !(in(mut, tMutations))) {
         accessibleTMutations.add(mut);
@@ -471,43 +474,41 @@ class Disease {
   boolean sell(Mutation mut) {
     String accMutName;
     Mutation accMut;
-    //checks if the post-reqs of the mutation the player is trying
-    //to sell is in acquired mutations. If so, then don't
-    //allow player to sell the mutation (this is how it works in-game too)
-    print(" "+checkIfCanSell(mut));
-    for (int i = 0; i < acquiredMutations.size(); i++) {
-      accMut = acquiredMutations.get(i);
-      for (int j = 0; j < accMut.prereqs().size(); j++) {
-        if (accMut.prereqs().get(j).equals(mut.name)) {
-          return false;
+    if (mut.type.equals("tMutation")) {
+      //checks if the post-reqs of the mutation the player is trying
+      //to sell is in acquired mutations. If so, then don't
+      //allow player to sell the mutation (this is how it works in-game too)
+      for (int i = 0; i < acquiredMutations.size(); i++) {
+        accMut = acquiredMutations.get(i);
+        for (int j = 0; j < accMut.prereqs().size(); j++) {
+          if (accMut.prereqs().get(j).equals(mut.name)) {
+            return false;
+          }
         }
       }
-    }
+      if (acquiredMutations.size() != 0) {
+        infectivity -= mut.infIncrement() / 10000.0;
+        severity -= mut.sevIncrement() / 10000.0;
+        lethality -= mut.letIncrement() / 10000.0;
+      }
+      acquiredMutations.remove(mut);
+      tMutations.remove(mut);
+      mut.bought = false;
+      points+= mut.cost();
 
-    if (acquiredMutations.size() != 0) {
-      infectivity -= mut.infIncrement() / 10000.0;
-      severity -= mut.sevIncrement() / 10000.0;
-      lethality -= mut.letIncrement() / 10000.0;
-    }
-    acquiredMutations.remove(mut);
-    mut.bought = false;
-    points+= mut.cost();
-
-    //re-adds mutation into the proper place (below previous tier levels) in the 
-    //accessible mutation ArrayLists
-    if (mut.type.equals("tMutation")) {
       //removes post-reqs when selling the mutation
       for (int i = 0; i < accessibleTMutations.size(); i++) {
         accMut = accessibleTMutations.get(i);
         for (int j = 0; j < accMut.prereqs().size(); j++) {
           if (accMut.prereqs().get(j).equals(mut.name)) {
             accessibleTMutations.remove(accMut);
-            tMutations.remove(mut);
             i--;
           }
         }
       }
 
+      //re-adds mutation into the proper place (below previous tier levels) in the 
+      //accessible mutation ArrayLists
       for (int i = 0; i < accessibleTMutations.size(); i++) {
         accMutName = accessibleTMutations.get(i).name;
         if (accMutName.substring(accMutName.length()-1).compareTo(mut.name.substring(mut.name.length()-1)) >= 0) {
@@ -523,6 +524,23 @@ class Disease {
       refreshDropDownList("<Transmission>");
       return true;
     } else if (mut.type.equals("sMutation")) {
+      //checks if the post-reqs of the mutation the player is trying
+      //to sell is in acquired mutations. If so, then don't
+      //allow player to sell the mutation (this is how it works in-game too)
+      print(" "+checkIfCanSell(mut));
+      if (!checkIfCanSell(mut)) {
+        return false;
+      }
+
+      if (acquiredMutations.size() != 0) {
+        infectivity -= mut.infIncrement() / 10000.0;
+        severity -= mut.sevIncrement() / 10000.0;
+        lethality -= mut.letIncrement() / 10000.0;
+      }
+      acquiredMutations.remove(mut);
+      mut.bought = false;
+      points+= mut.cost();
+
       //removes post-reqs when selling the mutation
       for (int i = 0; i < accessibleSMutations.size(); i++) {
         accMut = accessibleSMutations.get(i);
@@ -553,6 +571,7 @@ class Disease {
   }
 
   boolean checkIfCanSell(Mutation mut) {
+    prereqsThatReachedBase = new ArrayList<Mutation>();
     int numPrereqsBought = 0;
     //finds out how many prereqs are bought
     for (int i = 0; i < mut.prereqs().size(); i++) {
@@ -564,26 +583,30 @@ class Disease {
         for (int k = 0; k < prereq.prereqs().size(); k++) {
           prereqOfPrereq = convertNameToMutation(prereq.prereqs().get(k), allSMutations);
           if (!prereqOfPrereq.name.equals(mut.name)) {
-            treeHasBase(mut, prereq, prereqOfPrereq, false);
+            treeHasBase(mut, prereq, prereq, prereqOfPrereq, false);
           }
         }
       }
     }
-    //println(mut.name+ " - numPrereqsBought: " +numPrereqsBought);
-    return true;
+    return prereqsThatReachedBase.size() >= numPrereqsBought;
   }
 
-  boolean treeHasBase(Mutation original, Mutation tryToSell, Mutation mut, boolean treeHasBase) {
-    if (mut.isBase){
-      println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+  boolean treeHasBase(Mutation original, Mutation prereqOriginal, Mutation tryToSell, Mutation mut, boolean treeHasBase) {
+    if (mut.isBase || prereqOriginal.isBase) {
+      //println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+      //println("reached base!");
+      prereqsThatReachedBase.add(prereqOriginal);
       return true;
     }
-    if (mut.bought){
-      for (int i = 0; i < mut.prereqs.size(); i++){
+    if (prereqsThatReachedBase.contains(prereqOriginal)) {
+      return false;
+    }
+    if (mut.bought) {
+      for (int i = 0; i < mut.prereqs.size(); i++) {
         Mutation prereqOfMut = convertNameToMutation(mut.prereqs.get(i), allSMutations);
-        if (!prereqOfMut.name.equals(mut) && prereqOfMut.bought){
-          println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
-          return treeHasBase(original, mut, prereqOfMut, treeHasBase);
+        if (!prereqOfMut.name.equals(tryToSell.name) && !prereqOfMut.name.equals(original.name) && prereqOfMut.bought) {
+          //println("original: "+original.name+", tryToSell: "+tryToSell.name+", prereqOfTryToSell: "+mut.name);
+          return treeHasBase(original, prereqOriginal, mut, prereqOfMut, treeHasBase);
         }
       }
     }

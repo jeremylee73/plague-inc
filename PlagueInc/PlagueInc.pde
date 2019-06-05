@@ -153,7 +153,7 @@ void customize(DropdownList ddl) {
   ddl.setColorActive(color(255, 128));
 }
 
-void Confirm() { //there's a bug with confirm where it sometimes throws an error
+void Confirm() {
   if (d1.getValue() != 0) {
     fill(205);
     rect(1220, 300, 1000, 1000);
@@ -554,7 +554,7 @@ void draw() {
   }
 
   if (Math.random() < 0.0005){
-    disease.addRandomMutation();
+    //disease.addRandomMutation(); //uncomment later
   }
 
   disease.updateAccessibleMutations();
