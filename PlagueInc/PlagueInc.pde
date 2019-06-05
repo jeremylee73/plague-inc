@@ -30,6 +30,21 @@ void citySetup() {
   adjacent.add("Opelucid City");
   City League = new City("Pokemon League", 1000000, adjacent, true, false, 730, 60);
   cities.add(League);
+  
+  //Nuvema, Accumula, and Black (City) are not mistakenly ordered like so.
+  //It's to fix to a bug with the overlap of
+  //updating dead/disease count with adjacent cities' white circles
+  
+  ArrayList<String> adjacent13 = new ArrayList<String>();
+  adjacent13.add("Accumula Town");
+  City Nuvema = new City("Nuvema Town", 100000, adjacent13, true, true, 1100, 660);
+  cities.add(Nuvema);
+  
+  ArrayList<String> adjacent12 = new ArrayList<String>();
+  adjacent12.add("Straiton City");
+  adjacent12.add("Nuvema Town");
+  City Accumula = new City("Accumula Town", 100000, adjacent12, false, false, 1070, 570);
+  cities.add(Accumula);
 
   ArrayList<String> adjacent1 = new ArrayList<String>();
   adjacent1.add("Pokemon League");
@@ -62,12 +77,6 @@ void citySetup() {
   City Mistralton = new City("Mistralton City", 1000000, adjacent5, true, false, 170, 300);
   cities.add(Mistralton);
 
-  ArrayList<String> adjacent6 = new ArrayList<String>();
-  adjacent6.add("Undella Town");
-  adjacent6.add("Nimbasa City");
-  City Black = new City("Black City", 1000000, adjacent6, true, true, 865, 425);
-  cities.add(Black);
-
   ArrayList<String> adjacent7 = new ArrayList<String>();
   adjacent7.add("Nimbasa City");
   adjacent7.add("Mistralton City");
@@ -80,7 +89,7 @@ void citySetup() {
   adjacent8.add("Castelia City");
   City Nimbasa = new City("Nimbasa City", 1000000, adjacent8, true, false, 610, 425);
   cities.add(Nimbasa);
-
+  
   ArrayList<String> adjacent9 = new ArrayList<String>();
   adjacent9.add("Nimbasa City");
   adjacent9.add("Nacrene City");
@@ -92,23 +101,18 @@ void citySetup() {
   adjacent10.add("Straiton City");
   City Nacrene = new City("Nacrene City", 500000, adjacent10, false, true, 920, 500);
   cities.add(Nacrene);
+  
+  ArrayList<String> adjacent6 = new ArrayList<String>();
+  adjacent6.add("Undella Town");
+  adjacent6.add("Nimbasa City");
+  City Black = new City("Black City", 1000000, adjacent6, true, true, 865, 425);
+  cities.add(Black);
 
   ArrayList<String> adjacent11 = new ArrayList<String>();
   adjacent11.add("Nacrene City");
   adjacent11.add("Accumula Town");
   City Straiton = new City("Straiton City", 200000, adjacent11, false, false, 1040, 480);
   cities.add(Straiton);
-
-  ArrayList<String> adjacent12 = new ArrayList<String>();
-  adjacent12.add("Straiton City");
-  adjacent12.add("Nuvema Town");
-  City Accumula = new City("Accumula Town", 100000, adjacent12, false, false, 1070, 570);
-  cities.add(Accumula);
-
-  ArrayList<String> adjacent13 = new ArrayList<String>();
-  adjacent13.add("Accumula Town");
-  City Nuvema = new City("Nuvema Town", 100000, adjacent13, true, true, 1100, 660);
-  cities.add(Nuvema);
 
   ArrayList<String> adjacent14 = new ArrayList<String>();
   City Unity = new City("Unity Tower", 200000, adjacent14, true, true, 410, 700);
@@ -496,6 +500,7 @@ void draw() {
     c.drawRoutes();
     fill(255, 255, 255);
     c.drawAirports();
+    c.writeNames();
     //c.drawDocks();
   }
   drawCities();
@@ -505,7 +510,7 @@ void draw() {
     if (c.diseased > 0){
       numCitiesInfected++;
     }
-    if (Math.random() < (1/(720.0 + numCitiesInfected*100))) {
+    if (Math.random() < (1/(720.0 + numCitiesInfected*125))) {
       c.sporadicBubble();
     }
     c.planeTransmission();
