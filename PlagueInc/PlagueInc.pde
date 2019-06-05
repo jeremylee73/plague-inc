@@ -165,10 +165,9 @@ void Confirm() {
       fill(0, 0, 0);
       textSize(10);
       text("You do not have enough points for "+mut.name+".", 1220, 500, 150, 75);
-    } else {
-      refreshDropDownList("<Transmission>");
-      refreshDropDownList("<Current Mutations>");
     }
+    refreshDropDownList("<Transmission>");
+    refreshDropDownList("<Current Mutations>");
   }
   if (d2.getValue() != 0) {
     fill(205);
@@ -180,10 +179,9 @@ void Confirm() {
       fill(0, 0, 0);
       textSize(10);
       text("You do not have enough points for "+mut.name+".", 1220, 500, 150, 75);
-    } else {
-      refreshDropDownList("<Symptoms>");
-      refreshDropDownList("<Current Mutations>");
     }
+    refreshDropDownList("<Symptoms>");
+    refreshDropDownList("<Current Mutations>");
   }
   if (dSell.getValue() != 0) {
     fill(205);
@@ -417,12 +415,12 @@ void mousePressed() {
     }
   }
   //processing background color
-  if (pow((mouseX - 605),2) + pow((mouseY - 325),2) <= 225){
+  if (pow((mouseX - 605), 2) + pow((mouseY - 325), 2) <= 225) {
     cheatCodeOn = true;
   }
 }
 
-void mouseReleased(){
+void mouseReleased() {
   cheatCodeOn = false;
 }
 
@@ -578,8 +576,8 @@ void draw() {
   rect(1220, 180, 100, 22);
   fill(0, 0, 0);
   int totalPop = 0;
-  for (int i=0; i<cities.size(); i++){
-    totalPop += cities.get(i).population; 
+  for (int i=0; i<cities.size(); i++) {
+    totalPop += cities.get(i).population;
   }
   percentDead = totalDead * 100.0 / (totalPop);
   text("Dead: " + (int)percentDead + "%", 1220, 200);
@@ -599,7 +597,7 @@ void draw() {
   if (Math.random() < (1/180.0)) {
     points += pointRate;
   }
-  if (cheatCodeOn){
+  if (cheatCodeOn) {
     points+=1;
   }
 }
